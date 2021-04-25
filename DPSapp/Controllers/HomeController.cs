@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DPSapp.DAL;
+using DPSapp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +10,12 @@ namespace DPSapp.Controllers
 {
     public class HomeController : Controller
     {
+        private DPSContext db = new DPSContext();
         public ActionResult Index()
         {
+            Patient patient = new Patient { PatientName = "Karolina", PatientSurname = "Cicha" };
+            db.Patients.Add(patient);
+            db.SaveChanges();
             return View();
         }
 
