@@ -13,9 +13,9 @@ namespace DPSapp.Controllers
         private DPSContext db = new DPSContext();
         public ActionResult Index()
         {
-            Patient patient = new Patient { PatientName = "Karolina", PatientSurname = "Cicha" };
-            db.Patients.Add(patient);
-            db.SaveChanges();
+        //   Patient patient = new Patient { PatientName = "Karolina", PatientSurname = "Cicha" };
+        //    db.Patients.Add(patient);
+         //   db.SaveChanges();
             return View();
         }
 
