@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ChooseRoomSite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<DPSapp.Models.Room>
+<h2>ChooseRoomSite</h2>
+<div class="button-style-class color-class shadow-class">
+    <a href="#" class="gradient-class">
+        <span class="text-color-class">Button Title</span>
+    </a>
+</div>
+
+
+@foreach (var room in Model)
+{
+    <td>
+    <a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>
+    </td>
+    
+
+}
+

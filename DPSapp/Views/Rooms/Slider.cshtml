@@ -98,7 +98,7 @@
         crossorigin="anonymous"></script>
 
 
-    <img src="~\Images\\1.jpg" style="width:100%">
+  
 
 
 <h2>Slider</h2>
@@ -108,7 +108,7 @@
 
     @foreach (var adres in Model.ListOfAdresses)
     {
-        <td>@adres</td>
+        //<td>@adres</td>
         <div class="mySlides fade">
             <div class="numbertext">1</div>
             <img src="@Url.Content(adres)" style="width:100%">
@@ -121,9 +121,10 @@
 
 
 <div style="text-align:center">
+    @for (int i = 1; i <= Model.ListOfAdresses.Count; i++)
+    {
     <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+    }
 </div>
 
 <script>
