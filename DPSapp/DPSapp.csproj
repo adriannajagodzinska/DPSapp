@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="DAL\DPSContext.cs" />
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
+    <Compile Include="Models\ListOfUsers.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Role.cs" />
@@ -191,6 +193,7 @@
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Rooms\Slider.cshtml" />
     <Content Include="Views\Rooms\ChooseRoomSite.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
