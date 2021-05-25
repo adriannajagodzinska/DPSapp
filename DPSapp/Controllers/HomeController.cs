@@ -13,9 +13,9 @@ namespace DPSapp.Controllers
         private DPSContext db = new DPSContext();
         public ActionResult Index()
         {
-            //Role role = new Role { RoleId = 1, RoleName = "Administrator" };
+            //Role role = new Role { RoleId = 2, RoleName = "Rodzina" };
             //db.Roles.Add(role);
-
+            //db.SaveChanges();
             //User user = new User { Login = "admin", Password = "admin", RoleId = 1 };
             //db.Users.Add(user);
             //db.SaveChanges();
@@ -23,7 +23,7 @@ namespace DPSapp.Controllers
             //    db.Patients.Add(patient);
             //   db.SaveChanges();
             ListOfUsers list = new ListOfUsers();
-           
+
             list.login = new List<string>();
             list.password = new List<string>();
             list.role = new List<string>();
@@ -35,7 +35,7 @@ namespace DPSapp.Controllers
             list.role.Add("2");
 
             //To do - Pobieranie danych z bazy
-            //for (int i = 0; i < db.Users.Select(a => a.UserId).Max(); i++)
+            //for (int i = 1; i <= db.Users.Select(a => a.UserId).Max(); i++)
             //{
             //    if (db.Users.Where(a => a.UserId == i).Select(a => a).Count() == 1)
             //    {

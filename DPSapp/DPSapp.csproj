@@ -147,6 +147,7 @@
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,7 @@
     <Content Include="Views\Rooms\Slider.cshtml" />
     <Content Include="Views\Rooms\ChooseRoomSite.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\UserManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
