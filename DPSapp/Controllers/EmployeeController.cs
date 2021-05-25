@@ -37,7 +37,12 @@ namespace DPSapp.Controllers
             {
                 string name = userManager.Name;
                 string last = userManager.Surname;
-                int role = userManager.Role;
+                bool isFamily = userManager.Role;
+                int role = 1;
+                if (isFamily)
+                {
+                    role = 2;
+                }
                 string pass = System.Web.Security.Membership.GeneratePassword(12,2);
                 string firstPart = name.Substring(0, 3);
                 string secondPart = last.Substring(0, 2);

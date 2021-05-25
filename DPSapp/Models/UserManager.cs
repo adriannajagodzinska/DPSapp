@@ -9,7 +9,7 @@ namespace DPSapp.Models
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int Role { get; set; }
+        public bool Role { get; set; }
 
         
     }
