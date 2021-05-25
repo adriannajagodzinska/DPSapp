@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Strona startowa";
 }
-@model DPSapp.Models.ListOfUsers
-<head id="Head1" runat="server">
+@model DPSapp.Models.LoginAssistant
+@*<head id="Head1" runat="server">
     <script type="text/javascript">
         var loginy = @Html.Raw(Json.Encode(Model.login));
         var hasla = @Html.Raw(Json.Encode(Model.password));
@@ -37,7 +37,7 @@
 
 
     </script>
-</head>
+</head>*@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -57,15 +57,18 @@
                 <form>
                     <div class="form-group text-left">
                         <label for="exampleInputLogin">Login</label>
-                        <input name="log" type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp" placeholder="Wpisz login">
-
+                        @*<input name="log" type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp" placeholder="Wpisz login">*@
+                        @Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="form-group text-left">
                         <label for="exampleInputPassword1">Hasło</label>
-                        <input name="pas" type="password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">
+                        @Html.PasswordFor(model=>model.password, new { htmlAttributes = new { @class = "form-control" } })
+
+
+                        @*<input name="pas" type="password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">*@
                     </div>
 
-                    <button type="button" runat="server" onclick="return loguj()" class="btn btn-primary" style="margin-top:20px">Zaloguj</button>
+                    <button type="submit"  class="btn btn-primary" style="margin-top:20px">Zaloguj</button>
                 </form>
             </div>
         </div>

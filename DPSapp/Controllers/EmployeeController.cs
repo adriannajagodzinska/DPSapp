@@ -17,12 +17,26 @@ namespace DPSapp.Controllers
        
         public ActionResult Index()
         {
-            
-                //
-           
-                return View();
-            
-            
+
+            if (Session["role"]!=null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
         }
 
         public ActionResult UserManagement()

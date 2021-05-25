@@ -11,56 +11,72 @@ namespace DPSapp.Controllers
     public class HomeController : Controller
     {
         private DPSContext db = new DPSContext();
-        public ActionResult Index()
-        {
-            //Role role = new Role { RoleId = 2, RoleName = "Rodzina" };
-            //db.Roles.Add(role);
-            //db.SaveChanges();
-            //User user = new User { Login = "admin", Password = "admin", RoleId = 1 };
-            //db.Users.Add(user);
-            //db.SaveChanges();
-            //   Patient patient = new Patient { PatientName = "Karolina", PatientSurname = "Cicha" };
-            //    db.Patients.Add(patient);
-            //   db.SaveChanges();
-            ListOfUsers list = new ListOfUsers();
-
-            list.login = new List<string>();
-            list.password = new List<string>();
-            list.role = new List<string>();
-            list.login.Add("admin");
-            list.password.Add("admin");
-            list.role.Add("1");
-            list.login.Add("wnuczek");
-            list.password.Add("wnuczek");
-            list.role.Add("2");
-
-            //To do - Pobieranie danych z bazy
-            //for (int i = 1; i <= db.Users.Select(a => a.UserId).Max(); i++)
-            //{
-            //    if (db.Users.Where(a => a.UserId == i).Select(a => a).Count() == 1)
-            //    {
-            //        list.login.Add(db.Users.Where(a => a.UserId == i).Select(a => a.Login).ToString());
-            //        list.password.Add(db.Users.Where(a => a.UserId == i).Select(a => a.Password).ToString());
-            //        list.role.Add(db.Users.Where(a => a.UserId == i).Select(a => a.RoleId).ToString());
-            //    }
-
-            //}
-            return View(list);
-        }
-        //[HttpPost]
         //public ActionResult Index()
         //{
-        //    string log = Request["log"].ToString();
-        //    string pas = Resquest["pas"].ToString();
-        //    return Content()
+        //    //Role role = new Role { RoleId = 2, RoleName = "Rodzina" };
+        //    //db.Roles.Add(role);
+        //    //db.SaveChanges();
+        //    //User user = new User { Login = "admin", Password = "admin", RoleId = 1 };
+        //    //db.Users.Add(user);
+        //    //db.SaveChanges();
+        //    //   Patient patient = new Patient { PatientName = "Karolina", PatientSurname = "Cicha" };
+        //    //    db.Patients.Add(patient);
+        //    //   db.SaveChanges();
+        //    ListOfUsers list = new ListOfUsers();
+
+        //    list.login = new List<string>();
+        //    list.password = new List<string>();
+        //    list.role = new List<string>();
+        //    list.login.Add("admin");
+        //    list.password.Add("admin");
+        //    list.role.Add("1");
+        //    list.login.Add("wnuczek");
+        //    list.password.Add("wnuczek");
+        //    list.role.Add("2");
+
+        //    //To do - Pobieranie danych z bazy
+        //    //for (int i = 1; i <= db.Users.Select(a => a.UserId).Max(); i++)
+        //    //{
+        //    //    if (db.Users.Where(a => a.UserId == i).Select(a => a).Count() == 1)
+        //    //    {
+        //    //        list.login.Add(db.Users.Where(a => a.UserId == i).Select(a => a.Login).ToString());
+        //    //        list.password.Add(db.Users.Where(a => a.UserId == i).Select(a => a.Password).ToString());
+        //    //        list.role.Add(db.Users.Where(a => a.UserId == i).Select(a => a.RoleId).ToString());
+        //    //    }
+
+        //    //}
+        //    return View(list);
         //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Index(string log, string pas)
+        //public ActionResult Index()
         //{
-            
-        //    return View(objUser);
+        //    return View();
         //}
+        public ActionResult Index([Bind] LoginAssistant assistant)
+        {
+           
+            
+            if (db.Users.Where(a=>a.Login==assistant.login).Select(a=>a).Count()>0)
+            {
+                
+                if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.Password).FirstOrDefault().ToString()==assistant.password)
+                {
+                    Session["UserName"] = assistant.login;
+                    if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.RoleId).FirstOrDefault().ToString() == "1")
+                    {
+                        Session["Role"] = "1";
+                        return RedirectToAction("Index","Employee");
+                    }
+                    else
+                    {
+                        Session["Role"] = "2";
+                        return RedirectToAction("Index", "Family");
+                    }
+                }
+            }
+
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

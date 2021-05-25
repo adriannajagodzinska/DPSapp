@@ -141,6 +141,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
     <Compile Include="Models\ListOfUsers.cs" />
+    <Compile Include="Models\LoginAssistant.cs" />
     <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />
