@@ -141,6 +141,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
     <Compile Include="Models\ListOfUsers.cs" />
+    <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Role.cs" />
@@ -196,6 +197,7 @@
     <Content Include="Views\Rooms\ChooseRoomSite.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\UserManagement.cshtml" />
+    <Content Include="Views\Employee\LoginInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

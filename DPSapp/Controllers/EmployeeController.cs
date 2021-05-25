@@ -14,9 +14,15 @@ namespace DPSapp.Controllers
     {
         private DPSContext db = new DPSContext();
         // GET: Employee
+       
         public ActionResult Index()
         {
-            return View();
+            
+                //
+           
+                return View();
+            
+            
         }
 
         public ActionResult UserManagement()
@@ -46,6 +52,8 @@ namespace DPSapp.Controllers
                     if (true)
                     {
                         isFree = true;
+                        TempData["login"] = login;
+                        TempData["pass"] = pass;
                     }
                 }
                 
@@ -53,11 +61,19 @@ namespace DPSapp.Controllers
                 User user = new User { Login = login, Password = pass, RoleId = role };
                 db.Users.Add(user);
                 db.SaveChanges();
+                return RedirectToAction("LoginInfo");
 
-                return RedirectToAction("Index");
             }
 
             return View(userManager);
         }
+        public ActionResult LoginInfo()
+        {
+            LogInfo info = new LogInfo();
+            info.login = TempData["login"].ToString();
+            info.pass = TempData["pass"].ToString();
+            return View(info);
+        }
     }
+
 }

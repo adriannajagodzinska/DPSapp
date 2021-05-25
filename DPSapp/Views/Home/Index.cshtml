@@ -7,6 +7,7 @@
         var loginy = @Html.Raw(Json.Encode(Model.login));
         var hasla = @Html.Raw(Json.Encode(Model.password));
         var role = @Html.Raw(Json.Encode(Model.role));
+        
 
     function loguj() {
         let validated = false;
@@ -19,8 +20,9 @@
             if (userName == loginy[i]) {
                 if (userPass==hasla[i]) {
                     if (role[i] == "1") {
+                       
                         window.open("/Employee/Index", "_self")
-
+                       
                     }
                     else {
                         window.open("/Family/Index", "_self")

@@ -1,0 +1,38 @@
+﻿@model DPSapp.Models.LogInfo
+@{
+    ViewBag.Title = "LoginInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--<head id="Head1" runat="server">
+    <script>-->
+        @*var passplace = document.getElementById("PasswordPlaceholder")
+        var logplace = document.getElementById("LoginPlaceholder")
+        var pass = @Html.Raw(Json.Encode(Model.pass));
+        var log = @Html.Raw(Json.Encode(Model.login));
+        passplace.innerHTML += pas
+        logplace.innerHTML += log*@
+    <!--</script>
+
+    
+</head>-->
+
+<h2>Dane logowania utworzonego użytkownika</h2>
+
+<div>
+    <h1>Login</h1>
+    <div id="LoginPlaceholder">
+        @Html.DisplayFor(model => model.login)
+    </div>
+</div>
+<div>
+    <h1>Hasło</h1>
+    <div id="PasswordPlaceholder">
+        @Html.DisplayFor(model => model.pass)
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
