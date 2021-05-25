@@ -53,8 +53,13 @@ namespace DPSapp.Controllers
         //}
         public ActionResult Index([Bind] LoginAssistant assistant)
         {
-           
-            
+            //Role role = new Role { RoleId = 1, RoleName = "Administrator" };
+            //db.Roles.Add(role);
+            //db.SaveChanges();
+            //User user = new User { Login = "admin", Password = "admin", RoleId = 1 };
+            //db.Users.Add(user);
+            //db.SaveChanges();
+
             if (db.Users.Where(a=>a.Login==assistant.login).Select(a=>a).Count()>0)
             {
                 

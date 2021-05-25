@@ -38,6 +38,12 @@ namespace DPSapp.Controllers
 
 
         }
+        public ActionResult Patient()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
         public ActionResult UserManagement()
         {

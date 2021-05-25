@@ -44,7 +44,8 @@ namespace DPSapp.Controllers
             rooms.Add(room1);
             rooms.Add(room2);
             _db.Rooms.Add(room1);
-            _db.Rooms.Add(room2);
+            // _db.Rooms.Add(room2);
+            bool a = _db.ChangeTracker.HasChanges();
             _db.SaveChanges();
             return View(rooms);
         }
