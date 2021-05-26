@@ -42,8 +42,7 @@ namespace DPSapp.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+       
 
         public ActionResult UserManagement()
         {
