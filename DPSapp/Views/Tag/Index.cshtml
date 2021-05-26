@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DPSapp.Models.Tag>
+
+@{
+    ViewBag.Title = "Tag";
+}
+
+<h2>Lista znaczników</h2>
+<p id="dodaj">
+    @Html.ActionLink("Utwórz nowy znacznik", "Create")
+</p>
+
+<br />
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.RecipeName)*@
+            @Html.ActionLink("Numer id tagu", "Index", new { sortOrder = ViewBag.IdSortParm })
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Date)*@
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
+                    @item.RecipeName*@
+                @Html.DisplayFor(modelItem => item.TagId)
+                @*</a>*@
+
+
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.TagName)
+            </td>
+            @*<td>
+                    <div>
+                        <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
+
+                    </div>
+                </td>*@
+
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.TagId }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.TagId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

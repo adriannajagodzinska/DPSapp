@@ -42,7 +42,10 @@ namespace DPSapp.Controllers
         {
             return View();
         }
-       
+        public ActionResult Tag()
+        {
+            return View();
+        }
 
         public ActionResult UserManagement()
         {
