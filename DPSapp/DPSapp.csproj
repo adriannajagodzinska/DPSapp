@@ -167,6 +167,7 @@
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.bmp" />
     <Content Include="Images\4.jpg" />
+    <Content Include="Images\4.mp4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
