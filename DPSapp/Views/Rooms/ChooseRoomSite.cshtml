@@ -14,9 +14,12 @@
 
 @foreach (var room in Model)
 {
-    <td>
-    <a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>
-    </td>
+<td>
+
+   
+    <a href=@Url.Action(String.Format("Slider/{0}",@room.RoomNumber),"Rooms") class="btn btn-primary">@room.RoomNumber</a>
+    @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
+</td>
     
 
 }

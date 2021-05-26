@@ -66,39 +66,50 @@
     }
     /* Fading animation */
     .fade {
-      -webkit-animation-name: fade;
-      -webkit-animation-duration: 3.5s;
-      animation-name: fade;
-      animation-duration: 3.5s;
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 3.5s;
+        animation-name: fade;
+        animation-duration: 3.5s;
     }
 
     @@-webkit-keyframes fade {
-      from {opacity: .4}
-      to {opacity: 1}
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
     }
 
     @@keyframes fade {
-      from {opacity: .4}
-      to {opacity: 1}
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
     }
 
     /* On smaller screens, decrease text size */
-   @@media only screen and (max-width: 300px) {
-      .text {font-size: 11px}
+    @@media only screen and (max-width: 300px) {
+        .text {
+            font-size: 11px
+        }
     }
-
 </style>
 
 
 
-
+@*@model List<string> ListOfAdressessToMedia*@
 @model DPSapp.Models.ListOfAdressessToMedia
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
 
-  
+
 
 
 <h2>Slider</h2>
@@ -108,30 +119,124 @@
 
     @foreach (var adres in Model.ListOfAdresses)
     {
-        //<td>@adres</td>
-        <div class="mySlides fade">
-            <div class="numbertext">1</div>
-            <img src="@Url.Content(adres)" style="width:100%">
-            <div class="text">Caption Text</div>
-        </div>
+
+        if (isImage(adres))
+        {
+            //<td>@adres</td>
+            <div class="mySlides fade">
+                <div class="numbertext">1</div>
+                <img src="@Url.Content(adres)" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+        }
+        else if (isVideo(adres))
+        {
+            <div class="mySlides fade">
+                <div class="numbertext">1</div>
+                <video autoplay muted style="width:100%" controls>
+                    <source src="@Url.Content(adres)" type="video/mp4">
+                </video>
+                <div class="text">Caption Text</div>
+            </div>
+
+        }
+
+
+
+
 
     }
+
+
 </div>
 <br>
+@functions {
 
+    public string getExtension(string filename)
+    {
+        var parts = filename.Split('.');
+        return parts[parts.Length - 1];
+    }
+
+    public bool isVideo(string filename)
+    {
+        var ext = getExtension(filename);
+        switch (ext.ToLower())
+        {
+            case "m4v": return true;
+            case "avi": return true;
+            case "mpg": return true;
+            case "mp4": return true;
+
+        }
+        return false;
+    }
+
+    public bool isImage(string filename)
+    {
+        var ext = getExtension(filename);
+        switch (ext.ToLower())
+        {
+            case "jpg": return true;
+            case "gif": return true;
+            case "bmp": return true;
+            case "png": return true;
+
+
+        }
+        return false;
+    }
+
+
+}
 
 <div style="text-align:center">
     @for (int i = 1; i <= Model.ListOfAdresses.Count; i++)
     {
-    <span class="dot"></span>
+        <span class="dot"></span>
     }
 </div>
 
 <script>
     var slideIndex = 0;
+
     showSlides();
 
+
+    function getExtension(filename) {
+        var parts = filename.split('.');
+        return parts[parts.length - 1];
+    }
+
+    function isVideo(filename) {
+        var ext = getExtension(filename);
+        switch (ext.toLowerCase()) {
+            case 'm4v':
+            case 'avi':
+            case 'mpg':
+            case 'mp4':
+                // etc
+                return true;
+        }
+        return false;
+    }
+
+    function isImage(filename) {
+        var ext = getExtension(filename);
+        switch (ext.toLowerCase()) {
+            case 'jpg':
+            case 'gif':
+            case 'bmp':
+            case 'png':
+                //etc
+                return true;
+        }
+        return false;
+    }
+
+
     function showSlides() {
+
         var i;
         var slides = document.getElementsByClassName("mySlides");
         var dots = document.getElementsByClassName("dot");
