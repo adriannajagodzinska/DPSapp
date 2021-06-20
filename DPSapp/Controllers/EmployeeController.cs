@@ -26,13 +26,13 @@ namespace DPSapp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Error401", "Home");
                 }
 
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Error401", "Home");
             }
 
 
@@ -40,16 +40,62 @@ namespace DPSapp.Controllers
         }
         public ActionResult Patient()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            
         }
         public ActionResult Tag()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
         }
 
         public ActionResult UserManagement()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -96,10 +142,27 @@ namespace DPSapp.Controllers
         }
         public ActionResult LoginInfo()
         {
-            LogInfo info = new LogInfo();
-            info.login = TempData["login"].ToString();
-            info.pass = TempData["pass"].ToString();
-            return View(info);
+
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    LogInfo info = new LogInfo();
+                    info.login = TempData["login"].ToString();
+                    info.pass = TempData["pass"].ToString();
+                    return View(info);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            
         }
     }
 

@@ -89,6 +89,10 @@ namespace DPSapp.Controllers
             return View();
         }
 
+        public ActionResult Error401()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
