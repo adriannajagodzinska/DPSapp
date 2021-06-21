@@ -71,8 +71,26 @@ namespace DPSapp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //string name = patient.PatientName;
+                //string last = patient.PatientSurname;
+                //string pass = System.Web.Security.Membership.GeneratePassword(12, 2);
+                //string firstPart = name.Substring(0, 3);
+                //string secondPart = last.Substring(0, 2);
+                //Random r = new Random();
+                //string thirdPart = r.Next(100, 1000).ToString();
+                //string patientTag = string.Concat(firstPart, secondPart, thirdPart);
+                //var tags = db.Tags.ToList();
+                //int new_tag_id = tags.Count() + 1;
+                //var new_tag = new Tag() { TagId=new_tag_id, TagName = patientTag };
+                //db.Tags.Add(new_tag);
+                //db.SaveChanges();
                 db.Patients.Add(patient);
+                //db.SaveChanges();
+
+                //Patient patient1 = db.Patients.FirstOrDefault(x => x.PatientId == patient.PatientId);
+                //new_tag.Patients.Add(patient);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(patient);
