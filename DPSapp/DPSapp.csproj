@@ -143,6 +143,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
     <Compile Include="Models\ListOfUsers.cs" />
@@ -216,6 +217,7 @@
     <Content Include="Views\UploadFiles\Index.cshtml" />
     <Content Include="Views\Family\Index.cshtml" />
     <Content Include="Views\Family\Send.cshtml" />
+    <Content Include="Views\Employee\Send.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
 using System.Dynamic;
+using System.IO;
 
 namespace DPSapp.Controllers
 {
@@ -182,6 +183,76 @@ namespace DPSapp.Controllers
             }
             
         }
+        public ActionResult Send()
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var tags = from s in db.Tags
+                               select s;
+                    var model = new EmployeeSender
+                    {
+                        
+                    AvailableListOfTags = 
+                    };
+                    return View(model);
+
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Send([Bind(Include = "Komunikat, file")] EmployeeSender fSender)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (fSender.file.ContentLength > 0)
+                    {
+                        string filename = Path.GetFileName(fSender.file.FileName);
+                        string filepath = Path.Combine(Server.MapPath("~/FilesUpload"), filename);
+                        fSender.file.SaveAs(filepath);
+                        string userName = Session["UserName"].ToString();
+                        int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
+                        var Tagi = db.Patients.Where(a => a.PatientId == pID).Select(a => a.Tags);
+                        Tag tID = (Tag)Tagi.Select(a => a).FirstOrDefault();
+
+                        string komunikat = fSender.Komunikat;
+                        string adres = filepath;
+                        Message m = new Message { Image = adres, MessageText = komunikat };
+
+                        m.Tags.Add(tID);
+                        db.Messages.Add(m);
+                        db.SaveChanges();
+                    }
+                    ViewBag.Message = "Plik poprawnie załadowany!";
+                    return View();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Message = "Plik nie załadował się!";
+                    return View();
+                }
+
+            }
+            return View(fSender);
+        }
+
+
         [NonAction]
         public SelectList ToSelectListID(List<Patient> patients)
         {
@@ -196,6 +267,25 @@ namespace DPSapp.Controllers
                     //Text = patient.PatientId.ToString(),
                     Text = patient.PatientName.ToString(),
                     Value = patient.PatientId.ToString()
+                });
+            }
+            SelectList list2 = new SelectList(list, "Value", "Text");
+            return list2;
+        }
+
+        public SelectList ToSelectListTags(List<Tag> tags)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (Tag tag in tags)
+            {
+                var Temp = tag.TagId.ToString();
+                list.Add(new SelectListItem()
+                {
+                    //Value = "",
+                    //Text = patient.PatientId.ToString(),
+                    Text = tag.TagId.ToString(),
+                    Value = tag.TagName.ToString()
                 });
             }
             SelectList list2 = new SelectList(list, "Value", "Text");

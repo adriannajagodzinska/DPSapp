@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse" style="background-color: rgb(104 156 207)
+        <div class="navbar-collapse collapse" style="background-color: rgb(144 178 210)
 ">
             <ul class="nav navbar-nav">
                 <li>
@@ -30,9 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Family" class="gradient-class">
-                        <span class="text-color-class">Członkowie rodziny</span>
-                    </a>
+                   
                 </li>
                 <li>
                     <a href="Patient" class="gradient-class">
@@ -54,7 +52,12 @@
     </div>
 </div>
 
+<div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
 
+    <h1 class="display-4" style="text-align:center ;font-family:'Times New Roman'">Użytkownicy</h1>
+
+
+</div>
 <div>
     <table class="table table-hover" id="tabelka">
         <tr>
@@ -66,7 +69,14 @@
                 @* @Html.DisplayNameFor(model => model.Date)*@
                 @Html.ActionLink("Nazwisko pacjenta", "Index", new { sortOrder = ViewBag.SurnameSortParm })
             </th>
-            <th></th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Date)*@
+                @Html.ActionLink("Hasło", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Date)*@
+                @Html.ActionLink("Przypisany pacjent", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -86,9 +96,17 @@
             @item.Password
         </td>
         <td>
+            @if (item.PatientID == 0)
+            {
+                <h5> Brak (Konto Pracownika)</h5>
+            }
+            else
+            {
+        <h5>@item.PatientID</h5>
+                   
+            }
 
-            @item.PatientID
-        </td>
+            </td>
 
     </tr>
         }
