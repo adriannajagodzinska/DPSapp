@@ -1,0 +1,26 @@
+﻿@model DPSapp.Models.FamilySender
+@{
+    ViewBag.Title = "Send";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>Wyślij wiadomość</h2>
+    @using (Html.BeginForm("Index", "UploadFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+        @Html.LabelFor(model => model.Komunikat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Komunikat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Komunikat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div>
+            @Html.TextBox("file", "", new { type = "file" })
+            <input type="submit" value="Zapisz plik" />
+            @ViewBag.Message
+        </div>
+    }
+</center>
+
