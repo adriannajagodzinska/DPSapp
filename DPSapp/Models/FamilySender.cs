@@ -7,8 +7,8 @@ namespace DPSapp.Models
 {
     public class FamilySender
     {
-        
-        public string Komunikat;
-        
+        public HttpPostedFileBase  file { get; set; }
+        public string Komunikat { get; set; }
+
     }
 }
