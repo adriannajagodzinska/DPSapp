@@ -55,12 +55,12 @@
 
             @Html.DisplayFor(modelItem => item.PatientSurname)
         </td>
-        @*<td>
+        <td>
             <div>
-                <input type="button" value="Dodaj znacznik" onclick="@("window.location.href='" + @Url.Action("Create","PatientTag") + "'");" />
+                <input type="button" value="Dodaj znacznik" onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
 
             </div>
-        </td>*@
+        </td>
 
         <td>
             @Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |
