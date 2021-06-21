@@ -193,12 +193,11 @@ namespace DPSapp.Controllers
                                select s;
                     var model = new EmployeeSender
                     {
-                        
-                    AvailableListOfTags = 
+
+                        AvailableListOfTags = ToSelectListItemTags(tags.ToList())
                     };
                     return View(model);
 
-                    return View();
                 }
                 else
                 {
@@ -227,15 +226,25 @@ namespace DPSapp.Controllers
                         string filepath = Path.Combine(Server.MapPath("~/FilesUpload"), filename);
                         fSender.file.SaveAs(filepath);
                         string userName = Session["UserName"].ToString();
-                        int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
-                        var Tagi = db.Patients.Where(a => a.PatientId == pID).Select(a => a.Tags);
-                        Tag tID = (Tag)Tagi.Select(a => a).FirstOrDefault();
+                        ICollection<Tag> tagsSelected=new List<Tag>();
+                        for (int i = 0; i < fSender.SelectedTags.Count; i++)
+                        {
+                            
+                            var tagtemp= from s in db.Tags
+                                         where fSender.SelectedTags[i] == s.TagName
+                                         select s;
+                            tagsSelected.Add(tagtemp.First());
+                        }
+
+                     
+
+                        
 
                         string komunikat = fSender.Komunikat;
                         string adres = filepath;
                         Message m = new Message { Image = adres, MessageText = komunikat };
 
-                        m.Tags.Add(tID);
+                       
                         db.Messages.Add(m);
                         db.SaveChanges();
                     }
@@ -273,7 +282,7 @@ namespace DPSapp.Controllers
             return list2;
         }
 
-        public SelectList ToSelectListTags(List<Tag> tags)
+        public List<SelectListItem> ToSelectListItemTags(List<Tag> tags)
         {
             List<SelectListItem> list = new List<SelectListItem>();
 
@@ -288,8 +297,8 @@ namespace DPSapp.Controllers
                     Value = tag.TagName.ToString()
                 });
             }
-            SelectList list2 = new SelectList(list, "Value", "Text");
-            return list2;
+            //SelectList list2 = new SelectList(list, "Value", "Text");
+            return list;
         }
 
     }
