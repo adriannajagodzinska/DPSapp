@@ -12,8 +12,11 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TagName, "Nazwa znacznika", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.TagName, "", new { @class = "text-danger" })
+            @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(model=>model.TagId,((SelectList)ViewBag.TagId), new { @class = "form-control" })
+            @*@ViewBag.TagID as SelectList*@
+            
+            @*@Html.ValidationMessageFor(model => model.TagId, "", new { @class = "text-danger" })*@
         </div>
     </div>
     <div class="form-group">

@@ -51,12 +51,63 @@ namespace DPSapp.Controllers
             }
             return View(tag);
         }
-
         public ActionResult AddTagToPatient()
         {
-            ViewBag.TagName = new SelectList(db.Tags, "TagId", "TagName");
-            var url = Url.RequestContext.RouteData.Values["id"];
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var tags = from s in db.Tags
+                               select s;
+                    ViewBag.TagID = ToSelectListID(tags.ToList<Tag>());
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+        [HttpPost]
+        public ActionResult AddTagToPatient(int? id)
+        {
+
+            int patientid = int.Parse(this.RouteData.Values["id"].ToString());
+            var patientTags = from tag in db.Tags
+                              where tag.Patients.Any(c => c.PatientId == patientid)
+                              select tag;
+            List<Tag> patientTagsList = patientTags.ToList();
+
+            //Tag temp = new Tag { TagId = tag1.TagId, TagName = tag1.TagName };
+            //  patientTagsList.Add(temp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [NonAction]
+        public SelectList ToSelectListID(List<Tag> tags)
+        {
+           // List<SelectListItem> list = new List<SelectListItem>();
+            var dictionary = new Dictionary<int, string>();
+            foreach (Tag tag in tags)
+            {
+                // var Temp = tag.TagId.ToString();
+                //list.Add(new SelectListItem()
+                //{
+                //    //Value = "",
+                //    //Text = patient.PatientId.ToString(),
+                //    Text = tag.TagName.ToString(),
+                //    Value = tag.TagId.ToString()
+                //}) ;
+                dictionary.Add(tag.TagId, tag.TagName);
+            }
+            SelectList list2 = new SelectList(dictionary, "Key", "Value");
+            return list2;
         }
     }
 }
