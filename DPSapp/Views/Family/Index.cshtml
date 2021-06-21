@@ -4,5 +4,65 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #31708f;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        width: 200px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+</style>
+<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
+    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+
+        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Wybierz pokój</h1>
+
+
+    </div>
+</div>
+
+
+    
+
+
+        <a href=@Url.Action("Send","Family") class="button">Wyślij Wiadomość</a>
+
+        @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
+    
+
+
+
 
