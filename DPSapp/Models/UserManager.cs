@@ -10,7 +10,7 @@ namespace DPSapp.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public bool Role { get; set; }
-        public int PatientId { get; set; }
+        public string PatientId { get; set; }
 
     }
 }

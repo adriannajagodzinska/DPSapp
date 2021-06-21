@@ -114,11 +114,13 @@ namespace DPSapp.Controllers
                 string name = userManager.Name;
                 string last = userManager.Surname;
                 bool isFamily = userManager.Role;
-                int Pacjentid = userManager.PatientId;
+               // int Pacjentid = userManager.PatientId;
                 int role = 1;
+                int patientID = 0;
                 if (isFamily)
                 {
                     role = 2;
+                    patientID = int.Parse(userManager.PatientId);
                 }
                 string pass = System.Web.Security.Membership.GeneratePassword(12,2);
                 string firstPart = name.Substring(0, 3);
@@ -138,13 +140,14 @@ namespace DPSapp.Controllers
                         TempData["pass"] = pass;
                     }
                 }
-                
 
-                User user = new User { Login = login, Password = pass, RoleId = role };
-                if (isFamily)
-                {
-                    user.PatientID= userManager.PatientId;
-                }
+
+                User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  patientID};
+                //if (isFamily)
+                //{
+                //    user.PatientID= userManager.PatientId;
+                //    User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  pa};
+                //}
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("LoginInfo");
