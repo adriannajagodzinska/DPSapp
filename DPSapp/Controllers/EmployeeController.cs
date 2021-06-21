@@ -102,51 +102,19 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
-        [NonAction]
-        public SelectList ToSelectListID(List<Patient> patients)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            
-            foreach (Patient patient in patients)
-            {
-                var Temp = patient.PatientId.ToString();
-                list.Add(new SelectListItem()
-                {
-                    Value = "",
-                    Text = patient.PatientId.ToString(),
-                }) ; ; 
-            }
-            SelectList list2 = new SelectList(list,"Value","Text");
-            return list2;
-        }
-
-        public SelectList ToSelectListName(IQueryable<Patient> patients)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-
-            foreach (Patient patient in patients)
-            {
-
-                list.Add(new SelectListItem()
-                {
-
-                    Text = patient.PatientName.ToString(),
-                });
-            }
-
-            return new SelectList(list, "Text");
-        }
-
+     
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PacjentId")] UserManager userManager)
+        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PatientId")] UserManager userManager)
         {
             if (ModelState.IsValid)
             {
                 string name = userManager.Name;
                 string last = userManager.Surname;
                 bool isFamily = userManager.Role;
+                int Pacjentid = userManager.PatientId;
                 int role = 1;
                 if (isFamily)
                 {
@@ -173,6 +141,10 @@ namespace DPSapp.Controllers
                 
 
                 User user = new User { Login = login, Password = pass, RoleId = role };
+                if (isFamily)
+                {
+                    user.PatientID= userManager.PatientId;
+                }
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("LoginInfo");
@@ -205,6 +177,26 @@ namespace DPSapp.Controllers
             }
             
         }
+        [NonAction]
+        public SelectList ToSelectListID(List<Patient> patients)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (Patient patient in patients)
+            {
+                var Temp = patient.PatientId.ToString();
+                list.Add(new SelectListItem()
+                {
+                    //Value = "",
+                    //Text = patient.PatientId.ToString(),
+                    Text = patient.PatientId.ToString(),
+                    Value = patient.PatientName.ToString()
+                });
+            }
+            SelectList list2 = new SelectList(list, "Value", "Text");
+            return list2;
+        }
+
     }
 
 }
