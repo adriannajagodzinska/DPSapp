@@ -23,7 +23,9 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    return View();
+                    var users = from u in db.Users
+                                   select u;
+                    return View(users.ToList());
                 }
                 else
                 {
@@ -192,8 +194,8 @@ namespace DPSapp.Controllers
                 {
                     //Value = "",
                     //Text = patient.PatientId.ToString(),
-                    Text = patient.PatientId.ToString(),
-                    Value = patient.PatientName.ToString()
+                    Text = patient.PatientName.ToString(),
+                    Value = patient.PatientId.ToString()
                 });
             }
             SelectList list2 = new SelectList(list, "Value", "Text");
