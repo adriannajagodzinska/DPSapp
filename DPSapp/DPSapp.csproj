@@ -143,6 +143,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\FamilySender.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
     <Compile Include="Models\ListOfUsers.cs" />
     <Compile Include="Models\LoginAssistant.cs" />
@@ -214,7 +215,7 @@
     <Content Include="Views\Home\Error401.cshtml" />
     <Content Include="Views\UploadFiles\Index.cshtml" />
     <Content Include="Views\Family\Index.cshtml" />
-    <Content Include="Views\Tag\AddTagToPatient.cshtml" />
+    <Content Include="Views\Family\Send.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

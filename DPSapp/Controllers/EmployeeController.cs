@@ -23,7 +23,9 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    return View();
+                    var users = from u in db.Users
+                                   select u;
+                    return View(users.ToList());
                 }
                 else
                 {
@@ -102,55 +104,25 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
-        [NonAction]
-        public SelectList ToSelectListID(List<Patient> patients)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            
-            foreach (Patient patient in patients)
-            {
-                var Temp = patient.PatientId.ToString();
-                list.Add(new SelectListItem()
-                {
-                    Value = "",
-                    Text = patient.PatientId.ToString(),
-                }) ; ; 
-            }
-            SelectList list2 = new SelectList(list,"Value","Text");
-            return list2;
-        }
-
-        public SelectList ToSelectListName(IQueryable<Patient> patients)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-
-            foreach (Patient patient in patients)
-            {
-
-                list.Add(new SelectListItem()
-                {
-
-                    Text = patient.PatientName.ToString(),
-                });
-            }
-
-            return new SelectList(list, "Text");
-        }
-
+     
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PacjentId")] UserManager userManager)
+        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PatientId")] UserManager userManager)
         {
             if (ModelState.IsValid)
             {
                 string name = userManager.Name;
                 string last = userManager.Surname;
                 bool isFamily = userManager.Role;
+               // int Pacjentid = userManager.PatientId;
                 int role = 1;
+                int patientID = 0;
                 if (isFamily)
                 {
                     role = 2;
+                    patientID = int.Parse(userManager.PatientId);
                 }
                 string pass = System.Web.Security.Membership.GeneratePassword(12,2);
                 string firstPart = name.Substring(0, 3);
@@ -170,9 +142,14 @@ namespace DPSapp.Controllers
                         TempData["pass"] = pass;
                     }
                 }
-                
 
-                User user = new User { Login = login, Password = pass, RoleId = role };
+
+                User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  patientID};
+                //if (isFamily)
+                //{
+                //    user.PatientID= userManager.PatientId;
+                //    User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  pa};
+                //}
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("LoginInfo");
@@ -205,6 +182,26 @@ namespace DPSapp.Controllers
             }
             
         }
+        [NonAction]
+        public SelectList ToSelectListID(List<Patient> patients)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (Patient patient in patients)
+            {
+                var Temp = patient.PatientId.ToString();
+                list.Add(new SelectListItem()
+                {
+                    //Value = "",
+                    //Text = patient.PatientId.ToString(),
+                    Text = patient.PatientName.ToString(),
+                    Value = patient.PatientId.ToString()
+                });
+            }
+            SelectList list2 = new SelectList(list, "Value", "Text");
+            return list2;
+        }
+
     }
 
 }
