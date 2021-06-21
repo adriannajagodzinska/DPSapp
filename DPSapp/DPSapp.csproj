@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Views\PatientTag.cshtml" />
     <Content Include="Views\Home\Error401.cshtml" />
     <Content Include="Views\UploadFiles\Index.cshtml" />
+    <Content Include="Views\Family\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

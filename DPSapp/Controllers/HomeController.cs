@@ -82,6 +82,14 @@ namespace DPSapp.Controllers
             return View();
         }
 
+        public ActionResult Wyloguj()
+        {
+            Session["Role"] = null;
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
