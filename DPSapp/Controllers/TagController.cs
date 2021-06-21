@@ -36,7 +36,7 @@ namespace DPSapp.Controllers
             return View();
         }
 
-        // POST: Tag/Create
+        // POST: Recipe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -50,12 +50,6 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Index");
             }
             return View(tag);
-        }
-
-        public ActionResult AddTagToPatient()
-        {
-            ViewBag.TagName = new SelectList(db.Tags, "TagId", "TagName");
-            return View();
         }
     }
 }
