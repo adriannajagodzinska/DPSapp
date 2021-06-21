@@ -131,10 +131,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="DAL\DPSContext.cs" />
     <Compile Include="DAL\DPSInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,9 +211,13 @@
     <Content Include="Views\Tag\Index.cshtml" />
     <Content Include="Views\Tag\Create.cshtml" />
     <Content Include="Views\PatientTag.cshtml" />
+    <Content Include="Views\Home\Error401.cshtml" />
+    <Content Include="Views\UploadFiles\Index.cshtml" />
+    <Content Include="Views\Family\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FilesUpload\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

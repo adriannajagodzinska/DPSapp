@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
+using System.Dynamic;
 
 namespace DPSapp.Controllers
 {
@@ -26,13 +27,13 @@ namespace DPSapp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Error401", "Home");
                 }
 
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Error401", "Home");
             }
 
 
@@ -40,20 +41,106 @@ namespace DPSapp.Controllers
         }
         public ActionResult Patient()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            
         }
         public ActionResult Tag()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
         }
 
         public ActionResult UserManagement()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var patients = from s in db.Patients
+                                   select s;
+                    ViewBag.PatientID = ToSelectListID(patients.ToList<Patient>());
+                    ViewBag.Patient = patients.ToList(); 
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
         }
+        [NonAction]
+        public SelectList ToSelectListID(List<Patient> patients)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            
+            foreach (Patient patient in patients)
+            {
+                var Temp = patient.PatientId.ToString();
+                list.Add(new SelectListItem()
+                {
+                    Value = "",
+                    Text = patient.PatientId.ToString(),
+                }) ; ; 
+            }
+            SelectList list2 = new SelectList(list,"Value","Text");
+            return list2;
+        }
+
+        public SelectList ToSelectListName(IQueryable<Patient> patients)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (Patient patient in patients)
+            {
+
+                list.Add(new SelectListItem()
+                {
+
+                    Text = patient.PatientName.ToString(),
+                });
+            }
+
+            return new SelectList(list, "Text");
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname")] UserManager userManager)
+        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PacjentId")] UserManager userManager)
         {
             if (ModelState.IsValid)
             {
@@ -96,10 +183,27 @@ namespace DPSapp.Controllers
         }
         public ActionResult LoginInfo()
         {
-            LogInfo info = new LogInfo();
-            info.login = TempData["login"].ToString();
-            info.pass = TempData["pass"].ToString();
-            return View(info);
+
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    LogInfo info = new LogInfo();
+                    info.login = TempData["login"].ToString();
+                    info.pass = TempData["pass"].ToString();
+                    return View(info);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            
         }
     }
 
