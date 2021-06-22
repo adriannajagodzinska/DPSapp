@@ -68,14 +68,14 @@ namespace DPSapp.Controllers
                         fSender.file.SaveAs(filepath);
                         string userName = Session["UserName"].ToString();
                         int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
-                        var Tagi = db.Patients.Where(a => a.PatientId == pID).Select(a => a.Tags);
-                        Tag tID = (Tag)Tagi.Select(a => a).FirstOrDefault();
+                        //var Tagi = db.Patients.Where(a => a.PatientId == pID).Select(a => a.Tags);
+                        //Tag tID = (Tag)Tagi.Select(a => a).FirstOrDefault();
                         
                         string komunikat = fSender.Komunikat;
                         string adres = filepath;
                         Message m = new Message { Image = adres, MessageText = komunikat};
                         
-                        m.Tags.Add(tID);
+                        //m.Tags.Add(tID);
                         db.Messages.Add(m);
                         db.SaveChanges();
                         //int mID = db.Messages.Where(a => a.Image == adres).Select(a => a.MessageId).FirstOrDefault();
