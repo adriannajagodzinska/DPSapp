@@ -5,7 +5,16 @@
 }
 
 <center>
-    <h2>Wyślij wiadomość</h2>
+    <div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
+        <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+
+            <h1 class="display-4" style="text-align:center ;font-family:Broadway">Wyślij wiadomość</h1>
+
+
+        </div>
+    </div>
+
+    <h2></h2>
     @using (Html.BeginForm("Send", "Family", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="form-group">
@@ -24,7 +33,7 @@
             </div>
         </div>
         <div>
-            
+
             <input type="submit" value="Zapisz plik" />
             @ViewBag.Message
         </div>
