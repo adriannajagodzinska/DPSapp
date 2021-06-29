@@ -214,48 +214,56 @@ namespace DPSapp.Controllers
 
 
         [HttpPost]
-        public ActionResult Send([Bind(Include = "Komunikat, file")] EmployeeSender fSender)
+        public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     if (fSender.file.ContentLength > 0)
                     {
                         string filename = Path.GetFileName(fSender.file.FileName);
                         string filepath = Path.Combine(Server.MapPath("~/FilesUpload"), filename);
                         fSender.file.SaveAs(filepath);
                         string userName = Session["UserName"].ToString();
-                        ICollection<Tag> tagsSelected=new List<Tag>();
+                        List<Tag> tagsSelected=new List<Tag>();
                         for (int i = 0; i < fSender.SelectedTags.Count; i++)
                         {
-                            
-                            var tagtemp= from s in db.Tags
-                                         where fSender.SelectedTags[i] == s.TagName
-                                         select s;
-                            tagsSelected.Add(tagtemp.First());
+                            var nametagtemp = fSender.SelectedTags[i];
+                            var tagtemp= (from s in db.Tags
+                                         where s.TagName == nametagtemp             
+                                         select s);
+
+                        Tag taglist = tagtemp.ToList().First(); ;
+                         tagsSelected.Add(taglist);
+                          
+                           
                         }
-
-                     
-
-                        
-
                         string komunikat = fSender.Komunikat;
                         string adres = filepath;
                         Message m = new Message { Image = adres, MessageText = komunikat };
 
-                       
+                    m.Tags = tagsSelected;
+                      
+
+                        //foreach (var tag in tagsSelected)
+                        //{
+                        //    m.Tags.Add(tag);
+                          
+                        //}
+
+
                         db.Messages.Add(m);
                         db.SaveChanges();
                     }
                     ViewBag.Message = "Plik poprawnie załadowany!";
-                    return View();
-                }
-                catch (Exception)
-                {
-                    ViewBag.Message = "Plik nie załadował się!";
-                    return View();
-                }
+                    return RedirectToAction("Index", "Employee"); ;
+                //}
+                //catch (Exception)
+                //{
+                //    ViewBag.Message = "Plik nie załadował się!";
+                //    return View();
+                //}
 
             }
             return View(fSender);

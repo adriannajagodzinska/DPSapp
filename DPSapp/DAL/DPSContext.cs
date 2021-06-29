@@ -12,7 +12,7 @@ namespace DPSapp.DAL
     {
         public DPSContext() : base("DPSContext")
         {
-
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Room> Rooms { get; set; }

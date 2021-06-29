@@ -38,7 +38,7 @@
 
         <div>
 
-            <input type="submit" value="Zapisz plik" />
+            
             @ViewBag.Message
         </div>
         <h3> Wybierz tagi</h3>
@@ -47,12 +47,15 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox"
-                           name="SelectedFruits"
-                           value="@item.Text"
-                           @if (Model.SelectedTags.Contains(item.Text)) { <text> checked </text> } /> @item.Value
+                           name="SelectedTags"
+                           value="@item.Value"
+                           @if (Model.SelectedTags.Contains(item.Value)) 
+                           { <text> checked </text> } /> @item.Value 
                     </label>
                 </div>
-            }
+            @*@Html.CheckBoxFor(m=>Model.SelectedTags[])*@
+
+        }
         <hr />
         <hr />
         <div class="form-group">
