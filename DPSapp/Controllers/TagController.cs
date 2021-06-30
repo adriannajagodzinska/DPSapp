@@ -43,7 +43,7 @@ namespace DPSapp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TagId,TagName")] Tag tag)
+        public ActionResult Create([Bind(Include = "TagId,TagName,IsGlobal")] Tag tag)
         {
             if (ModelState.IsValid)
             {
