@@ -142,6 +142,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.cs" />
+    <Compile Include="Migrations\202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.Designer.cs">
+      <DependentUpon>202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
@@ -238,6 +242,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.resx">
+      <DependentUpon>202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
