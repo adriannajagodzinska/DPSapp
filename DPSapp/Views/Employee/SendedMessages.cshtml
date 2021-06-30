@@ -1,0 +1,38 @@
+﻿@model List<DPSapp.Models.Message>
+
+@{
+    ViewBag.Title = "SendedMessages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SendedMessages</h2>
+
+<table style="width:100%">
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Image.ToString()
+                @item.Image
+                <img src="@item.Image"  alt="Italian Trulli">
+            </td>
+           
+            <td>
+                @foreach (var item2 in item.Tags)
+                {
+                    @item2.TagName
+                }
+
+            </td>
+
+        </tr>
+    }
+
+
+</table>

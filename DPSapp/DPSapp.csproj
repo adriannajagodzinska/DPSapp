@@ -219,6 +219,7 @@
     <Content Include="Views\Family\Send.cshtml" />
     <Content Include="Views\Employee\Send.cshtml" />
     <Content Include="Views\Tag\Edit.cshtml" />
+    <Content Include="Views\Employee\SendedMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

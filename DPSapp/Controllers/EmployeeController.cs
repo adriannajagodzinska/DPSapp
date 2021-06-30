@@ -269,6 +269,32 @@ namespace DPSapp.Controllers
             return View(fSender);
         }
 
+        public ActionResult SendedMessages()
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                //    var messages = (from s in db.Messages
+                //               select s).ToList();
+
+                    var messages = db.Messages.Include("Tags").ToList();
+
+                    return View(messages);
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
 
         [NonAction]
         public SelectList ToSelectListID(List<Patient> patients)
