@@ -239,8 +239,9 @@ namespace DPSapp.Controllers
                           
                            
                         }
-                        string komunikat = fSender.Komunikat;
-                        string adres = filepath;
+                     string komunikat = fSender.Komunikat;
+                    string adres = "~/FilesUpload\\" + filename;
+                        //string adres = filepath;
                         Message m = new Message { Image = adres, MessageText = komunikat };
 
                     m.Tags = tagsSelected;

@@ -5,34 +5,91 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SendedMessages</h2>
+<h2>Wysłane ogłoszenia</h2>
 
 <table style="width:100%">
     <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-
+        <th>Obrazki/Filmy</th>
+        <th>Tagi</th>
+        <th>Komunikaty</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @item.Image.ToString()
-                @item.Image
-                <img src="@item.Image"  alt="Italian Trulli">
-            </td>
-           
-            <td>
-                @foreach (var item2 in item.Tags)
-                {
-                    @item2.TagName
-                }
+<tr>
+    <td>
 
-            </td>
+        @if (isImage(item.Image))
+        {
+            <img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />
+        }
+        else if (isVideo(item.Image))
+        {
+            <video autoplay muted style="width:100%" controls>
+                <source src="@Url.Content(item.Image)" type="video/mp4">
+            </video>
+        }
+        @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
 
-        </tr>
+
+    </td>
+
+    <td>
+        @foreach (var item2 in item.Tags)
+        {
+            @item2.TagName
+        }
+
+    </td>
+    <td>
+       
+            @item.MessageText
+        
+
+    </td>
+
+</tr>
+    }
+
+    }
+</table>
+
+@functions {
+
+    public string getExtension(string filename)
+    {
+        var parts = filename.Split('.');
+        return parts[parts.Length - 1];
+    }
+
+    public bool isVideo(string filename)
+    {
+        var ext = getExtension(filename);
+        switch (ext.ToLower())
+        {
+            case "m4v": return true;
+            case "avi": return true;
+            case "mpg": return true;
+            case "mp4": return true;
+
+        }
+        return false;
+    }
+
+    public bool isImage(string filename)
+    {
+        var ext = getExtension(filename);
+        switch (ext.ToLower())
+        {
+            case "jpg": return true;
+            case "gif": return true;
+            case "bmp": return true;
+            case "png": return true;
+            case "jpeg": return true;
+
+        }
+        return false;
     }
 
 
-</table>
+}
