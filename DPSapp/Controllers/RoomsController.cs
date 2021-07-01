@@ -24,25 +24,32 @@ namespace DPSapp.Controllers
         {
             
             ListOfAdressessToMedia ListOfAdresses = new ListOfAdressessToMedia();
+            //Zbierz pacjentów z danego pokoju
+            var room = _db.Rooms.Include("Patients").Where(c => c.RoomNumber == id).First();
+            List<Patient> patients = new List<Patient>(); 
+            //zbierz tagi do pacjentów
+            foreach (var item in room.Patients)
+            {
+                 var patient = _db.Patients.Include("Tags").Where(c => c.PatientId == item.PatientId).FirstOrDefault();
+                patients.Add(patient);
+            }
+
+            //połącz wszytkie tagi w jedną liste
+            List<Tag> ListofTags = new List<Tag>(); 
+            foreach (var patient in patients)
+            {
+                foreach (var tag in patient.Tags)
+                {
+                    ListofTags.Add(tag);
+                }
+                
+            }
 
 
 
-            var tags = from tag in _db.Tags
-                       where tag.Rooms.Any(c => c.RoomNumber == id)
-                       select tag;
-            List<Tag> tagi = tags.ToList();
-            //var tags = _db.Rooms.Where(c => c.RoomId == id).SelectMany(c => c.Tags);
-            //var tags = (from t in _db.Rooms
-            //                  where t.RoomNumber == id
-            //                  select (from tag in _db.Tags
-            //                          where t.Tags.
-            //                          select tag.TagName
-            //var libelles = _db.Rooms
-            //            .Include(e => )
-            //          .Single(e => e.EtudiantId == 1) // will throw exception if entity not found
-            //          .cours.Select(c => c.libelle);
-            //                          )).ToList();
-            //List<string> tags = tagstemp.
+            List<Tag> tagi = ListofTags.ToList();
+            
+            //zbierz wszystkie wiadomości, które mają te tagi
             List<string> adresses = new List<string>();
             foreach (var tag in tagi)
             {
@@ -60,11 +67,6 @@ namespace DPSapp.Controllers
             }
            ;
 
-            //List<string> list = new List<string>{"~/Images\\1.jpg",
-            //                                "~/Images\\2.jpg",
-            //                                "~/Images\\3.bmp",
-            //"~/Images\\4.mp4"};
-            // ""
             ListOfAdresses.ListOfAdresses = adresses;
 
             return View(ListOfAdresses);

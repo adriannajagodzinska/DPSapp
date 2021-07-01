@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ChooseRoomSite";
+    ViewBag.Title = "Przeglad pokojów";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<DPSapp.Models.Room>
@@ -60,7 +60,7 @@
     <td>
 
 
-        <a href=@Url.Action(String.Format("Employee/RoomsManager/{0}",@room.RoomNumber),"Rooms") class="button">@room.RoomNumber</a>
+        <a href=@Url.Action(String.Format("RoomsManager/{0}",@room.RoomNumber),"Employee") class="button">@room.RoomNumber</a>
 
         @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
     </td>

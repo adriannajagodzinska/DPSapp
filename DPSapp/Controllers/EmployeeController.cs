@@ -329,11 +329,61 @@ namespace DPSapp.Controllers
                 if (Session["role"].ToString() == "1")
                 {
 
-                    var tags = from tag in db.Tags
-                               where tag.Rooms.Any(c => c.RoomNumber == id)
-                               select tag;
+                   
+                    //Zbierz pacjentów z danego pokoju
+                    var room = db.Rooms.Include("Patients").Where(c => c.RoomNumber == id).First();
+                    List<Patient> patients = new List<Patient>();
+                    //zbierz tagi do pacjentów w danym pokoju
+                    foreach (var item in room.Patients)
+                    {
+                        var patient = db.Patients.Include("Tags").Where(c => c.PatientId == item.PatientId).FirstOrDefault();
+                        patients.Add(patient);
+                    }
 
-                    var messages = db.Messages.Include("Tags").ToList();
+                    //połącz wszytkie tagi w jedną liste
+                    List<Tag> ListofTags = new List<Tag>();
+                    foreach (var patient in patients)
+                    {
+                        foreach (var tag in patient.Tags)
+                        {
+                            ListofTags.Add(tag);
+                        }
+
+                    }
+
+
+                    List<Tag> tagi = ListofTags.ToList();
+
+                    //zbierz wszystkie wiadomości, które mają te tagi
+                    List<Message> messages = new List<Message>();
+                    List<Tag> tagiost = new List<Tag>();
+                    foreach (var tag in tagi)
+                    {
+                        //var temp = _db.Messages.Where(c => c.Tags == item).Select(c => c.Image);
+                        var temp = db.Tags.Include("Messages").Where(c => c.TagId == tag.TagId).FirstOrDefault();
+                        tagiost.Add(temp);
+                        
+                    }
+                    foreach (var tag in tagiost)
+                    {
+                        foreach (var item in tag.Messages)
+                        {
+                            messages.Add(item);
+                        }
+
+                    }
+
+           
+
+
+
+                    //var rooms = db.Messages.Include("Patients").ToList();
+
+                    //var tags = from tag in db.Tags
+                    //           where tag.Rooms.Any(c => c.RoomNumber == id)
+                    //           select tag;
+
+                    //var messages = db.Messages.Include("Tags").ToList();
 
                     return View(messages);
 
