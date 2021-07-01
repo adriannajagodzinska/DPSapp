@@ -11,6 +11,7 @@ namespace DPSapp.Models
         public int RoomId { get; set; }
         [Required]
         public int RoomNumber { get; set; }
+        public ICollection<Patient> Patients { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
     }
 }

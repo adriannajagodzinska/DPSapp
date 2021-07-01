@@ -146,6 +146,10 @@
     <Compile Include="Migrations\202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.Designer.cs">
       <DependentUpon>202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107011126298_dodaniepacjentowdopokoju.cs" />
+    <Compile Include="Migrations\202107011126298_dodaniepacjentowdopokoju.Designer.cs">
+      <DependentUpon>202107011126298_dodaniepacjentowdopokoju.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
@@ -224,6 +228,8 @@
     <Content Include="Views\Employee\Send.cshtml" />
     <Content Include="Views\Tag\Edit.cshtml" />
     <Content Include="Views\Employee\SendedMessages.cshtml" />
+    <Content Include="Views\Employee\Rooms.cshtml" />
+    <Content Include="Views\Employee\RoomsManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -246,6 +252,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.resx">
       <DependentUpon>202106301916156_Dodanie isGlobal do tgu%28tag dla wszystkich.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107011126298_dodaniepacjentowdopokoju.resx">
+      <DependentUpon>202107011126298_dodaniepacjentowdopokoju.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

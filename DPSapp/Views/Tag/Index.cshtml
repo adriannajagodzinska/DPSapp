@@ -86,30 +86,35 @@
 
     @foreach (var item in Model)
     {
-        <tr class="Search">
-            <td>
-                @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
-                    @item.RecipeName*@
-                @Html.DisplayFor(modelItem => item.TagId)
-                @*</a>*@
+<tr class="Search">
+    <td>
+        @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
+            @item.RecipeName*@
+        @Html.DisplayFor(modelItem => item.TagId)
+        @*</a>*@
 
 
-            </td>
-            <td>
+    </td>
+    <td>
 
-                @Html.DisplayFor(modelItem => item.TagName)
-            </td>
-            @*<td>
-                    <div>
-                        <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
+        @Html.DisplayFor(modelItem => item.TagName)
+    </td>
+    <td>
 
-                    </div>
-                </td>*@
+        @Html.DisplayFor(modelItem => item.IsGlobal)
+    </td>
 
-            <td>
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
-            </td>
-        </tr>
+    @*<td>
+            <div>
+                <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
+
+            </div>
+        </td>*@
+
+    <td>
+        @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
+    </td>
+</tr>
     }
 
 </table>
