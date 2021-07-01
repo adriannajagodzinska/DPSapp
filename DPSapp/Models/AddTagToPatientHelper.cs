@@ -9,12 +9,12 @@ namespace DPSapp.Models
 {
     public class AddTagToPatientHelper
     {
-        public Patient patient { get; set; }
+        public Patient Patient { get; set; }
 
         public int TagIdToAdd { get; set; }
+        
 
-
-        public SelectList ListOfTags { get; set; }
+        public List<Tag> ListOfTags { get; set; }
 
        
     }

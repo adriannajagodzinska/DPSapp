@@ -373,18 +373,6 @@ namespace DPSapp.Controllers
 
                     }
 
-           
-
-
-
-                    //var rooms = db.Messages.Include("Patients").ToList();
-
-                    //var tags = from tag in db.Tags
-                    //           where tag.Rooms.Any(c => c.RoomNumber == id)
-                    //           select tag;
-
-                    //var messages = db.Messages.Include("Tags").ToList();
-
                     return View(messages);
 
                 }

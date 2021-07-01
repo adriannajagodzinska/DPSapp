@@ -90,14 +90,19 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    var tags = from s in db.Tags
-                               select s;
-                    
+                    //var tags = from s in db.Tags
+                    //           select s;
+                    var tags = db.Tags.ToList();
                     ViewBag.TagID = ToSelectListID(tags.ToList<Tag>());
                     var patient = db.Patients.Include("Tags").Where(x => x.PatientId == id).First();
                     AddTagToPatientHelper helper = new AddTagToPatientHelper();
-                    helper.patient = patient;
-                    helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
+                    helper.Patient = patient;
+                    tags.ToList<Tag>();
+                    helper.ListOfTags = tags;
+                   
+
+                    //helper.ListOfTags = tags;
+                    //helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
                     
 
                     return View(helper);
@@ -115,20 +120,24 @@ namespace DPSapp.Controllers
         }
        // public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
         [HttpPost]
-        public ActionResult AddTagToPatient([Bind(Include = "patient, ListOfTags, TagIdToAdd")]AddTagToPatientHelper helper)
+        public ActionResult AddTagToPatient([Bind(Include = "TagIdToAdd")]AddTagToPatientHelper helper)
         {
             if (Session["role"] != null)
             {
                 if (Session["role"].ToString() == "1")
                 {
+                   // int patientid = helper.Patient.PatientId;
                     int patientid = int.Parse(this.RouteData.Values["id"].ToString());
-                    var patientTags = from tag in db.Tags
-                                      where tag.Patients.Any(c => c.PatientId == patientid)
-                                      select tag;
-                    List<Tag> patientTagsList = patientTags.ToList();
+                   
+                    var tag = db.Tags.Include("Patients").Where(s => s.TagId == helper.TagIdToAdd).FirstOrDefault();
+                    //var patientTags = from tag in db.Tags
+                    //                  where tag.Patients.Any(c => c.PatientId == patientid)
+                    //                  select tag;
 
-                    //Tag temp = new Tag { TagId = tag1.TagId, TagName = tag1.TagName };
-                    //  patientTagsList.Add(temp);
+                    var patient = db.Patients.Include("Tags").Where(s => s.PatientId == patientid).FirstOrDefault();
+
+                    tag.Patients.Add(patient);
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -150,6 +159,7 @@ namespace DPSapp.Controllers
         [NonAction]
         public SelectList ToSelectListID(List<Tag> tags)
         {
+
            // List<SelectListItem> list = new List<SelectListItem>();
             var dictionary = new Dictionary<int, string>();
             foreach (Tag tag in tags)
@@ -166,6 +176,26 @@ namespace DPSapp.Controllers
             }
             SelectList list2 = new SelectList(dictionary, "Key", "Value");
             return list2;
+        }
+
+        [NonAction]
+        public List<SelectListItem> ToSelectListItemTags(IQueryable<Tag> tags)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            foreach (Tag tag in tags)
+            {
+                var Temp = tag.TagId.ToString();
+                list.Add(new SelectListItem()
+                {
+                    //Value = "",
+                    //Text = patient.PatientId.ToString(),
+                    Text = tag.TagId.ToString(),
+                    Value = tag.TagName.ToString()
+                });
+            }
+            //SelectList list2 = new SelectList(list, "Value", "Text");
+            return list;
         }
     }
 }
