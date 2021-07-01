@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace DPSapp.Controllers
 {
     public class TagController : Controller
@@ -83,7 +84,7 @@ namespace DPSapp.Controllers
             }
             return View(tag);
         }
-        public ActionResult AddTagToPatient()
+        public ActionResult AddTagToPatient(int? id)
         {
             if (Session["role"] != null)
             {
@@ -91,8 +92,15 @@ namespace DPSapp.Controllers
                 {
                     var tags = from s in db.Tags
                                select s;
+                    
                     ViewBag.TagID = ToSelectListID(tags.ToList<Tag>());
-                    return View();
+                    var patient = db.Patients.Include("Tags").Where(x => x.PatientId == id).First();
+                    AddTagToPatientHelper helper = new AddTagToPatientHelper();
+                    helper.patient = patient;
+                    helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
+                    
+
+                    return View(helper);
                 }
                 else
                 {
@@ -105,20 +113,38 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
+       // public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
         [HttpPost]
-        public ActionResult AddTagToPatient(int? id)
+        public ActionResult AddTagToPatient([Bind(Include = "patient, ListOfTags, TagIdToAdd")]AddTagToPatientHelper helper)
         {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    int patientid = int.Parse(this.RouteData.Values["id"].ToString());
+                    var patientTags = from tag in db.Tags
+                                      where tag.Patients.Any(c => c.PatientId == patientid)
+                                      select tag;
+                    List<Tag> patientTagsList = patientTags.ToList();
 
-            int patientid = int.Parse(this.RouteData.Values["id"].ToString());
-            var patientTags = from tag in db.Tags
-                              where tag.Patients.Any(c => c.PatientId == patientid)
-                              select tag;
-            List<Tag> patientTagsList = patientTags.ToList();
+                    //Tag temp = new Tag { TagId = tag1.TagId, TagName = tag1.TagName };
+                    //  patientTagsList.Add(temp);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
 
-            //Tag temp = new Tag { TagId = tag1.TagId, TagName = tag1.TagName };
-            //  patientTagsList.Add(temp);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+           
         }
 
         [NonAction]

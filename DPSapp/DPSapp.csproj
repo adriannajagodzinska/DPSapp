@@ -151,6 +151,7 @@
       <DependentUpon>202107011126298_dodaniepacjentowdopokoju.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AddTagToPatientHelper.cs" />
     <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
     <Compile Include="Models\ListOfAdressessToMedia.cs" />
@@ -230,6 +231,7 @@
     <Content Include="Views\Employee\SendedMessages.cshtml" />
     <Content Include="Views\Employee\Rooms.cshtml" />
     <Content Include="Views\Employee\RoomsManager.cshtml" />
+    <Content Include="Views\Tag\AddTagToPatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
