@@ -305,8 +305,37 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    var rooms = db.Rooms.ToList();
+                    var rooms = db.Rooms.Include("Patients").ToList();
+
                     
+                    //zbierz tagi do pacjentów w danym pokoju
+                    foreach (var room in rooms)
+                    {
+                        List<Patient> patients = new List<Patient>();
+
+                        foreach (var patient in room.Patients )
+                        {
+                        var patienttemp = db.Patients.Include("Tags").Where(c => c.PatientId == patient.PatientId).FirstOrDefault();
+                        patients.Add(patienttemp);
+                        }
+
+                        List<Tag> ListofTags = new List<Tag>();
+                        foreach (var patient in patients)
+                        {
+                            foreach (var tag in patient.Tags)
+                            {
+                                ListofTags.Add(tag);
+                            }
+
+                        }
+                        room.Tags = ListofTags;
+
+                    }
+
+                    //połącz wszytkie tagi w jedną liste
+                    
+                    
+
                     return View(rooms);
 
                 }
