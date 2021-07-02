@@ -73,7 +73,7 @@ namespace DPSapp.Controllers
                         fSender.file.SaveAs(filepath);
                         string userName = Session["UserName"].ToString();
                         int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
-                        var pacjent = db.Patients.Where(a => a.PatientId == pID).Select(a => a).FirstOrDefault();
+                        var pacjent = db.Patients.Include("Tags").Where(a => a.PatientId == pID).Select(a => a).FirstOrDefault();
                         var Tagi = pacjent.Tags;
                         var tID = Tagi.Select(a => a).FirstOrDefault();
                         

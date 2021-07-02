@@ -51,6 +51,7 @@ namespace DPSapp.Controllers
         //{
         //    return View();
         //}
+        
         public ActionResult Index([Bind] LoginAssistant assistant)
         {
             //Role role = new Role { RoleId = 1, RoleName = "Administrator" };
@@ -77,6 +78,14 @@ namespace DPSapp.Controllers
                         return RedirectToAction("Index", "Family");
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("password", "Podane hasło jest niepoprawne");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("login", "Użytkownik o podanym loginie nie istnieje w bazie danych");
             }
 
             return View();

@@ -66,17 +66,18 @@
                         <label for="exampleInputPassword1">Hasło</label>
                         <br />
 
-                        @Html.PasswordFor(model=>model.password, new{ @class = "form-control"  })
+                        @Html.PasswordFor(model => model.password, new { @class = "form-control" })
 
 
                         @*<input name="pas" type="password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">*@
                     </div>
 
-                    <button type="submit"  class="btn btn-primary" style="margin-top:20px">Zaloguj</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top:20px">Zaloguj</button>
+
                 </form>
             </div>
         </div>
-
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     </div>
     <div class="col-sm-6" style="width:20rem"></div>
     <div class="col-sm-6" style="width:30rem">
