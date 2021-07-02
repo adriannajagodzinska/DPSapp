@@ -100,6 +100,58 @@ namespace DPSapp.Controllers
             return View(fSender);
         }
 
-        
+        public ActionResult EditPassword()
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditPassword([Bind(Include = "OldPass, NewPass1, NewPass2")] PassEditAssistant assistant)
+        {
+            if (ModelState.IsValid)
+            {
+                string login = Session["UserName"].ToString();
+                var user = db.Users.Where(a => a.Login == login).Select(a => a).FirstOrDefault();
+                if (user.Password == assistant.OldPass)
+                {
+                    if (assistant.NewPass1 == assistant.NewPass2)
+                    {
+
+                        var user2 = db.Users.Where(a => a.Login == login).Select(a => a).FirstOrDefault();
+                        user2.Password = assistant.NewPass1;
+                        db.SaveChanges();
+
+                        ViewBag.Message = "Zmieniono hasło";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Nowe hasła nie zgadzają się ";
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Podane stare hasło nie jest poprawne";
+                }
+            }
+
+            return View(assistant);
+        }
+
+
     }
 }
