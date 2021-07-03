@@ -254,9 +254,83 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
 
+        }
+
+        public ActionResult RemovePatienFromRoom(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    //var tags = from s in db.Tags
+                    //           select s;
+                    var room = _db.Rooms.Include("Patients").Where(x => x.RoomId == id).First();
+                    var patients = room.Patients.ToList();
+                    ViewBag.Patients = ToSelectList(patients.ToList<Patient>());
+                    
+                    AddPatientsToRoomHelper helper = new AddPatientsToRoomHelper();
+                    helper.Room = room;
+
+                    helper.ListOfPatients = patients;
+
+
+                    //helper.ListOfTags = tags;
+                    //helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
+
+
+                    return View(helper);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+        // public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
+        [HttpPost]
+        public ActionResult RemovePatienFromRoom([Bind(Include = "PatientIdToAdd")] AddPatientsToRoomHelper helper)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    // int patientid = helper.Patient.PatientId;
+                    int roomid = int.Parse(this.RouteData.Values["id"].ToString());
+
+                    var patient = _db.Patients.Where(s => s.PatientId == helper.PatientIdToAdd).FirstOrDefault();
+                    //var patientTags = from tag in db.Tags
+                    //                  where tag.Patients.Any(c => c.PatientId == patientid)
+                    //                  select tag;
+
+                    var room = _db.Rooms.Include("Patients").Where(s => s.RoomId == roomid).FirstOrDefault();
+
+                    room.Patients.Remove(patient);
+
+                    _db.SaveChanges();
+                    return RedirectToAction("Rooms", "Employee");
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
 
 
         }
+
+
+
         [NonAction]
         public SelectList ToSelectList(List<Patient> patients)
         {

@@ -99,6 +99,7 @@
 
                 }
                 <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomNumber),"Rooms") class="button">Dodaj pacjenta</a>
+                <a href=@Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomNumber),"Rooms") class="button">Usuń pacjenta</a>
             </td>
             <td>
                 @foreach (var tag in room.Tags)
