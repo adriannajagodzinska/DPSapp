@@ -71,6 +71,122 @@ namespace DPSapp.Controllers
 
             return View(ListOfAdresses);
         }
+        public ActionResult CreateRoom()
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    Room room = new Room();
+                    return View(room);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateRoom([Bind(Include = "RoomNumber")] Room room)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+
+
+                    _db.Rooms.Add(room);
+                    _db.SaveChanges();
+
+
+
+                    return RedirectToAction("Rooms", "Employee");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
+
+        public ActionResult DeleteRoom(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    Room room = _db.Rooms.Where(x=>x.RoomId==id).FirstOrDefault();
+                    
+                  
+                    return View(room);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteRoom(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+
+                    Room roomtemp = _db.Rooms.Where(x => x.RoomId == id).FirstOrDefault();
+
+
+
+                    _db.Rooms.Remove(roomtemp);
+                    _db.SaveChanges();
+
+
+
+                    return RedirectToAction("Rooms", "Employee");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
 
         public ActionResult ChooseRoomSite()
         {

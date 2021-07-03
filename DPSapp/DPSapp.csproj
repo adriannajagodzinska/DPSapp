@@ -235,6 +235,8 @@
     <Content Include="Views\Tag\AddTagToPatient.cshtml" />
     <Content Include="Views\Employee\EditPassword.cshtml" />
     <Content Include="Views\Family\EditPassword.cshtml" />
+    <Content Include="Views\Rooms\CreateRoom.cshtml" />
+    <Content Include="Views\Rooms\DeleteRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

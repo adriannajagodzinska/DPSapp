@@ -45,6 +45,7 @@
                 opacity: 1;
                 right: 0;
             }
+
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -56,8 +57,6 @@
         text-align: left;
         padding: 8px;
     }
-
-    
 </style>
 <div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
     <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
@@ -67,14 +66,18 @@
 
     </div>
 </div>
-
-
+<td>
+   
+</td>
+<a href=@Url.Action("CreateRoom","Rooms") class="button">Dodaj pokój</a>
 <table style="width:100%">
     <tr>
         <th>Numer Pokoju</th>
         <th>Pacjenci</th>
         <th>Tagi</th>
+        <th></th>
     </tr>
+
 
     @foreach (var room in Model)
     {
@@ -89,19 +92,23 @@
             <td>
                 @foreach (var patiens in room.Patients)
                 {
-                
-                <p>@String.Format("\n{0} {1}", patiens.PatientName, patiens.PatientSurname);</p>
-                  
+
+                    <p>@String.Format("\n{0} {1}", patiens.PatientName, patiens.PatientSurname);</p>
 
 
-                    }
 
-</td>
+                }
+
+            </td>
             <td>
                 @foreach (var tag in room.Tags)
                 {
-                <p>@String.Format("\n{0}", tag.TagName);</p>
+                    <p>@String.Format("\n{0}", tag.TagName);</p>
                 }
+
+            </td>
+            <td>
+                <a href=@Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms") class="button">Usuń pokój</a>
 
             </td>
         </tr>
