@@ -111,9 +111,11 @@
             </div>
         </td>*@
 
-    <td>
-        @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
-    </td>
+<td>
+    @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
+    @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId })
+</td>
+
 </tr>
     }
 

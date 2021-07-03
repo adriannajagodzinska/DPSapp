@@ -196,7 +196,7 @@ namespace DPSapp.Controllers
                     //           select s;
                     var patients = _db.Patients.ToList();
                     ViewBag.Patients = ToSelectList(patients.ToList<Patient>());
-                    var room = _db.Rooms.Include("Patients").Where(x => x.RoomId == id).First();
+                    var room = _db.Rooms.Where(x => x.RoomId == id).First();
                     AddPatientsToRoomHelper helper = new AddPatientsToRoomHelper();
                     helper.Room = room;
                    

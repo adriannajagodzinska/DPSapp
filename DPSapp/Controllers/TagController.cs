@@ -84,6 +84,90 @@ namespace DPSapp.Controllers
             }
             return View(tag);
         }
+
+        public ActionResult DeleteTag(int? id)
+        {
+
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Tag tag = db.Tags.Where(x => x.TagId == id).FirstOrDefault();
+                    
+                    if (tag == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tag);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+           
+        }
+
+        // POST: Recipe/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult DeleteTag(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+
+                    Tag tagtemp = db.Tags.Where(x => x.TagId == id).FirstOrDefault();
+
+
+
+                    db.Tags.Remove(tagtemp);
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("Index", "Tag");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.Tags.Remove(tag);
+            //   // db.Entry(tag).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(tag);
+        }
+
+
+
+
+
+
         public ActionResult AddTagToPatient(int? id)
         {
             if (Session["role"] != null)

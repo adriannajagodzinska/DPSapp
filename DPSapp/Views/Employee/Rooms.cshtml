@@ -98,8 +98,8 @@
 
 
                 }
-                <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomNumber),"Rooms") class="button">Dodaj pacjenta</a>
-                <a href=@Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomNumber),"Rooms") class="button">Usuń pacjenta</a>
+                <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomId),"Rooms") class="button">Dodaj pacjenta</a>
+                <a href=@Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomId),"Rooms") class="button">Usuń pacjenta</a>
             </td>
             <td>
                 @foreach (var tag in room.Tags)
@@ -115,7 +115,7 @@
         </tr>
     }
 
-
+    <a href=@Url.Action("Index","Employee") class="button">Wróć</a>
 
 </table>
 

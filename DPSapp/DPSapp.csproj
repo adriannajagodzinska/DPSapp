@@ -240,6 +240,7 @@
     <Content Include="Views\Rooms\DeleteRoom.cshtml" />
     <Content Include="Views\Rooms\AddPatientToRoom.cshtml" />
     <Content Include="Views\Rooms\RemovePatienFromRoom.cshtml" />
+    <Content Include="Views\Tag\DeleteTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
