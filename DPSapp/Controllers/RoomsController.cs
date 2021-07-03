@@ -186,54 +186,106 @@ namespace DPSapp.Controllers
             }
         }
 
+        public ActionResult AddPatientToRoom(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    //var tags = from s in db.Tags
+                    //           select s;
+                    var patients = _db.Patients.ToList();
+                    ViewBag.Patients = ToSelectList(patients.ToList<Patient>());
+                    var room = _db.Rooms.Include("Patients").Where(x => x.RoomId == id).First();
+                    AddPatientsToRoomHelper helper = new AddPatientsToRoomHelper();
+                    helper.Room = room;
+                   
+                    helper.ListOfPatients = patients;
+
+
+                    //helper.ListOfTags = tags;
+                    //helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
+
+
+                    return View(helper);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+        // public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
+        [HttpPost]
+        public ActionResult AddPatientToRoom([Bind(Include = "PatientIdToAdd")] AddPatientsToRoomHelper helper)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    // int patientid = helper.Patient.PatientId;
+                    int roomid = int.Parse(this.RouteData.Values["id"].ToString());
+
+                    var patient = _db.Patients.Where(s => s.PatientId == helper.PatientIdToAdd).FirstOrDefault();
+                    //var patientTags = from tag in db.Tags
+                    //                  where tag.Patients.Any(c => c.PatientId == patientid)
+                    //                  select tag;
+
+                    var room = _db.Rooms.Include("Patients").Where(s => s.RoomId == roomid).FirstOrDefault();
+
+                    room.Patients.Add(patient);
+
+                    _db.SaveChanges();
+                    return RedirectToAction("Rooms", "Employee");
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+
+        }
+        [NonAction]
+        public SelectList ToSelectList(List<Patient> patients)
+        {
+
+            // List<SelectListItem> list = new List<SelectListItem>();
+            var dictionary = new Dictionary<int, string>();
+            foreach (Patient patient in patients)
+            {
+                // var Temp = tag.TagId.ToString();
+                //list.Add(new SelectListItem()
+                //{
+                //    //Value = "",
+                //    //Text = patient.PatientId.ToString(),
+                //    Text = tag.TagName.ToString(),
+                //    Value = tag.TagId.ToString()
+                //}) ;
+                dictionary.Add(patient.PatientId, String.Format(patient.PatientName+" "+patient.PatientSurname));
+            }
+            SelectList list2 = new SelectList(dictionary, "Key", "Value");
+            return list2;
+        }
+
 
 
         public ActionResult ChooseRoomSite()
         {
             var rooms = (from r in _db.Rooms
                          select r).ToList();
-            //List<Room> rooms = new List<Room>();
-            //Room room1 = new Room();
-            //room1.RoomNumber = 1;
-            //Room room2 = new Room();
-            //room2.RoomNumber = 2;
-            //rooms.Add(room1);
-            //rooms.Add(room2);
-
-
-            //Tag pokoj1 = new Tag();
-            //Tag pokoj2 = new Tag();
-            //pokoj1.TagName = "pokoj1";
-            //pokoj2.TagName = "pokoj2";
-
-
-            //room1.Tags = new List<Tag>();
-            //room2.Tags = new List<Tag>();
-            //room1.Tags.Add(pokoj1);
-            //room2.Tags.Add(pokoj2);
-
-            //Message wiad1 = new Message();
-            //wiad1.Tags = new List<Tag>();
-            //wiad1.Tags.Add(pokoj1);
-
-            //Message wiad2 = new Message();
-            //wiad2.Tags = new List<Tag>();
-            //wiad2.Tags.Add(pokoj2);
-
-            //wiad1.Image = "~/Images\\1.jpg";
-            //wiad2.Image = "~/Images\\4.mp4";
-            //_db.Tags.Add(pokoj1);
-            //_db.Tags.Add(pokoj2);
-            //_db.Messages.Add(wiad1);
-            //_db.Messages.Add(wiad2);
-            //_db.Rooms.Add(room1);
-            //_db.Rooms.Add(room2);
-
-
-
-            // _db.Rooms.Add(room2);
-            //bool a = _db.ChangeTracker.HasChanges();
-            //_db.SaveChanges();
+           
             return View(rooms);
         }
 

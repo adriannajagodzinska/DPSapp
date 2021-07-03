@@ -98,7 +98,7 @@
 
 
                 }
-
+                <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomNumber),"Rooms") class="button">Dodaj pacjenta</a>
             </td>
             <td>
                 @foreach (var tag in room.Tags)

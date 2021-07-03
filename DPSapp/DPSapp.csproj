@@ -151,6 +151,7 @@
       <DependentUpon>202107011126298_dodaniepacjentowdopokoju.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AddPatientsToRoomHelper.cs" />
     <Compile Include="Models\AddTagToPatientHelper.cs" />
     <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
@@ -237,6 +238,7 @@
     <Content Include="Views\Family\EditPassword.cshtml" />
     <Content Include="Views\Rooms\CreateRoom.cshtml" />
     <Content Include="Views\Rooms\DeleteRoom.cshtml" />
+    <Content Include="Views\Rooms\AddPatientToRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
