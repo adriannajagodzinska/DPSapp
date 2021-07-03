@@ -106,6 +106,13 @@
                 @Html.DisplayFor(modelItem => item.PatientSurname)
             </td>
             <td>
+                @foreach (var tag in item.Tags)
+                {
+                    <p>@String.Format("\n{0}", tag.TagName);</p>
+                }
+
+
+
                 <div>
                     <input type="button" value="Dodaj znacznik" onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
 
@@ -114,8 +121,8 @@
 
             <td>
                 @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }) 
-                @*@Html.ActionLink("Usuń", "Delete", new { id = item.PatientId })*@
+                @*@Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId })*@ 
+                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId })
             </td>
         </tr>
     }

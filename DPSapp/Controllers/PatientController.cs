@@ -18,23 +18,26 @@ namespace DPSapp.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
-            var patients = from s in db.Patients
-                          select s;
+            var patients = db.Patients.Include("Tags").ToList();
+            //var patients = from s in db.Patients
+
+            //               select s;
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    recipes = recipes.Where(s => s.RecipeName.Contains(searchString)
             //                           || s.Sources.Contains(searchString));
             //}
+          
             switch (sortOrder)
             {
                 case "name_desc":
-                    patients = patients.OrderByDescending(s => s.PatientName); // możliwość sortowania po imieniu
+                     patients = patients.OrderByDescending(s => s.PatientName).ToList(); // możliwość sortowania po imieniu
                     break;
                 case "surname_desc":
-                    patients = patients.OrderByDescending(s => s.PatientSurname); // możliwość sortowania po imieniu
+                     patients = patients.OrderByDescending(s => s.PatientSurname).ToList(); // możliwość sortowania po imieniu
                     break;
                 default:
-                    patients = patients.OrderBy(s => s.PatientSurname); // domyślnie sortuj po nazwiskach
+                     patients = patients.OrderBy(s => s.PatientSurname).ToList(); // domyślnie sortuj po nazwiskach
                     break;
             }
             return View(patients.ToList());
@@ -95,5 +98,67 @@ namespace DPSapp.Controllers
             }
             return View(patient);
         }
+
+
+        public ActionResult DeletePatient(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    Patient patient = db.Patients.Where(x => x.PatientId == id).FirstOrDefault();
+
+
+                    return View(patient);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeletePatient(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    Patient patienttemp = db.Patients.Where(x => x.PatientId == id).FirstOrDefault();
+                    
+
+
+
+                    db.Patients.Remove(patienttemp);
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("Index", "Patient");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
     }
 }
