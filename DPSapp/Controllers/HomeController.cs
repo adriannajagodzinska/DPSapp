@@ -61,16 +61,16 @@ namespace DPSapp.Controllers
             //db.Users.Add(user);
             //db.SaveChanges();
 
-            if (db.Users.Where(a=>a.Login==assistant.login).Select(a=>a).Count()>0)
+            if (db.Users.Where(a => a.Login == assistant.login).Select(a => a).Count() > 0)
             {
-                
-                if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.Password).FirstOrDefault().ToString()==assistant.password)
+
+                if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.Password).FirstOrDefault().ToString() == assistant.password)
                 {
                     Session["UserName"] = assistant.login;
                     if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.RoleId).FirstOrDefault().ToString() == "1")
                     {
                         Session["Role"] = "1";
-                        return RedirectToAction("Index","Employee");
+                        return RedirectToAction("Index", "Employee");
                     }
                     else
                     {
