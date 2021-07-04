@@ -1,12 +1,17 @@
-﻿@model IEnumerable<DPSapp.Models.User>
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
+@model IEnumerable<DPSapp.Models.User>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style="  background-color:whitesmoke">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Panel administracji</h1>
+        <h1 class="display-4" style="text-align: center; background-color: white; font-family: Marker Felt; border: double">Panel administracji</h1>
 
 
     </div>
@@ -21,7 +26,7 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse" style="background-color: rgb(144 178 210)
+        <div class="navbar-collapse collapse" style="background-color: whitesmoke
 ">
             <ul class="nav navbar-nav">
                 <li>
@@ -67,26 +72,29 @@
     </div>
 </div>
 
-<div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="container" style="  background-color:whitesmoke">
 
-    <h1 class="display-4" style="text-align:center ;font-family:'Times New Roman'">Użytkownicy</h1>
+    <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt;
+        background-color:white;
+        border: double">Użytkownicy</h1>
 
 
 </div>
 <div>
-    <table class="table table-hover" id="tabelka">
+    <table class="table table-hover" id="tabelka" style="background-color: white; color:black">
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.RecipeName)*@
-                @Html.ActionLink("Imię pacjenta", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
                 @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Nazwisko pacjenta", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+                @Html.ActionLink("Login użytkownika", "Index", new { sortOrder = ViewBag.SurnameSortParm })
             </th>
             <th>
                 @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Hasło", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+                @Html.ActionLink("Hasło użytkownika", "Index", new { sortOrder = ViewBag.SurnameSortParm })
             </th>
             <th>
                 @* @Html.DisplayNameFor(model => model.Date)*@

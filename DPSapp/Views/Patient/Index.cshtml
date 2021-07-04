@@ -1,4 +1,9 @@
-﻿@model IEnumerable<DPSapp.Models.Patient>
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
+@model IEnumerable<DPSapp.Models.Patient>
 
 @{
     ViewBag.Title = "Pacjenci";
@@ -7,9 +12,9 @@
     .button {
         display: inline-block;
         border-radius: 4px;
-        background-color: rgb(138 171 204);
+        background-color: white;
         border: none;
-        color: #FFFFFF;
+        color: black;
         text-align: center;
         font-size: 28px;
         padding: 20px;
@@ -44,10 +49,11 @@
                 right: 0;
             }
 </style>
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
+    <div class="container" style=" background-color:white">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Lista Pacjentów</h1>
+        <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt;">Lista Pacjentów</h1>
 
 
     </div>
