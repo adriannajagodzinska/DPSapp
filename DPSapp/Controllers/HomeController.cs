@@ -51,7 +51,13 @@ namespace DPSapp.Controllers
         //{
         //    return View();
         //}
-        
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index([Bind] LoginAssistant assistant)
         {
             //Role role = new Role { RoleId = 1, RoleName = "Administrator" };
@@ -60,35 +66,44 @@ namespace DPSapp.Controllers
             //User user = new User { Login = "admin", Password = "admin", RoleId = 1 };
             //db.Users.Add(user);
             //db.SaveChanges();
-
-            if (db.Users.Where(a => a.Login == assistant.login).Select(a => a).Count() > 0)
+            if (assistant.login == null) {
+                ModelState.AddModelError("login", "Proszę wprowadzić login");
+            }
+            else
             {
-
-                if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.Password).FirstOrDefault().ToString() == assistant.password)
+                if (db.Users.Where(a => a.Login == assistant.login).Select(a => a).Count() > 0)
                 {
-                    Session["UserName"] = assistant.login;
-                    if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.RoleId).FirstOrDefault().ToString() == "1")
-                    {
-                        Session["Role"] = "1";
-                        return RedirectToAction("Index", "Employee");
+                    if (assistant.password == null) {
+                        ModelState.AddModelError("password", "Proszę wprowadzić hasło");
                     }
                     else
                     {
-                        Session["Role"] = "2";
-                        return RedirectToAction("Index", "Family");
+                        if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.Password).FirstOrDefault().ToString() == assistant.password)
+                        {
+                            Session["UserName"] = assistant.login;
+                            if (db.Users.Where(a => a.Login == assistant.login).Select(a => a.RoleId).FirstOrDefault().ToString() == "1")
+                            {
+                                Session["Role"] = "1";
+                                return RedirectToAction("Index", "Employee");
+                            }
+                            else
+                            {
+                                Session["Role"] = "2";
+                                return RedirectToAction("Index", "Family");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("password", "Podane hasło jest niepoprawne");
+                        }
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("password", "Podane hasło jest niepoprawne");
+                    ModelState.AddModelError("login", "Podany login jest niepoprawny");
                 }
             }
-            else
-            {
-                ModelState.AddModelError("login", "Użytkownik o podanym loginie nie istnieje w bazie danych");
-            }
-
-            return View();
+            return View(assistant);
         }
 
         public ActionResult Wyloguj()

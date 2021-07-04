@@ -8,11 +8,11 @@ namespace DPSapp.Models
 {
     public class LoginAssistant
     {
-      // [Required(ErrorMessage = "Nieprawidłowy login")]
-      // [DisplayFormat(NullDisplayText = "Należy wprowadzić login")]
+       // [Required(ErrorMessage = "Nieprawidłowy login")]
+        [DisplayFormat(NullDisplayText = "Należy wprowadzić login")]
         public string login { get; set; }
-       // [Required(ErrorMessage = "Nieprawidłowe hasło")]
-       // [DisplayFormat(NullDisplayText = "Należy wprowadzić hasło")]
+      //  [Required(ErrorMessage = "Nieprawidłowe hasło")]
+        [DisplayFormat(NullDisplayText = "Należy wprowadzić hasło")]
         public string password { get; set; }
        
     }

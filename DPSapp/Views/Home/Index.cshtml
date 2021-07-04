@@ -1,6 +1,6 @@
 ﻿<style>
     #tlo {
-        background-color:whitesmoke;
+        background-color: whitesmoke;
     }
 </style>
 @{
@@ -8,128 +8,135 @@
 }
 @model DPSapp.Models.LoginAssistant
 @*<head id="Head1" runat="server">
-    <script type="text/javascript">
-        var loginy = @Html.Raw(Json.Encode(Model.login));
-        var hasla = @Html.Raw(Json.Encode(Model.password));
-        var role = @Html.Raw(Json.Encode(Model.role));
-        
-
-    function loguj() {
-        let validated = false;
-        var userName = document.getElementById("exampleInputLogin").value;
-        var userPass = document.getElementById("exampleInputPassword1").value;
+        <script type="text/javascript">
+            var loginy = @Html.Raw(Json.Encode(Model.login));
+            var hasla = @Html.Raw(Json.Encode(Model.password));
+            var role = @Html.Raw(Json.Encode(Model.role));
 
 
-        var i;
-        for (i = 0; i < loginy.length; i++) {
-            if (userName == loginy[i]) {
-                if (userPass==hasla[i]) {
-                    if (role[i] == "1") {
-                       
-                        window.open("/Employee/Index", "_self")
-                       
-                    }
-                    else {
-                        window.open("/Family/Index", "_self")
+        function loguj() {
+            let validated = false;
+            var userName = document.getElementById("exampleInputLogin").value;
+            var userPass = document.getElementById("exampleInputPassword1").value;
+
+
+            var i;
+            for (i = 0; i < loginy.length; i++) {
+                if (userName == loginy[i]) {
+                    if (userPass==hasla[i]) {
+                        if (role[i] == "1") {
+
+                            window.open("/Employee/Index", "_self")
+
+                        }
+                        else {
+                            window.open("/Family/Index", "_self")
+                        }
                     }
                 }
             }
+
+
+
         }
 
 
+        </script>
+    </head>*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="jumbotron jumbotron-fluid" id="tlo">
+        <div class="container" style="background-color:white">
 
-    }
+            <h1 class="display-4" style="text-align: center; font-family: Marker Felt; border: double">System aktywizacji pensjonariuszy</h1>
 
+        </div>
 
-    </script>
-</head>*@
+        <div class="row" style="margin-top:50px">
+            <div class="col-sm-6" style="width: 15rem"></div>
+            <div class="col-sm-6 " style="width:30rem">
 
-<div class="jumbotron jumbotron-fluid" id="tlo">
-    <div class="container" style="background-color:white">
-
-        <h1 class="display-4" style="text-align: center; font-family: Marker Felt; border: double">System aktywizacji pensjonariuszy</h1>
-
-    </div>
-
-    <div class="row" style="margin-top:50px">
-        <div class="col-sm-6" style="width: 15rem"></div>
-        <div class="col-sm-6 " style="width:30rem">
-
-            <div class="card text-white bg-info text-center" style="        width: 30rem;
+                <div class="card text-white bg-info text-center" style="        width: 30rem;
         padding: 2rem;
         height: 30rem;
         background-color: white; border:double">
 
-                <div id="forma" class="card-body">
-                    <h4 class="card-title text-capitalize text-center" style="        background-color: white;
+                    <div id="forma" class="card-body">
+                        <h4 class="card-title text-capitalize text-center" style="        background-color: white;
         border: none;
         border-color: black;
         margin-bottom: 20px;
-        font-family: Marker Felt">Logowanie użytkownika</h4>
-                    <form>
-                        <div class="form-group text-left" style="font-family: Marker Felt">
-                            <label for="exampleInputLogin">Login</label>
-                            @*<input name="log" type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp" placeholder="Wpisz login">*@
-                            @Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })*@
-                            @Html.ValidationMessage("login")
-                        </div>
-                        <div class="form-group text-left" style="font-family: Marker Felt">
-                            <label for="exampleInputPassword1">Hasło</label>
-                            <br />
+        font-family: Marker Felt">
+                            Logowanie użytkownika
+                        </h4>
+                        <form>
+                            <div class="form-group text-left" style="font-family: Marker Felt">
+                                <label for="exampleInputLogin">Login</label>
+                                @*<input name="log" type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp" placeholder="Wpisz login">*@
+                                @Html.EditorFor(model => model.login, new { htmlAttributes = new {id="Login", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessage("login")*@
+                            </div>
+                            <div class="form-group text-left" style="font-family: Marker Felt">
+                                <label for="exampleInputPassword1">Hasło</label>
+                                <br />
 
-                            @Html.PasswordFor(model => model.password, new { @class = "form-control" })
-                            @*@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })*@
-                            @Html.ValidationMessage("password")
+                                @Html.PasswordFor(model => model.password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessage("password")*@
 
 
-                            @*<input name="pas" type="password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">*@
-                        </div>
+                                @*<input name="pas" type="password" class="form-control" id="exampleInputPassword1" placeholder="Wpisz hasło">*@
+                            </div>
 
-                        <button type="submit" class="btn btn-primary" style="        margin-top: 20px;
+                            <button type="submit" class="btn btn-primary" style="        margin-top: 20px;
         background-color: white;
         border-color: black;
         border: solid;
         border-radius: 30px;
         color: black;
-        font-family: Marker Felt">Zaloguj się</button>
+        font-family: Marker Felt">
+                                Zaloguj się
+                            </button>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
+                @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
             </div>
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-sm-6" style="width:20rem"></div>
-        <div class="col-sm-6" style="width:30rem">
-            <div class="card text-white bg-info text-center" style="        width: 30rem;
+            <div class="col-sm-6" style="width:20rem"></div>
+            <div class="col-sm-6" style="width:30rem">
+                <div class="card text-white bg-info text-center" style="        width: 30rem;
         padding: 2rem;
         height: 30rem;
         background-color: white;
         border: double">
-                <div class="card-body">
-                    <h4 class="card-title text-capitalize" style="margin-bottom: 20px;font-family: Marker Felt">Galeria dla pensjonariuszy</h4>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16" alignment-baseline="center">
-                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
-                    </svg>
-                    @*<p class="card-text text-left" style="margin-top:20px; margin-bottom:20px">Wejście do galerii zdjęć oraz wiadomości dla pensjonariuszy z podziałem na pokoje. </p>*@
-                    <a href=@Url.Action("ChooseRoomSite","Rooms") title="Wejście do galerii zdjęć oraz wiadomości dla pensjonariuszy z podziałem na pokoje." class="btn btn-primary" style="        margin-top: 20px;
+                    <div class="card-body">
+                        <h4 class="card-title text-capitalize" style="margin-bottom: 20px;font-family: Marker Felt">Galeria dla pensjonariuszy</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16" alignment-baseline="center">
+                            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                            <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                        </svg>
+                        @*<p class="card-text text-left" style="margin-top:20px; margin-bottom:20px">Wejście do galerii zdjęć oraz wiadomości dla pensjonariuszy z podziałem na pokoje. </p>*@
+                        <a href=@Url.Action("ChooseRoomSite", "Rooms") title="Wejście do galerii zdjęć oraz wiadomości dla pensjonariuszy z podziałem na pokoje." class="btn btn-primary" style="        margin-top: 20px;
         background-color: white;
         border-color: black;
         border: solid;
         border-radius: 30px;
         color: black;
         font-family: Marker Felt">Wybierz pokój</a>
+                    </div>
                 </div>
             </div>
+
+
+            @*<div>
+                    <a href=@Url.Action("Index","UploadFiles") class="btn btn-primary">Załaduj plik</a>
+                </div>*@
+            <div class="col-sm-6" style="width:5%"></div>
         </div>
-
-
-        @*<div>
-                <a href=@Url.Action("Index","UploadFiles") class="btn btn-primary">Załaduj plik</a>
-            </div>*@
-        <div class="col-sm-6" style="width:5%"></div>
     </div>
-</div>
+}
 
 
