@@ -1,21 +1,25 @@
-﻿
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
 @{
     ViewBag.Title = "ChooseRoomSite";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutClear.cshtml";
 }
 @model List<DPSapp.Models.Room>
 
 <style>
     .button {
-        display: inline-block;
-        border-radius: 4px;
-        background-color: #31708f;
-        border: none;
-        color: #FFFFFF;
+        display:inline-block;
+        border-radius: 5px;
+        background-color: white;
+        border: double;
+        color: black;
         text-align: center;
         font-size: 28px;
-        padding: 20px;
-        width: 200px;
+        padding: 30px;
+        width: 160px;
         transition: all 0.5s;
         cursor: pointer;
         margin: 5px;
@@ -38,7 +42,7 @@
             }
 
         .button:hover span {
-            padding-right: 25px;
+            padding-right: 10px;
         }
 
             .button:hover span:after {
@@ -46,25 +50,34 @@
                 right: 0;
             }
 </style>
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style=" background-color:white">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Wybierz pokój</h1>
+        <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt;
+        border: double;
+        color:black;
+">Wybierz pokój</h1>
 
 
     </div>
 </div>
-
-    @foreach (var room in Model)
-    {
-        <td>
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style=" margin:5px">
 
 
-            <a href=@Url.Action(String.Format("Slider/{0}",@room.RoomNumber),"Rooms") class="button">@room.RoomNumber</a>
+        @foreach (var room in Model)
+        {
+            <td>
 
-            @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
-        </td>
+
+                <a href=@Url.Action(String.Format("Slider/{0}",@room.RoomNumber),"Rooms") title="Naciśnięcie spowoduje przeniesienie do danego pokoju" class="button">@room.RoomNumber</a>
+
+                @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
+            </td>
 
 
-    }
+        }
+    </div>
+</div>
 

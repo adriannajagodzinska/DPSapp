@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<style>
+﻿<style>
     #tlo {
         background-color: whitesmoke;
     }
@@ -24,24 +23,25 @@
     <div class="navbar navbar-light navbar-inverse navbar-fixed-top bg-light" style="background-color:whitesmoke; color:black">
         <div class="container" style="color:black">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style=" color: black; font-family: Marker Felt">
+                <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style=" color: black; font-family: Marker Felt">
+                
                 </button>
                 @Html.ActionLink("Powrót do strony głównej", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse" style="color:black; float:right">
-                <ul class="nav navbar-nav">
+            @*<div class="navbar-collapse collapse" style="color:black; float:right">
+                <ul class="nav navbar-nav">*@
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Wyloguj się", "Wyloguj", "Home")</li>
+                    @*<li>@Html.ActionLink("Wyloguj się", "Wyloguj", "Home")</li>
                 </ul>
-            </div>
+            </div>*@
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
