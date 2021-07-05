@@ -243,6 +243,8 @@
     <Content Include="Views\Tag\DeleteTag.cshtml" />
     <Content Include="Views\Patient\DeletePatient.cshtml" />
     <Content Include="Views\Shared\_LayoutClear.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmp.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
