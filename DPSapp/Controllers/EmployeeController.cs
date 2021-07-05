@@ -17,15 +17,33 @@ namespace DPSapp.Controllers
         private DPSContext db = new DPSContext();
         // GET: Employee
        
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
 
             if (Session["role"]!=null)
             {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.LoginSortParm = String.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
+                ViewBag.PasswordSortParm = String.IsNullOrEmpty(sortOrder) ? "password_desc" : "";
+                ViewBag.PatientSortParm = String.IsNullOrEmpty(sortOrder) ? "patient_desc" : "";
                 if (Session["role"].ToString() == "1")
                 {
-                    var users = from u in db.Users
-                                   select u;
+                    var users = db.Users.ToList();
+                    switch (sortOrder)
+                    {
+                        case "login_desc":
+                            users = users.OrderByDescending(s => s.Login).ToList(); // możliwość sortowania po loginie
+                            break;
+                        case "password_desc":
+                            users = users.OrderByDescending(s => s.Password).ToList(); // możliwość sortowania po haśle (?)
+                            break;
+                        case "patient_desc":
+                            users = users.OrderByDescending(s => s.PatientID).ToList(); // możliwość sortowania po roli
+                            break;
+                        default:
+                            users = users.OrderBy(s => s.UserId).ToList(); // domyślnie sortuj po id
+                            break;
+                    }
                     return View(users.ToList());
                 }
                 else

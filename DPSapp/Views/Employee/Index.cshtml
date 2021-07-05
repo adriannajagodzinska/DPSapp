@@ -3,6 +3,31 @@
         background-color: whitesmoke;
     }
 </style>
+<style>
+    a.my-class {
+        color: yellow;
+    }
+
+        a.my-class:active {
+            color: red;
+        }
+
+        a.my-class:link {
+            color: blueviolet;
+        }
+
+        a.my-class:visited {
+            color: green;
+        }
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size:larger;
+    }
+</style>
+    
+
 @model IEnumerable<DPSapp.Models.User>
 @{
     ViewBag.Title = "Index";
@@ -17,125 +42,125 @@
     </div>
 </div>
 
-<div class="navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="navbar">
+            <div class="container" style="vertical-align:central">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" style="background-color: whitesmoke; border:double">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="Tag" class="gradient-class">
+                                <span class="text-color-class">Znaczniki</span>
+                            </a>
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+                            <a href="Patient" class="gradient-class">
+                                <span class="text-color-class">Pacjenci</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Employee/UserManagement" class="gradient-class">
+                                <span class="text-color-class">Użytkownicy</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Employee/SendedMessages" class="gradient-class">
+                                <span class="text-color-class">Ogłoszenia</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Employee/Send" class="gradient-class">
+                                <span class="text-color-class">Wyślij ogłoszenia</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Employee/Rooms" class="gradient-class">
+                                <span class="text-color-class">Pokoje</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Employee/EditPassword" class="gradient-class">
+                                <span class="text-color-class">Zmiana hasła</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="navbar-collapse collapse" style="background-color: whitesmoke
-">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="Tag" class="gradient-class">
-                        <span class="text-color-class">Znaczniki</span>
-                    </a>
-                </li>
-                <li>
+        <div class="container" style="  background-color:whitesmoke">
 
-                </li>
-                <li>
-                    <a href="Patient" class="gradient-class">
-                        <span class="text-color-class">Pacjenci</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Employee/UserManagement" class="gradient-class">
-                        <span class="text-color-class">Użytkownicy</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Employee/SendedMessages" class="gradient-class">
-                        <span class="text-color-class">Ogłoszenia</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Employee/Send" class="gradient-class">
-                        <span class="text-color-class">Wyślij ogłoszenia</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Employee/Rooms" class="gradient-class">
-                        <span class="text-color-class">Pokoje</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Employee/EditPassword" class="gradient-class">
-                        <span class="text-color-class">Zmiana hasła</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div class="container" style="  background-color:whitesmoke">
-
-    <h1 class="display-4" style="        text-align: center;
+            <h1 class="display-4" style="        text-align: center;
         font-family: Marker Felt;
         background-color:white;
-        border: double">Użytkownicy</h1>
+        border: double">
+                Użytkownicy
+            </h1>
 
 
-</div>
-<div>
-    <table class="table table-hover" id="tabelka" style="background-color: white; color:black">
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.RecipeName)*@
-                @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.NameSortParm })
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Login użytkownika", "Index", new { sortOrder = ViewBag.SurnameSortParm })
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Hasło użytkownika", "Index", new { sortOrder = ViewBag.SurnameSortParm })
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Przypisany pacjent", "Index", new { sortOrder = ViewBag.SurnameSortParm })
-            </th>
-        </tr>
+        </div>
+        <div>
+            <table class="table table-hover" id="tabelka" style="background-color: white; color:black">
+                <tr>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.RecipeName)*@
+                        @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.NameSortParm })
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.Date)*@
+                        @Html.ActionLink("Login użytkownika", "Index", new { @class = "my-class" }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli", sortOrder = ViewBag.LoginSortParm })
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.Date)*@
+                        @Html.ActionLink("Hasło użytkownika", "Index", new { @class = "my-class", sortOrder = ViewBag.PasswordSortParm }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.Date)*@
+                        @Html.ActionLink("Przypisany pacjent", "Index", new { @class = "my-class", sortOrder = ViewBag.PatientSortParm }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                    </th>
+                </tr>
 
-        @foreach (var item in Model)
-        {
-    <tr class="Search">
-        <td>
-            @item.UserId
-        </td>
-        <td>
+                @foreach (var item in Model)
+                {
+                    <tr class="Search">
+                        <td>
+                            @item.UserId
+                        </td>
+                        <td>
 
-            @item.Login
+                            @item.Login
 
 
-        </td>
-        <td>
+                        </td>
+                        <td>
 
-            @item.Password
-        </td>
-        <td>
-            @if (item.PatientID == 0)
-            {
-                <h5> Brak (Konto Pracownika)</h5>
-            }
-            else
-            {
-        <h5>@item.PatientID</h5>
-                   
-            }
+                            @item.Password
+                        </td>
+                        <td>
+                            @if (item.PatientID == 0)
+                            {
+                                <h5> Brak (Konto Pracownika)</h5>
+                            }
+                            else
+                            {
+                                <h5>@item.PatientID</h5>
 
-            </td>
+                            }
 
-    </tr>
-        }
+                        </td>
 
-    </table>
+                    </tr>
+                }
 
-</div>
+            </table>
+
+        </div>
 
 
