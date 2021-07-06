@@ -20,7 +20,6 @@ namespace DPSapp.Controllers
             ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
             var patients = db.Patients.Include("Tags").ToList();
             //var patients = from s in db.Patients
-          
             switch (sortOrder)
             {
                 case "name_desc":
