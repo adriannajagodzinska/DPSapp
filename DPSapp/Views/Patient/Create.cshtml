@@ -1,10 +1,40 @@
-﻿@model DPSapp.Models.Patient
+﻿<style>
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
+</style>
+@model DPSapp.Models.Patient
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Dodaj pacjenta</h2>
+<h3>Dodaj pacjenta</h3>
 
 
 @using (Html.BeginForm())
@@ -32,14 +62,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Utwórz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Powrót do listy pacjentów", "Index")
+    @Html.ActionLink("Powrót do listy pensjonariuszy", "Index",null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
 </div>
 
 @section Scripts {

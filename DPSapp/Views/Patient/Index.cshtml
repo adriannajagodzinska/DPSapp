@@ -17,13 +17,18 @@
         border: double;
         color: black;
         text-align: center;
-        font-size: 28px;
+        font-size: 14px;
+        font-family: Marker Felt;
         padding: 20px;
-        width: 400px;
+        width: 320px;
         transition: all 0.5s;
         cursor: pointer;
-        margin: 5px;
+        margin: 0px;
     }
+
+        .button:hover {
+            background-color: #EDEDED;
+        }
 
         .button span {
             cursor: pointer;
@@ -49,53 +54,76 @@
                 opacity: 1;
                 right: 0;
             }
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+    .my-class:active {
+        color: black;
+    }
+
+    .my-class:link {
+        color: black;
+    }
+
+    .my-class:visited {
+        color: black;
+    }
+
+    .my-class:hover {
+        color: cadetblue;
+    }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
 </style>
 <div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
     <div class="container" style=" background-color:white">
 
         <h1 class="display-4" style="        text-align: center;
         font-family: Marker Felt; border:double;">
-            Lista Pacjentów
+            Lista Pensjonariuszy
         </h1>
 
 
     </div>
 </div>
-<p id="dodaj" class="button">
-    @Html.ActionLink("Dodaj nowego pacjenta", "Create")
 
-</p>
+<div>
+    <p id="dodaj" class="button">
+        @Html.ActionLink("Dodaj nowego pacjenta", "Create",null, new {title = "Naciśnięcie spowoduje przeniesienie do modułu dodawania pensjonariusza" })
 
-
-@*@using (Html.BeginForm())
-        {
-    <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
     </p>
-        }*@
+</div>
 
-@*<br />*@
 <br />
-<div class="container">
-    <h4 class="display-4" style="text-align:left ;font-family:'Times New Roman'">Wyszukaj pacjenta</h4>
+<div class="card text-white bg-info text-center" style="background-color:whitesmoke">
+    <h4 class="display-4" style="        text-align: left;
+        font-family: Marker Felt">Wyszukaj pensjonariusza</h4>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
-            <input type="text" id="Search" placeholder="Search" class="form-control" />
+            <input type="text" id="Search" placeholder="Search" class="form-control" title="Dynamiczne wyszukiwanie pacjenta" />
         </div>
     </div>
 </div>
 <br />
-<table class="table table-hover" id="tabelka">
+<table class="table table-hover" id="tabelka" style="        font-family: Marker Felt;
+        background-color: white;
+        color: black">
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.RecipeName)*@
-            @Html.ActionLink("Imię pacjenta", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Imię pencjonariusza", "Index", new { sortOrder = ViewBag.NameSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
         </th>
         <th>
             @* @Html.DisplayNameFor(model => model.Date)*@
-            @Html.ActionLink("Nazwisko pacjenta", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+            @Html.ActionLink("Nazwisko pensjonariusza", "Index", new { sortOrder = ViewBag.SurnameSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
         </th>
         <th></th>
     </tr>
@@ -124,7 +152,8 @@
 
 
                 <div>
-                    <input type="button" value="Dodaj znacznik" onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
+                    <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                           onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
 
                 </div>
             </td>
@@ -132,7 +161,7 @@
             <td>
                 @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
                 @*@Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId })*@
-                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId })
+                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
             </td>
         </tr>
     }

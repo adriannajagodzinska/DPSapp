@@ -4,20 +4,24 @@
     }
 </style>
 <style>
-    a.my-class {
-        color: yellow;
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
     }
 
-        a.my-class:active {
-            color: red;
+        .my-class:active {
+            color: black;
         }
 
-        a.my-class:link {
-            color: blueviolet;
+        .my-class:link {
+            color: black;
         }
 
-        a.my-class:visited {
-            color: green;
+        .my-class:visited {
+            color: black;
+        }
+        .my-class:hover {
+            color:cadetblue;
         }
     .gradient-class {
         color: black;
@@ -115,15 +119,16 @@
                     </th>
                     <th>
                         @* @Html.DisplayNameFor(model => model.Date)*@
-                        @Html.ActionLink("Login użytkownika", "Index", new { @class = "my-class" }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli", sortOrder = ViewBag.LoginSortParm })
+    @Html.ActionLink("Login użytkownika", "Index", new { sortOrder = ViewBag.LoginSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+</th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.Date)*@
+                        @Html.ActionLink("Hasło użytkownika", "Index", new { sortOrder = ViewBag.PasswordSortParm }, new {@class = "my-class", title= "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                        @*@Html.ActionLink("Hasło użytkownika", "Index", null, new Dictionary<string, object> { { "sortOrder", "ViewBag.PasswordSortParm" }, { "class", "my-class" }, { "title", "Naciśnięcie spowoduje posortwanie danych według tabeli" } })*@
                     </th>
                     <th>
                         @* @Html.DisplayNameFor(model => model.Date)*@
-                        @Html.ActionLink("Hasło użytkownika", "Index", new { @class = "my-class", sortOrder = ViewBag.PasswordSortParm }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
-                    </th>
-                    <th>
-                        @* @Html.DisplayNameFor(model => model.Date)*@
-                        @Html.ActionLink("Przypisany pacjent", "Index", new { @class = "my-class", sortOrder = ViewBag.PatientSortParm }, new { title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                        @Html.ActionLink("Przypisany pacjent", "Index", new { sortOrder = ViewBag.PatientSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
                     </th>
                 </tr>
 
