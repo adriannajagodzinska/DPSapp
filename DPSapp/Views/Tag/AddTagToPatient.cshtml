@@ -1,6 +1,33 @@
-﻿@model DPSapp.Models.AddTagToPatientHelper
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+</style>
+@model DPSapp.Models.AddTagToPatientHelper
 @{
     ViewBag.Title = "AddTagToPatient";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
 <h2>Dodaj znacznik do pacjenta</h2>
@@ -36,5 +63,5 @@
 
 }
     <div>
-        @Html.ActionLink("Powrót do listy pacjentów", "Patient")
+        @Html.ActionLink("Powrót do listy pensjonariuszy", "Index", "Patient",null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
     </div>
