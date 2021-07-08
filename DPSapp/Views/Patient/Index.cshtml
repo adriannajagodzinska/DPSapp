@@ -144,10 +144,10 @@
                 @Html.DisplayFor(modelItem => item.PatientSurname)
             </td>
             <td>
-                @foreach (var tag in item.Tags)
+                @*@foreach (var tag in item.Tags)
                 {
                     <p>@String.Format("\n{0}", tag.TagName);</p>
-                }
+                }*@
 
 
 
@@ -160,7 +160,7 @@
 
             <td>
                 @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
-                @*@Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId })*@
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
                 @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
             </td>
         </tr>

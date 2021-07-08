@@ -223,7 +223,7 @@ namespace DPSapp.Controllers
                     tag.Patients.Add(patient);
 
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Patient");
                 }
                 else
                 {

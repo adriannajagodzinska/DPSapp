@@ -47,6 +47,7 @@ namespace DPSapp.Controllers
             {
                 return HttpNotFound();
             }
+            var patients = db.Patients.Include("Tags").ToList();
             return View(patient);
         }
        
@@ -150,7 +151,6 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
-
 
     }
 }

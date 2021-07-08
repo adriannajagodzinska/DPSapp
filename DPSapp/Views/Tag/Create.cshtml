@@ -1,4 +1,33 @@
-﻿@model DPSapp.Models.Tag
+﻿<style>
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
+</style>
+@model DPSapp.Models.Tag
 
 @{
     ViewBag.Title = "Create";
@@ -32,14 +61,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Utwórz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Powrót do listy znaczników", "Index")
+    @Html.ActionLink("Powrót do listy znaczników", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy znaczników" })
 </div>
 
 @section Scripts {

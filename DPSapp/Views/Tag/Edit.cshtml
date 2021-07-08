@@ -1,10 +1,37 @@
-﻿@model DPSapp.Models.Tag
+﻿<style>
+    #usun {
+        color: firebrick;
+    }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+</style>
+@model DPSapp.Models.Tag
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Edytuj</h2>
+<h2>Edytuj znacznik</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +39,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Przepisy</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TagId)
@@ -27,14 +53,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Powrót do listy znaczników", "Index")
+    @Html.ActionLink("Powrót do listy znaczników", "Index",null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy znaczników" })
 </div>
 
 @section Scripts {

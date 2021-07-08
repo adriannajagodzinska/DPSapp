@@ -117,11 +117,11 @@
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.RecipeName)*@
-            @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.IdSortParm })
+            @Html.ActionLink("Numer", "Index", new { sortOrder = ViewBag.IdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
         </th>
         <th>
             @* @Html.DisplayNameFor(model => model.Date)*@
-            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
         </th>
         <th></th>
     </tr>
@@ -146,16 +146,10 @@
                 @Html.DisplayFor(modelItem => item.IsGlobal)
             </td>
 
-            @*<td>
-                    <div>
-                        <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
-
-                    </div>
-                </td>*@
 
             <td>
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
-                @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId })
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji znacznika" })
+                @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania znacznika" })
             </td>
 
         </tr>
