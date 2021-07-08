@@ -10,6 +10,7 @@
         color: black !important;
     }
 </style>
+
 <html>
 <head id="tlo">
     <meta charset="utf-8" />
@@ -26,7 +27,7 @@
                 <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style=" color: black; font-family: Marker Felt">
                 
                 </button>
-                @Html.ActionLink("Powrót do strony głównej", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Powrót do strony głównej", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", title = "Naciśnięcie spowoduje powrót do strony głównej" })
             </div>
             @*<div class="navbar-collapse collapse" style="color:black; float:right">
                 <ul class="nav navbar-nav">*@

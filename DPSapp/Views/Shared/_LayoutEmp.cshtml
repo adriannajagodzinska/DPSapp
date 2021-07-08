@@ -10,6 +10,9 @@
         border-color: black;
         color: black !important;
     }
+    .navbar-brand {
+        color:black;
+    }
 </style>
 <html>
 <head id="tlo">
@@ -26,12 +29,12 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style=" color: black; font-family: Marker Felt">
                 </button>
-                @Html.ActionLink("Panel administracji", "Index", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Panel administracji", "Index", "Employee", new { area = "" }, new { @class = "navbar-brand", title = "Naciśnięcie spowoduje powrót do panelu administracji" })
             </div>
             <div class="navbar-collapse collapse" style="color:black; float:right">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Wyloguj się", "Wyloguj", "Home")</li>
+                    <li>@Html.ActionLink("Wyloguj się", "Wyloguj", "Home", new { @class = "my-class", title = "Naciśnięcie spowoduje wylogowanie i powrót do strony głównej" })</li>
                 </ul>
             </div>
         </div>

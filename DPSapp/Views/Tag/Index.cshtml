@@ -1,19 +1,29 @@
-﻿@model IEnumerable<DPSapp.Models.Tag>
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
+@model IEnumerable<DPSapp.Models.Tag>
 <style>
     .button {
         display: inline-block;
         border-radius: 4px;
-        background-color: rgb(138 171 204);
-        border: none;
-        color: #FFFFFF;
+        background-color: white;
+        border: double;
+        color: black;
         text-align: center;
-        font-size: 28px;
+        font-size: 14px;
+        font-family: Marker Felt;
         padding: 20px;
-        width: 400px;
+        width: 320px;
         transition: all 0.5s;
         cursor: pointer;
-        margin: 5px;
+        margin: 0px;
     }
+
+        .button:hover {
+            background-color: #EDEDED;
+        }
 
         .button span {
             cursor: pointer;
@@ -39,43 +49,75 @@
                 opacity: 1;
                 right: 0;
             }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
 </style>
 @{
     ViewBag.Title = "Tag";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
+    <div class="container" style=" background-color:white">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Lista znaczników</h1>
+        <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt; border:double;">
+            Lista Znaczników
+        </h1>
 
 
     </div>
 </div>
 
 <p id="dodaj" class="button">
-    @Html.ActionLink("Utwórz nowy znacznik", "Create")
+    @Html.ActionLink("Utwórz nowy znacznik", "Create", null, new { title = "Naciśnięcie spowoduje przeniesienie do modułu tworzenia znacznika" })
 </p>
 <br />
-
-<div class="container">
-    <h4 class="display-4" style="text-align:left ;font-family:'Times New Roman'">Wyszukaj znacznik</h4>
+<div class="card text-white bg-info text-center" style="background-color:whitesmoke">
+    <h4 class="display-4" style="        text-align: left;
+        font-family: Marker Felt">
+        Wyszukaj znacznik
+    </h4>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
-            <input type="text" id="Search" placeholder="Search" class="form-control" />
+            <input type="text" id="Search" placeholder="Search" class="form-control" title="Dynamiczne wyszukiwanie znacznika" />
         </div>
     </div>
 </div>
-
-
-<h1 class="display-4" style="text-align:center ;font-family:'Times New Roman'">Znaczniki</h1>
-
 <br />
-<table class="table table-hover" id="tabelka">
+<table class="table table-hover" id="tabelka" style="        font-family: Marker Felt;
+        background-color: white;
+        color: black">
     <tr>
         <th>
             @*@Html.DisplayNameFor(model => model.RecipeName)*@
-            @Html.ActionLink("Numer id tagu", "Index", new { sortOrder = ViewBag.IdSortParm })
+            @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.IdSortParm })
         </th>
         <th>
             @* @Html.DisplayNameFor(model => model.Date)*@
@@ -86,40 +128,60 @@
 
     @foreach (var item in Model)
     {
-<tr class="Search">
-    <td>
-        @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
-            @item.RecipeName*@
-        @Html.DisplayFor(modelItem => item.TagId)
-        @*</a>*@
+        <tr class="Search">
+            <td>
+                @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
+                    @item.RecipeName*@
+                @Html.DisplayFor(modelItem => item.TagId)
+                @*</a>*@
 
 
-    </td>
-    <td>
+            </td>
+            <td>
 
-        @Html.DisplayFor(modelItem => item.TagName)
-    </td>
-    <td>
+                @Html.DisplayFor(modelItem => item.TagName)
+            </td>
+            <td>
 
-        @Html.DisplayFor(modelItem => item.IsGlobal)
-    </td>
+                @Html.DisplayFor(modelItem => item.IsGlobal)
+            </td>
 
-    @*<td>
-            <div>
-                <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
+            @*<td>
+                    <div>
+                        <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
 
-            </div>
-        </td>*@
+                    </div>
+                </td>*@
 
-<td>
-    @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
-    @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId })
-</td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId })
+                @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId })
+            </td>
 
-</tr>
+        </tr>
     }
 
 </table>
+<script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
 
 
 
