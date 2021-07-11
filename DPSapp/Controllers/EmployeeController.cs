@@ -123,12 +123,16 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
-     
-      
+
+        // GET: Recipe/Create
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserManagement([Bind(Include ="Name, Role, Surname, PatientId")] UserManager userManager)
+        public ActionResult CreateUser([Bind(Include ="Name, Role, Surname, PatientId")] UserManager userManager)
         {
             if (ModelState.IsValid)
             {
@@ -177,6 +181,10 @@ namespace DPSapp.Controllers
 
             return View(userManager);
         }
+
+
+
+        
         public ActionResult LoginInfo()
         {
 

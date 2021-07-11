@@ -1,8 +1,42 @@
-﻿@model List<DPSapp.Models.Message>
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
+<style>
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
+</style>
+@model List<DPSapp.Models.Message>
 
 @{
     ViewBag.Title = "SendedMessages";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
 <h2>Wysłane ogłoszenia</h2>
@@ -16,39 +50,39 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
+        <tr>
+            <td>
 
-        @if (isImage(item.Image))
-        {
-            <img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />
-        }
-        else if (isVideo(item.Image))
-        {
-            <video autoplay muted style="width:100%" controls>
-                <source src="@Url.Content(item.Image)" type="video/mp4">
-            </video>
-        }
-        @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
+                @if (isImage(item.Image))
+                {
+                    <img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />
+                }
+                else if (isVideo(item.Image))
+                {
+                    <video autoplay muted style="width:100%" controls>
+                        <source src="@Url.Content(item.Image)" type="video/mp4">
+                    </video>
+                }
+                @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
 
 
-    </td>
+            </td>
 
-    <td>
-        @foreach (var item2 in item.Tags)
-        {
-            @item2.TagName
-        }
+            <td>
+                @foreach (var item2 in item.Tags)
+                {
+                    @item2.TagName
+                }
 
-    </td>
-    <td>
-       
-            @item.MessageText
-        
+            </td>
+            <td>
 
-    </td>
+                @item.MessageText
 
-</tr>
+
+            </td>
+
+        </tr>
     }
 
     }

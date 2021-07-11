@@ -1,79 +1,171 @@
-﻿@model DPSapp.Models.EmployeeSender
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+</style>
+<style>
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
+</style>
+@model DPSapp.Models.EmployeeSender
 @{
     ViewBag.Title = "Send";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Wyślij ogłoszenie</h1>
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style="  background-color:whitesmoke">
+
+        <h1 class="display-4" style="text-align: center; background-color: white; font-family: Marker Felt; border: double">Wyślij ogłoszenie</h1>
 
 
     </div>
 </div>
 
-
 <center>
-
     @using (Html.BeginForm("Send", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        <div class="row" style="margin-top:50px; float:left">
+            <div class="col-sm-6" style="width: 30rem"></div>
+            <div class="col-sm-6 " style="width:50rem">
 
-    <div class="form-horizontal">
-        <hr />
-        <div class="form-group ">
-            @Html.LabelFor(model => model.Komunikat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Komunikat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Komunikat, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="card text-white bg-info text-center" style=" width: 50rem; padding: 4rem;
+       background-color: white; border: double">
 
+                    <div id="forma" class="card-body">
+                        <h4 class="card-title text-capitalize text-center" style="        background-color: white;
+        border: none;
+        border-color: black;
+        margin-bottom: 20px;
+        font-family: Marker Felt">
+                        </h4>
+                        <form>
+                            <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                                <label>Komunikat: </label>
+                                @*@Html.LabelFor(model => model.Komunikat, "Komunikat: ", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                @Html.EditorFor(model => model.Komunikat, new { htmlAttributes = new { @class = "form-control", title = "Wprowadzona wiadomość tekstowa zostanie umieszczona na załączonym pliku" } })
+                                @Html.ValidationMessageFor(model => model.Komunikat, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                                @*@Html.LabelFor(model => model.file, "Plik:      ", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <label>Plik:      </label>
+                                <input type="file" name="file" required />
+                                @*<div class="col-md-10">
+                                    <input type="file" name="file" required />
+                                </div>*@
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="file" required />
-            </div>
-        </div>
+                            <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                                <label> Wybierz znaczniki</label>
+                                @foreach (var item in Model.AvailableListOfTags)
+                                {
+                                    <div class="checkbox" style="font-family: Marker Felt">
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="SelectedTags"
+                                                   value="@item.Value"
+                                                   @if (Model.SelectedTags.Contains(item.Value)) { <text> checked </text> } /> @item.Value
+                                            </label>
 
-        <div>
+                                        </div>
+                                        @*@Html.CheckBoxFor(m=>Model.SelectedTags[])*@
 
-            
-            @ViewBag.Message
-        </div>
-        <h3> Wybierz tagi</h3>
-        @foreach (var item in Model.AvailableListOfTags)
-        {
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"
-                           name="SelectedTags"
-                           value="@item.Value"
-                           @if (Model.SelectedTags.Contains(item.Value)) 
-                           { <text> checked </text> } /> @item.Value 
-                    </label>
-                
+                                    }
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="        margin-top: 20px;
+        background-color: white;
+        border-color: black;
+        border: solid;
+        border-radius: 30px;
+        color: black;
+        font-family: Marker Felt">
+                                Dodaj ogłoszenie
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            @*@Html.CheckBoxFor(m=>Model.SelectedTags[])*@
-
-        }
-        <hr />
-        <hr />
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Dodaj ogłoszenie" />
+            </div>
         </div>
-    </div>
+    }
 
 
-        
+    @*@using (Html.BeginForm("Send", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                <div class="form-group ">
+                    @Html.LabelFor(model => model.Komunikat, "Komunikat:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Komunikat, new { htmlAttributes = new { @class = "form-control", title = "Wprowadzona wiadomość tekstowa zostanie umieszczona na załączonym pliku" } })
+                        @Html.ValidationMessageFor(model => model.Komunikat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.file, "Plik:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="file" required />
+                    </div>
+                </div>
+
+                <div>
 
 
-        }
+                    @ViewBag.Message
+                </div>
+                <h3> Wybierz znaczniki</h3>
+                @foreach (var item in Model.AvailableListOfTags)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"
+                                   name="SelectedTags"
+                                   value="@item.Value"
+                                   @if (Model.SelectedTags.Contains(item.Value)) { <text> checked </text> } /> @item.Value
+                            </label>
 
-</center>
+                        </div>*@
+    @*@Html.CheckBoxFor(m=>Model.SelectedTags[])*@
+
+    @*}
+            <hr />
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Dodaj ogłoszenie" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
     <div>
-        @Html.ActionLink("Powrót", "Index")
+        @Html.ActionLink("Powrót do panelu administracji", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do panelu administracji" })
     </div>
+</center>
+
 

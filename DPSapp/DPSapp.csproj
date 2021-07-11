@@ -245,6 +245,7 @@
     <Content Include="Views\Shared\_LayoutClear.cshtml" />
     <Content Include="Views\Shared\_LayoutEmp.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Employee\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
