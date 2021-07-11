@@ -1,25 +1,40 @@
 ﻿
 @{
     ViewBag.Title = "Przeglad pokojów";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 @model List<DPSapp.Models.Room>
-
 <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
     .button {
         display: inline-block;
         border-radius: 4px;
-        background-color: #31708f;
-        border: none;
-        color: #FFFFFF;
+        background-color: white;
+        border: double;
+        color: black;
         text-align: center;
-        font-size: 28px;
+        font-size: 14px;
+        font-family: Marker Felt;
         padding: 20px;
-        width: 200px;
+        width: 320px;
         transition: all 0.5s;
         cursor: pointer;
-        margin: 5px;
+        margin: 0px;
     }
+
+        .button:hover {
+            background-color: #EDEDED;
+        }
 
         .button span {
             cursor: pointer;
@@ -46,22 +61,41 @@
                 right: 0;
             }
 
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
     }
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
     }
 </style>
-<div class="jumbotron jumbotron-fluid" style="background-image: linear-gradient(rgb(104 156 207), white)">
-    <div class="container" style="  background-image: linear-gradient(rgb(104 156 207), white)">
+<div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
+    <div class="container" style=" background-color:whitesmoke">
 
-        <h1 class="display-4" style="text-align:center ;font-family:Broadway">Wybierz pokój</h1>
+        <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt; border:double; background-color:white">
+            Wybierz pokój
+        </h1>
 
 
     </div>
