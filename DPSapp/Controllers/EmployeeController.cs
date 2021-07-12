@@ -290,8 +290,8 @@ namespace DPSapp.Controllers
                         }
                      string komunikat = fSender.Komunikat;
                     string adres = "~/FilesUpload\\" + filename;
-                        //string adres = filepath;
-                        Message m = new Message { Image = adres, MessageText = komunikat };
+                    //string adres = filepath;
+                    Message m = new Message { Image = adres, MessageText = komunikat, IsAnnouncement = true };
 
                     m.Tags = tagsSelected;
                       
@@ -330,7 +330,7 @@ namespace DPSapp.Controllers
                 //    var messages = (from s in db.Messages
                 //               select s).ToList();
 
-                    var messages = db.Messages.Include("Tags").ToList();
+                    var messages = db.Messages.Include("Tags").Where(x=>x.IsAnnouncement==true).ToList();
 
                     return View(messages);
 
@@ -346,6 +346,71 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
         }
+
+
+        public ActionResult DeleteMessage(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    Message message = db.Messages.Where(x => x.MessageId == id).FirstOrDefault();
+
+
+                    return View(message);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteMessage(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+
+                    Message messagetemp = db.Messages.Where(x => x.MessageId == id).FirstOrDefault();
+
+
+
+                    db.Messages.Remove(messagetemp);
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("SendedMessages", "Employee");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
+
+
+
 
 
         public ActionResult Rooms()

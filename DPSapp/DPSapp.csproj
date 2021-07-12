@@ -254,6 +254,7 @@
     <Content Include="Views\Shared\_LayoutEmp.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Employee\CreateUser.cshtml" />
+    <Content Include="Views\Employee\DeleteMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

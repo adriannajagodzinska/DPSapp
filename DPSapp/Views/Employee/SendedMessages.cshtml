@@ -50,39 +50,45 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+<tr class="Search">
+    <td>
 
-                @if (isImage(item.Image))
-                {
-                    <img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />
-                }
-                else if (isVideo(item.Image))
-                {
-                    <video autoplay muted style="width:100%" controls>
-                        <source src="@Url.Content(item.Image)" type="video/mp4">
-                    </video>
-                }
-                @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
-
-
-            </td>
-
-            <td>
-                @foreach (var item2 in item.Tags)
-                {
-                    @item2.TagName
-                }
-
-            </td>
-            <td>
-
-                @item.MessageText
+        @if (isImage(item.Image))
+        {
+            <img style="vertical-align: bottom;" width="50%" src="@Url.Content(item.Image)" alt="tbd" />
+        }
+        else if (isVideo(item.Image))
+        {
+            <video autoplay muted style="width:50%" controls>
+                <source src="@Url.Content(item.Image)" type="video/mp4">
+            </video>
+        }
+        @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
 
 
-            </td>
+    </td>
 
-        </tr>
+    <td>
+        @foreach (var item2 in item.Tags)
+        {
+            @item2.TagName
+        }
+
+    </td>
+    <td>
+
+        @item.MessageText
+
+
+    </td>
+    <td>
+
+        <a href=@Url.Action(String.Format("DeleteMessage/{0}",@item.MessageId),"Employee") class="button">Usuń Ogłoszenie</a>
+
+
+    </td>
+
+</tr>
     }
 
     }
