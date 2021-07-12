@@ -154,6 +154,10 @@
     <Compile Include="Migrations\202107122151596_ZmianaIsGlobal na IsAnnounment.Designer.cs">
       <DependentUpon>202107122151596_ZmianaIsGlobal na IsAnnounment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107122203036_poprawka dodanie IsAnnouncement do message.cs" />
+    <Compile Include="Migrations\202107122203036_poprawka dodanie IsAnnouncement do message.Designer.cs">
+      <DependentUpon>202107122203036_poprawka dodanie IsAnnouncement do message.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddPatientsToRoomHelper.cs" />
     <Compile Include="Models\AddTagToPatientHelper.cs" />
@@ -278,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107122151596_ZmianaIsGlobal na IsAnnounment.resx">
       <DependentUpon>202107122151596_ZmianaIsGlobal na IsAnnounment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107122203036_poprawka dodanie IsAnnouncement do message.resx">
+      <DependentUpon>202107122203036_poprawka dodanie IsAnnouncement do message.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

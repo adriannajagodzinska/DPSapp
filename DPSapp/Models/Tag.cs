@@ -11,7 +11,6 @@ namespace DPSapp.Models
         public int TagId { get; set; }
         [Required]
         public string TagName { get; set; }
-        public bool IsAnnouncement { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
