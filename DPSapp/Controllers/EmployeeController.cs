@@ -215,12 +215,35 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    var tags = from s in db.Tags
-                               select s;
+                    var isTagForaAllAlreadyExist = db.Tags.Any(x => x.TagName == "Dla wszystkich");
+                    
+                    Tag tagDlaWszystkich = new Tag();
+                    if (!isTagForaAllAlreadyExist)
+                    {
+                        
+                        tagDlaWszystkich.TagName = "Dla wszystkich";
+                        db.Tags.Add(tagDlaWszystkich);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        tagDlaWszystkich = db.Tags.Where(x=>x.TagName== "Dla wszystkich").FirstOrDefault();
+                    }
+
+                    var tags = (from s in db.Tags
+                               select s).ToList();
+
+                    List<Tag> tagsWithAll = new List<Tag>();
+                    tagsWithAll.Add(tagDlaWszystkich);
+                    foreach (var item in tags)
+                    {
+                        tagsWithAll.Add(item);
+                    }
+
                     var model = new EmployeeSender
                     {
 
-                        AvailableListOfTags = ToSelectListItemTags(tags.ToList())
+                        AvailableListOfTags = ToSelectListItemTags(tagsWithAll.ToList())
                     };
                     return View(model);
 
