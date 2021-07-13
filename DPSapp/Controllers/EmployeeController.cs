@@ -127,7 +127,11 @@ namespace DPSapp.Controllers
         // GET: Recipe/Create
         public ActionResult CreateUser()
         {
-            return View();
+            UserManager userManager = new UserManager();
+            var patients = db.Patients.ToList();
+            ViewBag.Patients = 
+            ViewBag.PatientID = ToSelectList(patients.ToList<Patient>());
+            return View(userManager);
         }
 
         [HttpPost]
@@ -601,6 +605,22 @@ namespace DPSapp.Controllers
                 });
             }
             SelectList list2 = new SelectList(list, "Value", "Text");
+            return list2;
+        }
+
+
+
+        [NonAction]
+        public SelectList ToSelectList(List<Patient> patients)
+        {
+
+            var dictionary = new Dictionary<int, string>();
+            foreach (Patient patient in patients)
+            {
+               
+                dictionary.Add(patient.PatientId, String.Format(patient.PatientName + " " + patient.PatientSurname));
+            }
+            SelectList list2 = new SelectList(dictionary, "Key", "Value");
             return list2;
         }
 
