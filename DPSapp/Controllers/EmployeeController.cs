@@ -16,11 +16,11 @@ namespace DPSapp.Controllers
     {
         private DPSContext db = new DPSContext();
         // GET: Employee
-       
+
         public ActionResult Index(string sortOrder)
         {
 
-            if (Session["role"]!=null)
+            if (Session["role"] != null)
             {
                 ViewBag.CurrentSort = sortOrder;
                 ViewBag.LoginSortParm = String.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
@@ -78,7 +78,7 @@ namespace DPSapp.Controllers
             {
                 return RedirectToAction("Error401", "Home");
             }
-            
+
         }
         public ActionResult Tag()
         {
@@ -106,11 +106,10 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "1")
                 {
-                    var patients = from s in db.Patients
+                    var users = from s in db.Users
                                    select s;
-                    ViewBag.PatientID = ToSelectListID(patients.ToList<Patient>());
-                    ViewBag.Patient = patients.ToList(); 
-                    return View();
+                    
+                    return View(users.ToList());
                 }
                 else
                 {
@@ -129,66 +128,140 @@ namespace DPSapp.Controllers
         {
             UserManager userManager = new UserManager();
             var patients = db.Patients.ToList();
-            ViewBag.Patients = 
+            ViewBag.Patients =
             ViewBag.PatientID = ToSelectList(patients.ToList<Patient>());
             return View(userManager);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateUser([Bind(Include ="Name, Role, Surname, PatientId")] UserManager userManager)
+        public ActionResult CreateUser([Bind(Include = "Name, Role, Surname, PatientId")] UserManager userManager)
         {
-            if (ModelState.IsValid)
+            if (Session["role"] != null)
             {
-                string name = userManager.Name;
-                string last = userManager.Surname;
-                bool isFamily = userManager.Role;
-               // int Pacjentid = userManager.PatientId;
-                int role = 1;
-                int patientID = 0;
-                if (isFamily)
+                if (Session["role"].ToString() == "1")
                 {
-                    role = 2;
-                    patientID = int.Parse(userManager.PatientId);
-                }
-                string pass = System.Web.Security.Membership.GeneratePassword(12,2);
-                string firstPart = name.Substring(0, 3);
-                string secondPart = last.Substring(0, 2);
-                Random r = new Random();
-                bool isFree = false;
-                string login = "";
-                while (isFree==false)
-                {
-                    string thirdPart = r.Next(100, 1000).ToString();
-                    login = string.Concat(firstPart, secondPart, thirdPart);
-                    //To do - wprowadzić warunek braku loginu w bazie
-                    if (true)
+                    if (ModelState.IsValid)
                     {
-                        isFree = true;
-                        TempData["login"] = login;
-                        TempData["pass"] = pass;
+                        string name = userManager.Name;
+                        string last = userManager.Surname;
+                        bool isFamily = userManager.Role;
+                        // int Pacjentid = userManager.PatientId;
+                        int role = 1;
+                        int patientID = 0;
+                        if (isFamily)
+                        {
+                            role = 2;
+                            patientID = int.Parse(userManager.PatientId);
+                        }
+                        string pass = System.Web.Security.Membership.GeneratePassword(12, 2);
+                        string firstPart = name.Substring(0, 3);
+                        string secondPart = last.Substring(0, 2);
+                        Random r = new Random();
+                        bool isFree = false;
+                        string login = "";
+                        while (isFree == false)
+                        {
+                            string thirdPart = r.Next(100, 1000).ToString();
+                            login = string.Concat(firstPart, secondPart, thirdPart);
+                            //To do - wprowadzić warunek braku loginu w bazie
+                            if (true)
+                            {
+                                isFree = true;
+                                TempData["login"] = login;
+                                TempData["pass"] = pass;
+                            }
+                        }
+
+
+                        User user = new User { Login = login, Password = pass, RoleId = role, PatientID = patientID };
+                        //if (isFamily)
+                        //{
+                        //    user.PatientID= userManager.PatientId;
+                        //    User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  pa};
+                        //}
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        return RedirectToAction("LoginInfo");
+
                     }
+
+                    return View(userManager);
                 }
-
-
-                User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  patientID};
-                //if (isFamily)
-                //{
-                //    user.PatientID= userManager.PatientId;
-                //    User user = new User { Login = login, Password = pass, RoleId = role, PatientID =  pa};
-                //}
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("LoginInfo");
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
 
             }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
 
-            return View(userManager);
         }
 
 
+        public ActionResult EditUser(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
 
-        
+
+                    return View(user);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser([Bind(Include = "UserId, Login, Password, RoleId, PatientId")] User editeduser)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        var previoususer = db.Users.Where(x => x.UserId == editeduser.UserId).FirstOrDefault();
+                        db.Users.Remove(previoususer);
+                        db.Users.Add(editeduser);
+                        db.SaveChanges();
+
+
+                        return RedirectToAction("UserManagement", "Employee");
+                    }
+
+                    return View(editeduser.UserId);
+                }
+
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+        }
+    
         public ActionResult LoginInfo()
         {
 
@@ -607,6 +680,8 @@ namespace DPSapp.Controllers
             SelectList list2 = new SelectList(list, "Value", "Text");
             return list2;
         }
+
+
 
 
 

@@ -72,7 +72,7 @@
         font-size: larger;
     }
 </style>
-@model DPSapp.Models.UserManager
+@model List<DPSapp.Models.User>
 @{
     ViewBag.Title = "Zarządzanie użytkownikami";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -99,40 +99,53 @@
 
 }
 <div>
-    <table class="table table-hover" id="tabelka">
+    
+
+
+    <table style="width:100%">
         <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.RecipeName)*@
-                @Html.ActionLink("Imię pacjenta", "Index", new { sortOrder = ViewBag.NameSortParm })
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Nazwisko pacjenta", "Index", new { sortOrder = ViewBag.SurnameSortParm })
-            </th>
-            <th></th>
+            <th>Login</th>
+            <th>Hasło</th>
+            <th>PacjentID</th>
         </tr>
 
-        @foreach (var item in ViewBag.Patient)
+
+        @foreach (var user in Model)
         {
-            <tr class="Search">
-                <td>
-                    @item.PatientId
-                </td>
+            <tr>
                 <td>
 
-                    @item.PatientName
 
+                   @user.Login
 
+                    @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
                 </td>
                 <td>
-
-                    @item.PatientSurname
+                    @user.Password
                 </td>
+                <td>
+                    @if (user.PatientID == 0)
+                    {
+                        <h5> Brak (Konto Pracownika)</h5>
+                    }
+                    else
+                    {
+                        <h5>@user.PatientID</h5>
 
+                    }
+                </td>
+                <td>
+                    <a href=@Url.Action(String.Format("EditUser/{0}",@user.UserId),"Employee") class="button">Edytuj użytkownika</a>
+
+                </td>
             </tr>
         }
 
+        <a href=@Url.Action("Index","Employee") class="button">Wróć</a>
+
     </table>
+
+
 
 </div>
 

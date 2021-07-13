@@ -158,6 +158,10 @@
     <Compile Include="Migrations\202107122203036_poprawka dodanie IsAnnouncement do message.Designer.cs">
       <DependentUpon>202107122203036_poprawka dodanie IsAnnouncement do message.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107131056142_RangeWUserRoleId.cs" />
+    <Compile Include="Migrations\202107131056142_RangeWUserRoleId.Designer.cs">
+      <DependentUpon>202107131056142_RangeWUserRoleId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddPatientsToRoomHelper.cs" />
     <Compile Include="Models\AddTagToPatientHelper.cs" />
@@ -255,6 +259,7 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Employee\CreateUser.cshtml" />
     <Content Include="Views\Employee\DeleteMessage.cshtml" />
+    <Content Include="Views\Employee\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107122203036_poprawka dodanie IsAnnouncement do message.resx">
       <DependentUpon>202107122203036_poprawka dodanie IsAnnouncement do message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107131056142_RangeWUserRoleId.resx">
+      <DependentUpon>202107131056142_RangeWUserRoleId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
