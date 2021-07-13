@@ -17,26 +17,58 @@ namespace DPSapp.Controllers
         // GET: Tag
         public ActionResult Index(string sortOrder)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
-            var tags = from s in db.Tags
-                       select s;
-            switch (sortOrder)
+            if (Session["role"] != null)
             {
-                case "name_desc":
-                    tags = tags.OrderByDescending(s => s.TagName); // możliwość sortowania po nazwie
-                    break;
-                default:
-                    tags = tags.OrderBy(s => s.TagId); // domyślnie sortuj po id
-                    break;
+                if (Session["role"].ToString() == "1")
+                {
+                    ViewBag.CurrentSort = sortOrder;
+                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                    ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+                    var tags = from s in db.Tags
+                               select s;
+                    switch (sortOrder)
+                    {
+                        case "name_desc":
+                            tags = tags.OrderByDescending(s => s.TagName); // możliwość sortowania po nazwie
+                            break;
+                        default:
+                            tags = tags.OrderBy(s => s.TagId); // domyślnie sortuj po id
+                            break;
+                    }
+                    return View(tags.ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
             }
-            return View(tags.ToList());
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+           
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+            
         }
 
         // POST: Tag/Create
@@ -46,27 +78,62 @@ namespace DPSapp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "TagId,TagName,IsGlobal")] Tag tag)
         {
-            if (ModelState.IsValid)
+            if (Session["role"] != null)
             {
-                db.Tags.Add(tag);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Session["role"].ToString() == "1")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Tags.Add(tag);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(tag);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
             }
-            return View(tag);
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+           
         }
         // GET: Recipe/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["role"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (Session["role"].ToString() == "1")
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Tag tag = db.Tags.Find(id);
+                    if (tag == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tag);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
             }
-            Tag tag = db.Tags.Find(id);
-            if (tag == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error401", "Home");
             }
-            return View(tag);
+
+
+            
         }
 
         // POST: Recipe/Edit/5
@@ -76,13 +143,31 @@ namespace DPSapp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TagId,TagName")] Tag tag)
         {
-            if (ModelState.IsValid)
+            if (Session["role"] != null)
             {
-                db.Entry(tag).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Session["role"].ToString() == "1")
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(tag).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(tag);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
             }
-            return View(tag);
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+          
         }
 
         public ActionResult DeleteTag(int? id)
