@@ -75,7 +75,7 @@
 @model List<DPSapp.Models.User>
 @{
     ViewBag.Title = "Zarządzanie użytkownikami";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 <div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
     <div class="container" style=" background-color:whitesmoke">
@@ -97,33 +97,70 @@
 </div>
 
 
-}
+<br />
+<div class="card text-white bg-info text-center" style="background-color:whitesmoke">
+    <h4 class="display-4" style="        text-align: left;
+        font-family: Marker Felt">
+        Wyszukaj użytkownika
+    </h4>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" title="Dynamiczne wyszukiwanie użytkownika" />
+        </div>
+    </div>
+</div>
+<br />
 <div>
-    
 
 
-    <table style="width:100%">
+
+    <table class="table table-hover" id="tabelka" style="        font-family: Marker Felt;
+        background-color: white;
+        color: black">
         <tr>
-            <th>Login</th>
-            <th>Hasło</th>
-            <th>PacjentID</th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.RecipeName)*@
+                @Html.ActionLink("Numer", "UserManagement", new { sortOrder = ViewBag.IdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.RecipeName)*@
+                @Html.ActionLink("Login", "UserManagement", new { sortOrder = ViewBag.LoginSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Date)*@
+                @Html.ActionLink("Hasło", "UserManagement", new { sortOrder = ViewBag.PasswordSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Date)*@
+                @Html.ActionLink("Liczba przypisanych pensjonariuszy", "UserManagement", new { sortOrder = ViewBag.PatientIdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+            </th>
+            <th></th>
         </tr>
+        @*<tr>
+                <th>Login</th>
+                <th>Hasło</th>
+                <th>PacjentID</th>
+            </tr>*@
 
 
         @foreach (var user in Model)
         {
-            <tr>
+            <tr class="Search">
+                <td>
+                    @user.UserId
+                </td>
                 <td>
 
 
-                   @user.Login
+                    @user.Login
 
                     @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
                 </td>
                 <td>
                     @user.Password
                 </td>
-                <td>
+                <td style="position:center">
                     @if (user.PatientID == 0)
                     {
                         <h5> Brak (Konto Pracownika)</h5>
@@ -135,13 +172,13 @@
                     }
                 </td>
                 <td>
-                    <a href=@Url.Action(String.Format("EditUser/{0}",@user.UserId),"Employee") class="button">Edytuj użytkownika</a>
-
+                    @*<a href=@Url.Action(String.Format("EditUser/{0}",@user.UserId),"Employee") class="button">Edytuj użytkownika</a>*@
+                    @Html.ActionLink("Edytuj", "EditUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia edycję wybranego użytkownika" })
                 </td>
             </tr>
         }
 
-        <a href=@Url.Action("Index","Employee") class="button">Wróć</a>
+        @*<a href=@Url.Action("Index","Employee") class="button">Wróć</a>*@
 
     </table>
 
@@ -149,10 +186,29 @@
 
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+<script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

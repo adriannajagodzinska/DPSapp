@@ -115,7 +115,7 @@
                 <tr>
                     <th>
                         @*@Html.DisplayNameFor(model => model.RecipeName)*@
-                        @Html.ActionLink(" ", "Index", new { sortOrder = ViewBag.NameSortParm })
+                        @Html.ActionLink("Numer", "Index", new { sortOrder = ViewBag.IdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
                     </th>
                     <th>
                         @* @Html.DisplayNameFor(model => model.Date)*@
@@ -128,7 +128,7 @@
                     </th>
                     <th>
                         @* @Html.DisplayNameFor(model => model.Date)*@
-                        @Html.ActionLink("Przypisany pacjent", "Index", new { sortOrder = ViewBag.PatientSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                        @Html.ActionLink("Liczba przypisanych pensjonariuszy", "Index", new { sortOrder = ViewBag.PatientIdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
                     </th>
                 </tr>
 

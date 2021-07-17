@@ -23,9 +23,10 @@ namespace DPSapp.Controllers
             if (Session["role"] != null)
             {
                 ViewBag.CurrentSort = sortOrder;
+                ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
                 ViewBag.LoginSortParm = String.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
                 ViewBag.PasswordSortParm = String.IsNullOrEmpty(sortOrder) ? "password_desc" : "";
-                ViewBag.PatientSortParm = String.IsNullOrEmpty(sortOrder) ? "patient_desc" : "";
+                ViewBag.PatientIdSortParm = String.IsNullOrEmpty(sortOrder) ? "patient_desc" : "";
                 if (Session["role"].ToString() == "1")
                 {
                     var users = db.Users.ToList();
@@ -39,6 +40,9 @@ namespace DPSapp.Controllers
                             break;
                         case "patient_desc":
                             users = users.OrderByDescending(s => s.PatientID).ToList(); // możliwość sortowania po roli
+                            break;
+                        case "id_desc":
+                            users = users.OrderBy(s => s.UserId).ToList(); // możliwość sortowania po id
                             break;
                         default:
                             users = users.OrderBy(s => s.UserId).ToList(); // domyślnie sortuj po id
@@ -100,16 +104,37 @@ namespace DPSapp.Controllers
             }
         }
 
-        public ActionResult UserManagement()
+        public ActionResult UserManagement(string sortOrder)
         {
             if (Session["role"] != null)
             {
+                ViewBag.CurrentSort = sortOrder;
+                ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+                ViewBag.LoginSortParm = String.IsNullOrEmpty(sortOrder) ? "login_desc" : "";
+                    ViewBag.PasswordSortParm = String.IsNullOrEmpty(sortOrder) ? "password_desc" : "";
+                    ViewBag.PatientIdSortParm = String.IsNullOrEmpty(sortOrder) ? "patient_desc" : "";
                 if (Session["role"].ToString() == "1")
-                {
-                    var users = from s in db.Users
-                                   select s;
-                    
-                    return View(users.ToList());
+                { 
+                        var users = db.Users.ToList();
+                        switch (sortOrder)
+                        {
+                            case "login_desc":
+                                users = users.OrderByDescending(s => s.Login).ToList(); // możliwość sortowania po loginie
+                                break;
+                            case "password_desc":
+                                users = users.OrderByDescending(s => s.Password).ToList(); // możliwość sortowania po haśle (?)
+                                break;
+                            case "patient_desc":
+                                users = users.OrderByDescending(s => s.PatientID).ToList(); // możliwość sortowania po roli
+                                break;
+                        case "id_desc":
+                            users = users.OrderBy(s => s.UserId).ToList(); // możliwość sortowania po id
+                            break;
+                        default:
+                                users = users.OrderBy(s => s.UserId).ToList(); // domyślnie sortuj po id
+                                break;
+                        }
+                        return View(users.ToList());
                 }
                 else
                 {
