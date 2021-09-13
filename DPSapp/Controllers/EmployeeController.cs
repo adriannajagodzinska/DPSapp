@@ -686,6 +686,67 @@ namespace DPSapp.Controllers
         }
 
 
+        public ActionResult DeleteUser(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    User user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+
+
+                    return View(user);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteUser(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    User usertemp = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+
+
+
+
+                    db.Users.Remove(usertemp);
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("UserManagement", "Employee");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
+
         [NonAction]
         public SelectList ToSelectListID(List<Patient> patients)
         {

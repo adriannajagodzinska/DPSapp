@@ -260,6 +260,8 @@
     <Content Include="Views\Employee\CreateUser.cshtml" />
     <Content Include="Views\Employee\DeleteMessage.cshtml" />
     <Content Include="Views\Employee\EditUser.cshtml" />
+    <Content Include="Views\Patient\EditPatient.cshtml" />
+    <Content Include="Views\Employee\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
