@@ -161,8 +161,9 @@
             <td>
                 @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
                 @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
-                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
+
                 @Html.ActionLink("Edycja", "EditPatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza" })
+                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
             </td>
         </tr>
     }

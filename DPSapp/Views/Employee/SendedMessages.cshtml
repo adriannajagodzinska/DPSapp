@@ -4,6 +4,51 @@
     }
 </style>
 <style>
+    .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: white;
+        border: double;
+        color: black;
+        text-align: center;
+        font-size: 14px;
+        font-family: Marker Felt;
+        padding: 20px;
+        width: 320px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 0px;
+    }
+
+        .button:hover {
+            background-color: #EDEDED;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
     .my-class {
         color: black;
         font-family: Marker Felt;
@@ -39,58 +84,89 @@
     Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Wysłane ogłoszenia</h2>
+<div class="jumbotron jumbotron-fluid" style="background-color:whitesmoke">
+    <div class="container" style=" background-color:whitesmoke">
 
-<table style="width:100%">
+        <h1 class="display-4" style="        text-align: center;
+        font-family: Marker Felt; border:double; background-color:white">
+            Lista Wysłanych Ogłoszeń
+        </h1>
+
+
+    </div>
+</div>
+
+<div>
+    <p id="dodaj" class="button">
+        @Html.ActionLink("Dodaj ogłoszenie", "Send", null, new { title = "Naciśnięcie spowoduje przeniesienie do modułu dodawania ogłoszenia" })
+
+    </p>
+</div>
+<br />
+<div class="card text-white bg-info text-center" style="background-color:whitesmoke">
+    <h4 class="display-4" style="        text-align: left;
+        font-family: Marker Felt">
+        Wyszukaj ogłoszenie
+    </h4>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" title="Dynamiczne wyszukiwanie ogłoszeń" />
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover" id="tabelka" style="        font-family: Marker Felt;
+        background-color: white;
+        color: black">
     <tr>
-        <th>Obrazki/Filmy</th>
-        <th>Tagi</th>
-        <th>Komunikaty</th>
+        <th align="center">
+            Wysłane multimedia
+        </th>
+        <th>
+            Znaczniki
+        </th>
+        <th>
+            Komunikat
+        </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr class="Search">
-    <td>
+        <tr class="Search">
 
-        @if (isImage(item.Image))
-        {
-            <img style="vertical-align: bottom;" width="50%" src="@Url.Content(item.Image)" alt="tbd" />
-        }
-        else if (isVideo(item.Image))
-        {
-            <video autoplay muted style="width:50%" controls>
-                <source src="@Url.Content(item.Image)" type="video/mp4">
-            </video>
-        }
-        @*<img style="vertical-align: bottom;" width="100%" src="@Url.Content(item.Image)" alt="tbd" />*@
+            <td align="center">
+                @if (isImage(item.Image))
+                {
+                    <img style="vertical-align: bottom; width:50px; height:50px" src="@Url.Content(item.Image)" alt="tbd" />
+                }
+                else if (isVideo(item.Image))
+                {
+                    <video autoplay muted style="width: 50px; height: 50px" controls>
+                        <source src="@Url.Content(item.Image)" type="video/mp4">
+                    </video>
+                }
 
+            </td>
+            <td>
 
-    </td>
+                @foreach (var item2 in item.Tags)
+                {
+                    @item2.TagName
+                }
+            </td>
+            <td>
+                @item.MessageText
 
-    <td>
-        @foreach (var item2 in item.Tags)
-        {
-            @item2.TagName
-        }
+            </td>
 
-    </td>
-    <td>
+            <td>
+                <a href=@Url.Action(String.Format("DeleteMessage/{0}", @item.MessageId), "Employee") class="my-class">Usuń</a>
 
-        @item.MessageText
+            </td>
 
-
-    </td>
-    <td>
-
-        <a href=@Url.Action(String.Format("DeleteMessage/{0}",@item.MessageId),"Employee") class="button">Usuń Ogłoszenie</a>
-
-
-    </td>
-
-</tr>
-    }
-
+        </tr>
     }
 </table>
 
@@ -133,3 +209,23 @@
 
 
 }
+<script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
