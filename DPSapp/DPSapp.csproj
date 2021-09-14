@@ -262,6 +262,7 @@
     <Content Include="Views\Employee\EditUser.cshtml" />
     <Content Include="Views\Patient\EditPatient.cshtml" />
     <Content Include="Views\Employee\DeleteUser.cshtml" />
+    <Content Include="Views\Employee\DetailsUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

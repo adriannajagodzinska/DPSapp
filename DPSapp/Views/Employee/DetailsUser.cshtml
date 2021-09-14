@@ -1,0 +1,105 @@
+﻿<style>
+    #tlo {
+        background-color: whitesmoke;
+    }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+</style>
+@model DPSapp.Models.User
+@{
+    ViewBag.Title = "DetailsUser";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
+}
+
+<div class="row" style="margin-top:50px; float:left">
+    <div class="col-sm-6" style="width: 30rem"></div>
+    <div class="col-sm-6 " style="width:50rem">
+
+        <div class="card text-white bg-info text-center" style=" width: 50rem; padding: 4rem; height: 50rem;
+       background-color: white; border: double">
+
+            <div id="forma" class="card-body">
+                <h4 class="card-title text-capitalize text-center" style="        background-color: white;
+        border: none;
+        border-color: black;
+        margin-bottom: 20px;
+        font-family: Marker Felt">
+                </h4>
+                <form>
+                    <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                        <label>Użytkownik: </label>
+                        @Html.DisplayFor(model => Model.Login)
+                    </div>
+                    <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                        <label>Przypisany pensjonariusz: </label>
+                        <br />
+                        @ViewBag.PatientN @ViewBag.PatientS 
+                        @*<table class="table" id="tabela">
+
+                            @foreach (var item in Model.PatientID)
+                            {
+                                <tr>
+
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TagName)
+                                    </td>
+                                </tr>
+                            }
+                        </table>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+        @*<dl class="dl-horizontal">
+                    <dt>
+                        Pensjonariusz:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => Model.PatientName) @Html.DisplayFor(model => Model.PatientSurname)
+                    </dd>
+                    <dt>
+                        Przypisane znaczniki:
+                    </dt>
+                    <dd>
+                        <table class="table" id="tabela">
+
+                            @foreach (var item in Model.Tags)
+                            {
+                                <tr>
+
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TagName)
+                                        </td>
+            </tr>
+                            }
+                        </table>
+                    </dd>
+                </dl>*@
+        <div>
+            <p style="text-align:left;">
+                @*@Html.ActionLink("Edytuj", "Edit", new { id = Model.PatientId }) |*@
+                @Html.ActionLink("Powrót do listy użytkowników", "UserManagement", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy użytkowników" })
+            </p>
+        </div>
+

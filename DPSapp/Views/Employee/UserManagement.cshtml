@@ -167,12 +167,13 @@
                     }
                     else
                     {
-                        <h5>@user.PatientID</h5>
+                        <h5>1</h5>
 
                     }
                 </td>
                 <td>
                     @*<a href=@Url.Action(String.Format("EditUser/{0}",@user.UserId),"Employee") class="button">Edytuj użytkownika</a>*@
+                    @Html.ActionLink("Szczegóły", "DetailsUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląf szczegółów użytkownika" })
                     @Html.ActionLink("Edytuj", "EditUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia edycję wybranego użytkownika" })
                     @Html.ActionLink("Usuń", "DeleteUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia usunięcie wybranego użytkownika" })
                 </td>

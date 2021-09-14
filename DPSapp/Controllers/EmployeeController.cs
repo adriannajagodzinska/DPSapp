@@ -234,7 +234,9 @@ namespace DPSapp.Controllers
                 if (Session["role"].ToString() == "1")
                 {
                     var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
-
+                    var patients = db.Patients.ToList();
+                    ViewBag.Patients =
+                    ViewBag.PatientID = ToSelectList(patients.ToList<Patient>());
 
                     return View(user);
                 }
@@ -310,6 +312,51 @@ namespace DPSapp.Controllers
                 return RedirectToAction("Error401", "Home");
             }
             
+        }
+        // Więcej info o użytkowniku
+        public ActionResult DetailsUser(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    User user = db.Users.Find(id);
+                    var patients = db.Patients.ToList();
+                    if (user == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    var patient = patients.Where(x => x.PatientId == user.PatientID).FirstOrDefault();
+                    if (user.PatientID != 0)
+                    {
+                        ViewBag.PatientN = patient.PatientName.ToString();
+                        ViewBag.PatientS = patient.PatientSurname.ToString();
+                    }
+                    else
+                    {
+                        ViewBag.PatientN = "Brak";
+                    }
+                    return View(user);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+
         }
         public ActionResult Send()
         {
@@ -693,7 +740,17 @@ namespace DPSapp.Controllers
                 if (Session["role"].ToString() == "1")
                 {
                     User user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
-
+                    var patients = db.Patients.ToList();
+                    var patient = patients.Where(x => x.PatientId == user.PatientID).FirstOrDefault();
+                    if (user.PatientID != 0)
+                    {
+                        ViewBag.PatientN = patient.PatientName.ToString();
+                        ViewBag.PatientS = patient.PatientSurname.ToString();
+                    }
+                    else
+                    {
+                        ViewBag.PatientN = "Brak";
+                    }
 
                     return View(user);
 
