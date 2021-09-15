@@ -157,11 +157,12 @@
         @foreach (var item2 in item.Tags)
         {
             @item2.TagName
+            <br />
         }
     </td>
     <td>
-        <a href=@Url.Action(String.Format("AddTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Dodaj Znacznik</a>
-
+        <a href=@Url.Action(String.Format("AddTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Dodaj Znacznik</a><br />
+        <a href=@Url.Action(String.Format("RemoveTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Usuń Znacznik</a>
     </td>
     <td>
         @item.MessageText

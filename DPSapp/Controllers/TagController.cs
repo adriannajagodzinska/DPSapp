@@ -400,6 +400,80 @@ namespace DPSapp.Controllers
 
         }
 
+        public ActionResult RemoveTagToMessage(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var message = db.Messages.Include("Tags").Where(x => x.MessageId == id).First();
+                    //var tags = from s in db.Tags
+                    //           select s;
+                    var tags = message.Tags.ToList();
+                    ViewBag.TagID = ToSelectListID(tags.ToList<Tag>());
+                    
+                    AddTagToMessageHelper helper = new AddTagToMessageHelper();
+                    helper.message = message;
+                    tags.ToList<Tag>();
+                    helper.ListOfTags = tags;
+
+
+                    //helper.ListOfTags = tags;
+                    //helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
+
+
+                    return View(helper);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+        // public ActionResult Send([Bind(Include = "Komunikat, file, SelectedTags")] EmployeeSender fSender)
+        [HttpPost]
+        public ActionResult RemoveTagToMessage([Bind(Include = "message,TagIdToAdd")] AddTagToMessageHelper helper)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    // int patientid = helper.Patient.PatientId;
+                    int messagetid = int.Parse(this.RouteData.Values["id"].ToString());
+
+                    var tag = db.Tags.Include("Messages").Where(s => s.TagId == helper.TagIdToAdd).FirstOrDefault();
+                    //var patientTags = from tag in db.Tags
+                    //                  where tag.Patients.Any(c => c.PatientId == patientid)
+                    //                  select tag;
+
+                    var message = db.Messages.Include("Tags").Where(s => s.MessageId == messagetid).FirstOrDefault();
+                    message.Tags.Remove(tag);
+
+                    // tag.Messages.Add(message);
+
+                    db.SaveChanges();
+                    return RedirectToAction("SendedMessages", "Employee");
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+
+        }
+
 
 
 

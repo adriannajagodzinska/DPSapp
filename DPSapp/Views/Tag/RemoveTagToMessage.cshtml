@@ -26,12 +26,12 @@
 </style>
 @model DPSapp.Models.AddTagToMessageHelper
 @{
-    ViewBag.Title = "AddTagToMessage";
+    ViewBag.Title = "RemoveTagToMessage";
     Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Dodaj znacznik do ogłoszenia</h2>
-@using (Html.BeginForm("AddTagToMessage", "Tag", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2>Usuń znacznik do ogłoszenia</h2>
+@using (Html.BeginForm("RemoveTagToMessage", "Tag", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
 
@@ -56,7 +56,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj Znacznik" class="btn btn-default" />
+                <input type="submit" value="Usuń Znacznik" class="btn btn-default" />
             </div>
         </div>
     </div>

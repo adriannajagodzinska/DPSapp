@@ -267,6 +267,7 @@
     <Content Include="Views\Employee\DetailsUser.cshtml" />
     <Content Include="Views\Employee\EditMessage.cshtml" />
     <Content Include="Views\Tag\AddTagToMessage.cshtml" />
+    <Content Include="Views\Tag\RemoveTagToMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
