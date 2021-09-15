@@ -16,6 +16,7 @@
         text-align: left;
         padding: 8px;
     }
+
     .button {
         display: inline-block;
         border-radius: 4px;
@@ -61,6 +62,52 @@
                 right: 0;
             }
 
+
+    .buttonRoom {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: white;
+        border: double;
+        color: black;
+        text-align: center;
+        font-size: 14px;
+        font-family: Marker Felt;
+        padding: 19px;
+        width: 320px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 0px;
+    }
+
+        .buttonRoom:hover {
+            background-color: #EDEDED;
+        }
+
+        .buttonRoom span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonRoom span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .buttonRoom:hover span {
+            padding-right: 25px;
+        }
+
+            .buttonRoom:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
     .my-class {
         color: black;
         font-family: Marker Felt;
@@ -100,28 +147,53 @@
 
     </div>
 </div>
+<div>
+    <p id="dodaj" class="button" onclick="@("window.location.href='" + @Url.Action("CreateRoom", "Rooms") + "'");" title="Naciśnięcie spowoduje przeniesienie do modułu dodawania nowego pokoju">
+        @*@Html.ActionLink("Utwórz nowy pokój", "CreateRoom", null, new { title = "Naciśnięcie spowoduje przeniesienie do modułu dodawania nowego pokoju" })
+        @Url.Action("CreateRoom", "Rooms")*@
+        @*<input value="Utwórz nowy pokój"  title="Naciśnięcie spowoduje przeniesienie do modułu dodawania nowego pokoju"
+        onclick="@("window.location.href='" + @Url.Action("CreateRoom", "Rooms") + "'");" />*@
+        Utwórz nowy pokój
+    </p>
+</div>
+<br />
+<div class="card text-white bg-info text-center" style="background-color:whitesmoke">
+    <h4 class="display-4" style="        text-align: left;
+        font-family: Marker Felt">
+        Wyszukaj pokój
+    </h4>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" title="Dynamiczne wyszukiwanie pokoju" />
+        </div>
+    </div>
+</div>
+<br />
 <td>
-   
 </td>
-<a href=@Url.Action("CreateRoom","Rooms") class="button">Dodaj pokój</a>
-<table style="width:100%">
+@*<a href=@Url.Action("CreateRoom","Rooms") class="button">Dodaj pokój</a>*@
+<table class="table table-hover" id="tabelka" style="        font-family: Marker Felt;
+        background-color: white;
+        color: black">
     <tr>
         <th>Numer Pokoju</th>
-        <th>Pacjenci</th>
-        <th>Tagi</th>
+        <th>Pensjonariusze</th>
+        <th>Znaczniki</th>
         <th></th>
     </tr>
 
-
     @foreach (var room in Model)
     {
-        <tr>
+        <tr class="Search">
             <td>
-
-
-                <a href=@Url.Action(String.Format("RoomsManager/{0}",@room.RoomNumber),"Employee") class="button">@room.RoomNumber</a>
-
-                @*<a href=@Url.Action("Slider","Rooms") class="btn btn-primary">@room.RoomNumber</a>*@
+                @*<a href=@Url.Action(String.Format("RoomsManager/{0}",@room.RoomNumber),"Employee") class="my-class" title="Naciśnięcie spowoduje przeniesienie do widoku pokoju">@room.RoomNumber</a>*@
+                <input type="button" value=" @room.RoomNumber " style="background-color:white; color:black; border:double; text-align:center; width:100px" title="Naciśnięcie spowoduje przeniesienie do widoku pokoju"
+                       onclick="@("window.location.href='" + @Url.Action(String.Format("RoomsManager/{0}",@room.RoomNumber),"Employee"));" />
+                <span style="color:transparent; font-size:0;">
+                    @Html.DisplayFor(modelItem => room.RoomNumber)
+                </span>
+                
             </td>
             <td>
                 @foreach (var patiens in room.Patients)
@@ -132,24 +204,62 @@
 
 
                 }
-                <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomId),"Rooms") class="button">Dodaj pacjenta</a>
-                <a href=@Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomId),"Rooms") class="button">Usuń pacjenta</a>
+                <input type="button" value="Dodaj" style="background-color:white; color:black; border:double; text-align:center;" title="Naciśnięcie spowoduje przeniesienie do formularza przypisania pensjonariusza do pokoju"
+                       onclick="@("window.location.href='" + @Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomId),"Rooms") + "'");" />
+                <input type="button" value="Usuń" style="background-color:white; color:black; border:double; text-align:center;" title="Naciśnięcie spowoduje wypisanie pensjonariusza z pokoju"
+                       onclick="@("window.location.href='" + @Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomId),"Rooms") + "'");" />
+
+                @*<input type="button" value="Dodaj" style="background-color:white; color:black; border:double; text-align:center;" title="Naciśnięcie spowoduje przeniesienie do formularza przypisania pensjonariusza do pokoju"
+                           onclick="@("window.location.href='" + @Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomId),"Rooms") + "'");" />
+
+                    <a href=@Url.Action(String.Format("AddPatientToRoom/{0}",@room.RoomId),"Rooms") class="my-class" title="Naciśnięcie spowoduje przeniesienie do formularza przypisania pensjonariusza do pokoju">Dodaj pensjonariusza</a>*@
+                @*<a href=@Url.Action(String.Format("RemovePatienFromRoom/{0}",@room.RoomId),"Rooms") class="my-class" title="Naciśnięcie spowoduje wypisanie pensjonariusza z pokoju">Usuń pensjonariusza</a>*@
+
+
             </td>
             <td>
                 @foreach (var tag in room.Tags)
                 {
                     <p>@String.Format("\n{0}", tag.TagName);</p>
                 }
-
             </td>
             <td>
-                <a href=@Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms") class="button">Usuń pokój</a>
 
+
+                @*<a href=@Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms") class="my-class" title="Naciśnięcie spowoduje usunięcie pokoju">Usuń pokój</a>*@
+                <input type="button" value="Usuń pokój" style="background-color:white; color:black; border:double;" title="Naciśnięcie spowoduje usunięcie pokoju"
+                       onclick="@("window.location.href='" + @Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms")+ "'"));" />
+
+                @*<div>
+                        <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                               onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
+
+                    </div>*@
             </td>
         </tr>
     }
 
-    <a href=@Url.Action("Index","Employee") class="button">Wróć</a>
-
 </table>
 
+@*<a href=@Url.Action("Index","Employee") class="button">Wróć</a>*@
+
+<script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
