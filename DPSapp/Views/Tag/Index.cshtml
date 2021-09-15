@@ -7,12 +7,12 @@
 <style>
     .button {
         display: inline-block;
-        border-radius: 4px;
+        border-radius: 3px;
         background-color: white;
         border: double;
         color: black;
         text-align: center;
-        font-size: 14px;
+        font-size: 17px;
         font-family: Marker Felt;
         padding: 20px;
         width: 320px;
@@ -101,7 +101,7 @@
 <div class="card text-white bg-info text-center" style="background-color:whitesmoke">
     <h4 class="display-4" style="        text-align: left;
         font-family: Marker Felt">
-        Wyszukaj znacznik
+        Wyszukaj znacznik:
     </h4>
     <div class="form-group">
         <div class="input-group">
@@ -147,10 +147,23 @@
             </td>*@
 
 
-            <td>
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji znacznika" })
-                @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania znacznika" })
-            </td>
+        <td>
+            
+                
+                <div>
+                    
+                            <input type="button" value="Edytuj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                                   onclick="@("window.location.href='" + @Url.Action("Edit","Tag", new { id = item.TagId }) + "'");" />
+                        
+                            <input type="button" value="Usuń znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                                   onclick="@("window.location.href='" + @Url.Action("DeleteTag","Tag", new { id = item.TagId }) + "'");" />
+                    
+                </div>
+
+
+                @*@Html.ActionLink("Edytuj", "Edit", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji znacznika" })
+        @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania znacznika" })*@
+</td>
 
         </tr>
     }

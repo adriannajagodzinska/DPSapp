@@ -31,7 +31,11 @@
     Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Edytuj znacznik</h2>
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style="  background-color:whitesmoke">
+        <h1 class="display-4" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Edytuj Znacznik</h1>
+    </div>
+</div>
 
 
 @using (Html.BeginForm())
@@ -53,15 +57,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+                <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|
+                @Html.ActionLink("Powrót do listy znaczników", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy znaczników" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Powrót do listy znaczników", "Index",null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy znaczników" })
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
