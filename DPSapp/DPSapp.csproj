@@ -172,6 +172,7 @@
     <Compile Include="Models\LoginAssistant.cs" />
     <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageEditor.cs" />
     <Compile Include="Models\PassEditAssistant.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Role.cs" />
@@ -263,6 +264,7 @@
     <Content Include="Views\Patient\EditPatient.cshtml" />
     <Content Include="Views\Employee\DeleteUser.cshtml" />
     <Content Include="Views\Employee\DetailsUser.cshtml" />
+    <Content Include="Views\Employee\EditMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

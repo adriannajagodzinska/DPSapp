@@ -557,6 +557,92 @@ namespace DPSapp.Controllers
         }
 
 
+        public ActionResult EditMessage(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    var mess = db.Messages.Include("Tags").Where(x => x.MessageId == id).FirstOrDefault();
+
+                    MessageEditor mEditor = new MessageEditor
+                    {
+                        message = mess
+                    };
+                    return View(mEditor);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMessage([Bind(Include = "message,file")] MessageEditor mEditor)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "1")
+                {
+                    if (ModelState.IsValid)
+                    {
+
+
+
+                        
+                        string filename = Path.GetFileName(mEditor.file.FileName);
+                        string filepath = Path.Combine(Server.MapPath("~/FilesUpload"), filename);
+                        mEditor.file.SaveAs(filepath);
+                        string userName = Session["UserName"].ToString();
+                        
+                        string komunikat = mEditor.message.MessageText;
+                        string adres = "~/FilesUpload\\" + filename;
+                        Message tempmess = db.Messages.Include("Tags").Where(x => x.MessageId == mEditor.message.MessageId).FirstOrDefault();
+
+                        List<Tag> tagi = tempmess.Tags.ToList();
+                        Message m = new Message { Image = adres, MessageText = komunikat, IsAnnouncement = true, Tags=tagi };
+
+                        var previousmessage = db.Messages.Where(x => x.MessageId == mEditor.message.MessageId).FirstOrDefault();
+                        db.Messages.Remove(previousmessage);
+                        db.Messages.Add(m);
+                        db.SaveChanges();
+
+
+                        return RedirectToAction("SendedMessages", "Employee");
+                    }
+
+                    return View(mEditor.message.MessageId);
+                }
+
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+        }
+
+
+
+
+
+
+
+
 
 
 
