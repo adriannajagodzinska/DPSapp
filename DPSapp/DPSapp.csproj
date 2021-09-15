@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddPatientsToRoomHelper.cs" />
+    <Compile Include="Models\AddTagToMessageHelper.cs" />
     <Compile Include="Models\AddTagToPatientHelper.cs" />
     <Compile Include="Models\EmployeeSender.cs" />
     <Compile Include="Models\FamilySender.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Views\Employee\DeleteUser.cshtml" />
     <Content Include="Views\Employee\DetailsUser.cshtml" />
     <Content Include="Views\Employee\EditMessage.cshtml" />
+    <Content Include="Views\Tag\AddTagToMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -127,6 +127,9 @@
             Znaczniki
         </th>
         <th>
+            
+        </th>
+        <th>
             Komunikat
         </th>
         <th></th>
@@ -134,39 +137,43 @@
 
     @foreach (var item in Model)
     {
-        <tr class="Search">
+<tr class="Search">
 
-            <td align="center">
-                @if (isImage(item.Image))
-                {
-                    <img style="vertical-align: bottom; width:50px; height:50px" src="@Url.Content(item.Image)" alt="tbd" />
-                }
-                else if (isVideo(item.Image))
-                {
-                    <video autoplay muted style="width: 50px; height: 50px" controls>
-                        <source src="@Url.Content(item.Image)" type="video/mp4">
-                    </video>
-                }
+    <td align="center">
+        @if (isImage(item.Image))
+        {
+            <img style="vertical-align: bottom; width:50px; height:50px" src="@Url.Content(item.Image)" alt="tbd" />
+        }
+        else if (isVideo(item.Image))
+        {
+            <video autoplay muted style="width: 50px; height: 50px" controls>
+                <source src="@Url.Content(item.Image)" type="video/mp4">
+            </video>
+        }
 
-            </td>
-            <td>
+    </td>
+    <td>
 
-                @foreach (var item2 in item.Tags)
-                {
-                    @item2.TagName
-                }
-            </td>
-            <td>
-                @item.MessageText
+        @foreach (var item2 in item.Tags)
+        {
+            @item2.TagName
+        }
+    </td>
+    <td>
+        <a href=@Url.Action(String.Format("AddTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Dodaj Znacznik</a>
 
-            </td>
+    </td>
+    <td>
+        @item.MessageText
 
-            <td>
-                <a href=@Url.Action(String.Format("DeleteMessage/{0}", @item.MessageId), "Employee") class="my-class">Usuń</a>
-                <a href=@Url.Action(String.Format("EditMessage/{0}", @item.MessageId), "Employee") class="my-class">Edytuj</a>
-            </td>
+    </td>
 
-        </tr>
+    <td>
+        <a href=@Url.Action(String.Format("DeleteMessage/{0}", @item.MessageId), "Employee") class="my-class">Usuń</a>
+        <a href=@Url.Action(String.Format("EditMessage/{0}", @item.MessageId), "Employee") class="my-class">Edytuj</a>
+    </td>
+
+</tr>
     }
 </table>
 
