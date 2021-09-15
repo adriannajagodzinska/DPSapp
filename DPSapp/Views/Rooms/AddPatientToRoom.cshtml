@@ -137,7 +137,11 @@
             font-size: larger;
         }
     </style>
-<h2>Przypisz pensjonariusza do pokoju</h2>
+    <div class="jumbotron jumbotron-fluid" id="tlo">
+        <div class="container" style="  background-color:whitesmoke">
+            <h1 class="display-4" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Dodawanie pensjonariusza do pokoju</h1>
+        </div>
+    </div>
 @using (Html.BeginForm("AddPatientToRoom", "Rooms", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
@@ -159,17 +163,24 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
-        </div>
+        </div>*@
     </div>
 
 }
 <div>
 
-    <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
-        Powrót do listy pokoi
-    </span>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|
+            @*@Html.ActionLink("Powrót do listy pokoi", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pokoi" })*@
+            <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
+                Powrót do listy pokoi
+            </span>
+        </div>
+    </div>
 </div>

@@ -5,169 +5,195 @@
     ViewBag.Title = "AddPatientToRoom";
     Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
+<style>
+    #usun {
+        color: firebrick;
+    }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: white;
+        border: double;
+        color: black;
+        text-align: center;
+        font-size: 14px;
+        font-family: Marker Felt;
+        padding: 20px;
+        width: 320px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 0px;
+    }
+
+        .button:hover {
+            background-color: #EDEDED;
         }
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        .button {
-            display: inline-block;
-            border-radius: 4px;
-            background-color: white;
-            border: double;
-            color: black;
-            text-align: center;
-            font-size: 14px;
-            font-family: Marker Felt;
-            padding: 20px;
-            width: 320px;
-            transition: all 0.5s;
+        .button span {
             cursor: pointer;
-            margin: 0px;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
         }
 
-            .button:hover {
-                background-color: #EDEDED;
-            }
-
-            .button span {
-                cursor: pointer;
-                display: inline-block;
-                position: relative;
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
                 transition: 0.5s;
             }
 
-                .button span:after {
-                    content: '\00bb';
-                    position: absolute;
-                    opacity: 0;
-                    top: 0;
-                    right: -20px;
-                    transition: 0.5s;
-                }
-
-            .button:hover span {
-                padding-right: 25px;
-            }
-
-                .button:hover span:after {
-                    opacity: 1;
-                    right: 0;
-                }
-
-
-        .buttonRoom {
-            display: inline-block;
-            border-radius: 4px;
-            background-color: white;
-            border: double;
-            color: black;
-            text-align: center;
-            font-size: 14px;
-            font-family: Marker Felt;
-            padding: 19px;
-            width: 320px;
-            transition: all 0.5s;
-            cursor: pointer;
-            margin: 0px;
+        .button:hover span {
+            padding-right: 25px;
         }
 
-            .buttonRoom:hover {
-                background-color: #EDEDED;
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
             }
 
-            .buttonRoom span {
-                cursor: pointer;
-                display: inline-block;
-                position: relative;
+
+    .buttonRoom {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: white;
+        border: double;
+        color: black;
+        text-align: center;
+        font-size: 14px;
+        font-family: Marker Felt;
+        padding: 19px;
+        width: 320px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 0px;
+    }
+
+        .buttonRoom:hover {
+            background-color: #EDEDED;
+        }
+
+        .buttonRoom span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonRoom span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
                 transition: 0.5s;
             }
 
-                .buttonRoom span:after {
-                    content: '\00bb';
-                    position: absolute;
-                    opacity: 0;
-                    top: 0;
-                    right: -20px;
-                    transition: 0.5s;
-                }
-
-            .buttonRoom:hover span {
-                padding-right: 25px;
-            }
-
-                .buttonRoom:hover span:after {
-                    opacity: 1;
-                    right: 0;
-                }
-
-        .my-class {
-            color: black;
-            font-family: Marker Felt;
+        .buttonRoom:hover span {
+            padding-right: 25px;
         }
 
-            .my-class:active {
-                color: black;
+            .buttonRoom:hover span:after {
+                opacity: 1;
+                right: 0;
             }
 
-            .my-class:link {
-                color: black;
-            }
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
 
-            .my-class:visited {
-                color: black;
-            }
-
-            .my-class:hover {
-                color: cadetblue;
-            }
-
-        .gradient-class {
+        .my-class:active {
             color: black;
-            position: center;
-            font-family: Marker Felt;
-            font-size: larger;
         }
-    </style>
-<h2>Usuń pensjonariusza z pokoju</h2>
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+
+    .gradient-class {
+        color: black;
+        position: center;
+        font-family: Marker Felt;
+        font-size: larger;
+    }
+</style>
+
+<p class="error">@ViewBag.ErrorMessage</p>
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style="  background-color:whitesmoke">
+        <h1 class="display-4" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Usuwanie pensjonariusza z pokoju</h1>
+    </div>
+</div>
+<h3 id="usun">Czy na pewno chcesz usunąć pensjonariusza z pokoju?</h3>
+
 @using (Html.BeginForm("RemovePatienFromRoom", "Rooms", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
 
-            <div class="col-md-10">
+        <div class="col-md-10">
 
-                @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
-                @*@Html.DropDownListFor(m => m.TagIdToAdd, Model.ListOfTags, new { @class = "form-control" })*@
-                @Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(ViewBag.Patients, "Value", "Text"))
-                @*@ViewBag.TagID as SelectList*@
+            @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
+            @*@Html.DropDownListFor(m => m.TagIdToAdd, Model.ListOfTags, new { @class = "form-control" })*@
+            
+            @*@ViewBag.TagID as SelectList*@
 
-                @*@Html.ValidationMessageFor(model => model.TagId, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Usuń" class="btn btn-default" />
+            <div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <span style="font-family: Marker Felt">
+                            Pensjonariusz:
+                        </span>
+                        @Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(ViewBag.Patients, "Value", "Text"))
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Usuń" class="btn btn-default" />
+            </div>
+        </div>*@
+</div>
+
 }
 <div>
-    <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
-        Powrót do listy pokoi
-    </span>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|
+            @*@Html.ActionLink("Powrót do listy pokoi", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pokoi" })*@
+            <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
+                Powrót do listy pokoi
+            </span>
+        </div>
+</div>
 </div>
