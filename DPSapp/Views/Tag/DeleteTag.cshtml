@@ -33,9 +33,16 @@
 
 
 <p class="error">@ViewBag.ErrorMessage</p>
+
+<div class="jumbotron jumbotron-fluid" id="tlo">
+    <div class="container" style="  background-color:whitesmoke">
+        <h1 class="display-2" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Usuwanie Znacznika</h1>
+    </div>
+</div>
+
 <h3 id="usun">Czy na pewno chcesz usunąć znacznik?</h3>
 <div>
-    <h4>Tag</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,14 +52,7 @@
         <dd>
             @Html.DisplayFor(model => model.TagName)
         </dd>
-
-        <dt>
-            Czy globalny:
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsGlobal)
-        </dd>
+      
 
     </dl>
 
@@ -61,7 +61,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            <input type="submit" style="background-color:white; color:black; border:double;" value="Usuń" class="btn btn-default" /> |
             @Html.ActionLink("Powrót do listy znaczników", "Index",null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy znaczników" })
         </div>
     }
