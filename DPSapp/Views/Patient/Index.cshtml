@@ -125,47 +125,65 @@
             @* @Html.DisplayNameFor(model => model.Date)*@
             @Html.ActionLink("Nazwisko pensjonariusza", "Index", new { sortOrder = ViewBag.SurnameSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
         </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Date)*@
+           Znaczniki pacjenta
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr class="Search">
-            <td>
-                @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
-                    @item.RecipeName*@
-                @Html.DisplayFor(modelItem => item.PatientName)
-                @*</a>*@
+<tr class="Search">
+    <td>
+        @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
+            @item.RecipeName*@
+        @Html.DisplayFor(modelItem => item.PatientName)
+        @*</a>*@
 
 
-            </td>
-            <td>
+    </td>
+    <td>
 
-                @Html.DisplayFor(modelItem => item.PatientSurname)
-            </td>
-            <td>
-                @*@foreach (var tag in item.Tags)
-                {
-                    <p>@String.Format("\n{0}", tag.TagName);</p>
-                }*@
+        @Html.DisplayFor(modelItem => item.PatientSurname)
+    </td>
+
+    <td>
+
+        @foreach (var item2 in item.Tags)
+        {
+            @item2.TagName
+            <br />
+        }
+    </td>
+    <td>
+        @*@foreach (var tag in item.Tags)
+        {
+            <p>@String.Format("\n{0}", tag.TagName);</p>
+        }*@
 
 
 
-                <div>
-                    <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
-                           onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
+        <div>
+            <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                   onclick="@("window.location.href='" + @Url.Action("AddTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
 
-                </div>
-            </td>
+        </div>
+        <div>
+            <input type="button" value="Usuń znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                   onclick="@("window.location.href='" + @Url.Action("RemoveTagToPatient","Tag", new { id = item.PatientId }) + "'");" />
 
-            <td>
-                @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
+        </div>
+    </td>
 
-                @Html.ActionLink("Edycja", "EditPatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza" })
-                @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
-            </td>
-        </tr>
+    <td>
+        @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
+        @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
+
+        @Html.ActionLink("Edycja", "EditPatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza" })
+        @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
+    </td>
+</tr>
     }
 
 </table>
