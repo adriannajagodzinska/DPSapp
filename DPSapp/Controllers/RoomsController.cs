@@ -56,6 +56,7 @@ namespace DPSapp.Controllers
             
             //zbierz wszystkie wiadomości, które mają te tagi
             List<string> adresses = new List<string>();
+            List<string> komunikaty = new List<string>();
             foreach (var tag in tagi)
             {
             //    var temp3 = _db.Messages.Include("Tags").Where(c => c.Tags == tag).Select(x => x.Image).ToList();
@@ -86,6 +87,7 @@ namespace DPSapp.Controllers
                 {
                    
                             adresses.Add(messaage.Image);
+                    komunikaty.Add(messaage.MessageText);
                    
                     
                 }
@@ -93,6 +95,7 @@ namespace DPSapp.Controllers
            ;
 
             ListOfAdresses.ListOfAdresses = adresses;
+            ListOfAdresses.Komunikaty = komunikaty;
 
             return View(ListOfAdresses);
         }

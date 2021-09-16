@@ -111,35 +111,62 @@
 
 <div class="slideshow-container">
 
-    @foreach (var adres in Model.ListOfAdresses)
+    @for (int i = 0; i < Model.ListOfAdresses.Count; i++)
     {
-
-        if (isImage(adres))
+        if (isImage(Model.ListOfAdresses[i]))
         {
             //<td>@adres</td>
-            <div class="mySlides fade">
-                <div class="numbertext">1</div>
-                <img src="@Url.Content(adres)" style="width:100%">
-                <div class="text">Caption Text</div>
-            </div>
+    <div class="mySlides fade">
+        <div class="numbertext">1</div>
+        <img src="@Url.Content(Model.ListOfAdresses[i])" style="width:100%">
+        <div class="text" style="font-size:30px; color:black">@Model.Komunikaty[i]</div>
+    </div>
+           
         }
-        else if (isVideo(adres))
+        else if (isVideo(Model.ListOfAdresses[i]))
         {
             <div class="mySlides fade">
                 <div class="numbertext">1</div>
                 <video autoplay muted style="width:100%" controls>
-                    <source src="@Url.Content(adres)" type="video/mp4">
+                    <source src="@Url.Content(Model.ListOfAdresses[i])" type="video/mp4">
                 </video>
-                <div class="text">Caption Text</div>
+                <div class="text" style="font-size:30px; color:black">@Model.Komunikaty[i]</div>
             </div>
-
+            
         }
-
-
-
-
-
     }
+
+
+
+    @*@foreach (var adres in Model.ListOfAdresses)
+        {
+
+            if (isImage(adres))
+            {
+                //<td>@adres</td>
+                <div class="mySlides fade">
+                    <div class="numbertext">1</div>
+                    <img src="@Url.Content(adres)" style="width:100%">
+                    <div class="text">Caption Text</div>
+                </div>
+            }
+            else if (isVideo(adres))
+            {
+                <div class="mySlides fade">
+                    <div class="numbertext">1</div>
+                    <video autoplay muted style="width:100%" controls>
+                        <source src="@Url.Content(adres)" type="video/mp4">
+                    </video>
+                    <div class="text">Caption</div>
+                </div>
+
+            }*@
+
+
+
+
+
+
 
 
 </div>

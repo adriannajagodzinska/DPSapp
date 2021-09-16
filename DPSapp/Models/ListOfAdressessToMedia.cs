@@ -8,5 +8,6 @@ namespace DPSapp.Models
     public class ListOfAdressessToMedia
     {
         public List<string> ListOfAdresses { get; set; }
+        public List<string> Komunikaty { get; set; }
     }
 }
