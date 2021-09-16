@@ -160,31 +160,36 @@
 
                 @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
                 @*@Html.DropDownListFor(m => m.TagIdToAdd, Model.ListOfTags, new { @class = "form-control" })*@
+
                 @Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(ViewBag.Patients, "Value", "Text"))
+                @*@Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(Model.ListOfPatients, "PatientID", "PatientName"))*@
                 @*@ViewBag.TagID as SelectList*@
 
                 @*@Html.ValidationMessageFor(model => model.TagId, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+                <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />
+                <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
+                    Powrót do listy pokoi
+                </span>
             </div>
-        </div>*@
+        </div>
     </div>
 
 }
-<div>
+<!--<div>
 
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|
-            @*@Html.ActionLink("Powrót do listy pokoi", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pokoi" })*@
-            <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
+            <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|-->-->
+            <!--@*@Html.ActionLink("Powrót do listy pokoi", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pokoi" })*@-->
+            <!--<span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
                 Powrót do listy pokoi
             </span>
         </div>
-    </div>
-</div>
+    </div>-->
+<!--</div>-->

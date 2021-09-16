@@ -40,7 +40,12 @@ namespace DPSapp.Controllers
             {
                 foreach (var tag in patient.Tags)
                 {
-                    ListofTags.Add(tag);
+                    bool containsItem = ListofTags.Any(item => item.TagId == tag.TagId);
+                    if(!containsItem)
+                    {
+                            ListofTags.Add(tag);
+                    }
+                    
                 }
                 
             }
@@ -62,7 +67,10 @@ namespace DPSapp.Controllers
                 List<Message> wiadomosci = temp.ToList();
                 foreach (var messaage in temp)
                 {
-                    adresses.Add(messaage.Image);
+                   
+                            adresses.Add(messaage.Image);
+                   
+                    
                 }
             }
            ;
@@ -202,7 +210,7 @@ namespace DPSapp.Controllers
                    
                     helper.ListOfPatients = patients;
 
-
+                    ViewBag.ListOfPatients = ToSelectListID(helper.ListOfPatients.ToList());
                     //helper.ListOfTags = tags;
                     //helper.ListOfTags = ToSelectListID(tags.ToList<Tag>()); 
 
@@ -239,7 +247,7 @@ namespace DPSapp.Controllers
                     var room = _db.Rooms.Include("Patients").Where(s => s.RoomId == roomid).FirstOrDefault();
 
                     room.Patients.Add(patient);
-
+                  
                     _db.SaveChanges();
                     return RedirectToAction("Rooms", "Employee");
                 }
@@ -361,6 +369,28 @@ namespace DPSapp.Controllers
                          select r).ToList();
            
             return View(rooms);
+        }
+
+        [NonAction]
+        public SelectList ToSelectListID(List<Patient> patients)
+        {
+
+            // List<SelectListItem> list = new List<SelectListItem>();
+            var dictionary = new Dictionary<int, string>();
+            foreach (Patient patient in patients)
+            {
+                // var Temp = tag.TagId.ToString();
+                //list.Add(new SelectListItem()
+                //{
+                //    //Value = "",
+                //    //Text = patient.PatientId.ToString(),
+                //    Text = tag.TagName.ToString(),
+                //    Value = tag.TagId.ToString()
+                //}) ;
+                dictionary.Add(patient.PatientId, patient.PatientName+" "+patient.PatientSurname);
+            }
+            SelectList list2 = new SelectList(dictionary, "Key", "Value");
+            return list2;
         }
 
     }
