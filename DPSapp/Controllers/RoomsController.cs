@@ -40,7 +40,12 @@ namespace DPSapp.Controllers
             {
                 foreach (var tag in patient.Tags)
                 {
-                    ListofTags.Add(tag);
+                    bool containsItem = ListofTags.Any(item => item.TagId == tag.TagId);
+                    if(!containsItem)
+                    {
+                            ListofTags.Add(tag);
+                    }
+                    
                 }
                 
             }
@@ -62,7 +67,10 @@ namespace DPSapp.Controllers
                 List<Message> wiadomosci = temp.ToList();
                 foreach (var messaage in temp)
                 {
-                    adresses.Add(messaage.Image);
+                   
+                            adresses.Add(messaage.Image);
+                   
+                    
                 }
             }
            ;
