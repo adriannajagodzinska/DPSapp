@@ -228,7 +228,7 @@
 
                 @*<a href=@Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms") class="my-class" title="Naciśnięcie spowoduje usunięcie pokoju">Usuń pokój</a>*@
                 <input type="button" value="Usuń pokój" style="background-color:white; color:black; border:double;" title="Naciśnięcie spowoduje usunięcie pokoju"
-                       onclick="@("window.location.href='" + @Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms")+ "'"));" />
+                       onclick="@("window.location.href='" + @Url.Action(String.Format("DeleteRoom/{0}",@room.RoomId),"Rooms")+ "'");" />
 
                 @*<div>
                         <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"

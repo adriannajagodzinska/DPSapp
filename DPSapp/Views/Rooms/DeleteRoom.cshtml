@@ -1,19 +1,43 @@
-﻿@model DPSapp.Models.Room
+﻿<style>
+    #usun {
+        color: firebrick;
+    }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+</style>
+@model DPSapp.Models.Room
 
 @{
     ViewBag.Title = "DeleteRoom";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>DeleteRoom</h2>
-
-<h3>Jesteś pewny, że chcesz usunąć ten pokój?</h3>
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3 id="usun">Czy na pewno chcesz usunąć pokój?</h3>
 <div>
-    <h4>Room</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RoomNumber)
+            Numer pokoju:
         </dt>
 
         <dd>
@@ -22,12 +46,17 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" style="background-color:white; color:black; border:double;" value="Usuń" class="btn btn-default" />
+        <span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
+            Powrót do listy pokoi
+        </span>
+    </div>
+</div>
     }
 </div>

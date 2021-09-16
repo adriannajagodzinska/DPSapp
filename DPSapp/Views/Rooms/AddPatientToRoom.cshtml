@@ -141,11 +141,6 @@
             font-size: larger;
         }
     </style>
-    <div class="jumbotron jumbotron-fluid" id="tlo">
-        <div class="container" style="  background-color:whitesmoke">
-            <h1 class="display-4" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Dodawanie pensjonariusza do pokoju</h1>
-        </div>
-    </div>
     <h3 id="usun">Wybierz pensjonariusza, którego chcesz przypisać do pokoju</h3>
 @using (Html.BeginForm("AddPatientToRoom", "Rooms", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -160,7 +155,9 @@
 
                 @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
                 @*@Html.DropDownListFor(m => m.TagIdToAdd, Model.ListOfTags, new { @class = "form-control" })*@
-
+                <span style="font-family: Marker Felt">
+                    Pensjonariusz:
+                </span>
                 @Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(ViewBag.Patients, "Value", "Text"))
                 @*@Html.DropDownListFor(m => m.PatientIdToAdd, new SelectList(Model.ListOfPatients, "PatientID", "PatientName"))*@
                 @*@ViewBag.TagID as SelectList*@
@@ -179,17 +176,4 @@
         </div>
     </div>
 
-}
-<!--<div>
-
-
-    <!--<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" style="background-color:white; color:black; border:double;" value="Zapisz" class="btn btn-default" />|-->-->
-            <!--@*@Html.ActionLink("Powrót do listy pokoi", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pokoi" })*@-->
-            <!--<span id="dodaj" class="my-class" onclick="@("window.location.href='" + @Url.Action(String.Format("Rooms"), "Employee") + "'");" title="Naciśnięcie spowoduje powrót do listy pokoi">
-                Powrót do listy pokoi
-            </span>
-        </div>
-    </div>-->
-<!--</div>-->
+} 

@@ -142,11 +142,6 @@
 </style>
 
 <p class="error">@ViewBag.ErrorMessage</p>
-<div class="jumbotron jumbotron-fluid" id="tlo">
-    <div class="container" style="  background-color:whitesmoke">
-        <h1 class="display-4" style=" font-size: 30px; text-align: center; background-color: white; font-family: Marker Felt; border: double">Usuwanie pensjonariusza z pokoju</h1>
-    </div>
-</div>
 <h3 id="usun">Czy na pewno chcesz usunąć pensjonariusza z pokoju?</h3>
 
 @using (Html.BeginForm("RemovePatienFromRoom", "Rooms", FormMethod.Post, new { enctype = "multipart/form-data" }))
