@@ -58,14 +58,31 @@ namespace DPSapp.Controllers
             List<string> adresses = new List<string>();
             foreach (var tag in tagi)
             {
-                //var temp = _db.Messages.Where(c => c.Tags == item).Select(c => c.Image);
-               
-                var temp = (from m in _db.Messages
-                            where m.Tags.Any(c => c.TagId == tag.TagId)
-                            select m);
+            //    var temp3 = _db.Messages.Include("Tags").Where(c => c.Tags == tag).Select(x => x.Image).ToList();
+            //    var temp2 = (from m in _db.Messages select m).ToList();
+            //    var temp = (from m in _db.Messages
+            //                where m.Tags.Any(c => c.TagId == tag.TagId)
+            //                select m);
+                var wszystkiewiadomosci = _db.Messages.Include("Tags").ToList();
 
-                List<Message> wiadomosci = temp.ToList();
-                foreach (var messaage in temp)
+
+                List<Message> wiadomosci = new List<Message>();
+                foreach (var wiadomosc in wszystkiewiadomosci)
+                {
+
+                    foreach (var tagiwiadomosci in wiadomosc.Tags)
+                    {
+                        if(tagiwiadomosci.TagId==tag.TagId)
+                        {
+                            wiadomosci.Add(wiadomosc);
+                        }
+                    }
+
+                }
+
+
+
+                foreach (var messaage in wiadomosci)
                 {
                    
                             adresses.Add(messaage.Image);

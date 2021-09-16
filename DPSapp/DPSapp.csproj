@@ -162,6 +162,14 @@
     <Compile Include="Migrations\202107131056142_RangeWUserRoleId.Designer.cs">
       <DependentUpon>202107131056142_RangeWUserRoleId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109162215314_Zmiana usuwania tagu.cs" />
+    <Compile Include="Migrations\202109162215314_Zmiana usuwania tagu.Designer.cs">
+      <DependentUpon>202109162215314_Zmiana usuwania tagu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109162238124_cofniecie.cs" />
+    <Compile Include="Migrations\202109162238124_cofniecie.Designer.cs">
+      <DependentUpon>202109162238124_cofniecie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddPatientsToRoomHelper.cs" />
     <Compile Include="Models\AddTagToMessageHelper.cs" />
@@ -303,6 +311,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107131056142_RangeWUserRoleId.resx">
       <DependentUpon>202107131056142_RangeWUserRoleId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109162215314_Zmiana usuwania tagu.resx">
+      <DependentUpon>202109162215314_Zmiana usuwania tagu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109162238124_cofniecie.resx">
+      <DependentUpon>202109162238124_cofniecie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
