@@ -177,11 +177,26 @@
     </td>
 
     <td>
-        @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
-        @Html.ActionLink("Szczegóły", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
+        <div>
+            <input type="button" value="Szczegóły pacjenta" style="background-color:white; color:black; border:double;" title="Naciśnięcie umożliwia podgląd przypisanych znaczników"
+                   onclick="@("window.location.href='" + @Url.Action("Details","Patient", new { id = item.PatientId }) + "'");" />
 
-        @Html.ActionLink("Edycja", "EditPatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza" })
-        @Html.ActionLink("Usuń", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })
+        </div>
+        <div>
+            <input type="button" value="Edycja pacjenta" style="background-color:white; color:black; border:double;" title="Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza"
+                   onclick="@("window.location.href='" + @Url.Action("EditPatient","Patient", new { id = item.PatientId }) + "'");" />
+
+        </div>
+        <div>
+            <input type="button" value="Usuń pacjenta" style="background-color:white; color:black; border:double;" title="Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza"
+                   onclick="@("window.location.href='" + @Url.Action("DeletePatient","Patient", new { id = item.PatientId }) + "'");" />
+
+        </div>
+        @*@Html.ActionLink("Edytuj", "Edit", new { id = item.PatientId }) |*@
+        @*@Html.ActionLink("Szczegóły pacjenta", "Details", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd przypisanych znaczników" })
+
+        @Html.ActionLink("Edycja pacjenta", "EditPatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji pensjonariusza" })
+        @Html.ActionLink("Usuń Pacjenta ", "DeletePatient", new { id = item.PatientId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania pensjonariusza" })*@
     </td>
 </tr>
     }
