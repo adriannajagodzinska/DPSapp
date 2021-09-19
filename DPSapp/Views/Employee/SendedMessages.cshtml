@@ -161,8 +161,19 @@
         }
     </td>
     <td>
-        <a href=@Url.Action(String.Format("AddTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Dodaj Znacznik</a><br />
-        <a href=@Url.Action(String.Format("RemoveTagToMessage/{0}", @item.MessageId), "Tag") class="my-class">Usuń Znacznik</a>
+        <div>
+            <input type="button" value="Dodaj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                   onclick="@("window.location.href='" +@Url.Action(String.Format("AddTagToMessage/{0}", @item.MessageId), "Tag") + "'");" />
+
+        </div>
+
+        <div>
+            <input type="button" value="Usuń znacznik" style="background-color:white; color:black; border:double;" title="Usuń znacznik pensjonariuszowi"
+                   onclick="@("window.location.href='" + @Url.Action(String.Format("RemoveTagToMessage/{0}", @item.MessageId), "Tag") + "'");" />
+
+        </div>
+
+        
     </td>
     <td>
         @item.MessageText
@@ -170,8 +181,17 @@
     </td>
 
     <td>
-        <a href=@Url.Action(String.Format("DeleteMessage/{0}", @item.MessageId), "Employee") class="my-class">Usuń</a>
-        <a href=@Url.Action(String.Format("EditMessage/{0}", @item.MessageId), "Employee") class="my-class">Edytuj</a>
+        <div>
+            <input type="button" value="Usuń ogłoszenie" style="background-color:white; color:black; border:double;" title="Usuń ogłoszenie"
+                   onclick="@("window.location.href='" +@Url.Action(String.Format("DeleteMessage/{0}", @item.MessageId), "Employee") + "'");" />
+
+        </div>
+        <div>
+            <input type="button" value="Edytuj ogłoszenie" style="background-color:white; color:black; border:double;" title="Edytuj ogłoszenie"
+                   onclick="@("window.location.href='" + @Url.Action(String.Format("EditMessage/{0}", @item.MessageId), "Employee") + "'");" />
+
+        </div>
+        
     </td>
 
 </tr>
