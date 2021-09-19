@@ -17,5 +17,6 @@ namespace DPSapp.Models
         [Range(1,2)]
         public int RoleId { get; set; }
         public int PatientID { get; set; }
+        public string PatientName { get; set; }
     }
 }

@@ -174,10 +174,15 @@ namespace DPSapp.Controllers
                         // int Pacjentid = userManager.PatientId;
                         int role = 1;
                         int patientID = 0;
+                        string patientName = "";
+
+
                         if (isFamily)
                         {
                             role = 2;
                             patientID = int.Parse(userManager.PatientId);
+                            var tempPatient = db.Patients.Where(x => x.PatientId == patientID).FirstOrDefault();
+                            patientName = tempPatient.PatientName + " " + tempPatient.PatientSurname;
                         }
                         string pass = System.Web.Security.Membership.GeneratePassword(12, 2);
                         string firstPart = name.Substring(0, 3);
@@ -199,7 +204,7 @@ namespace DPSapp.Controllers
                         }
 
 
-                        User user = new User { Login = login, Password = pass, RoleId = role, PatientID = patientID };
+                        User user = new User { Login = login, Password = pass, RoleId = role, PatientID = patientID , PatientName = patientName };
                         //if (isFamily)
                         //{
                         //    user.PatientID= userManager.PatientId;
@@ -264,6 +269,8 @@ namespace DPSapp.Controllers
                     if (ModelState.IsValid)
                     {
                         var previoususer = db.Users.Where(x => x.UserId == editeduser.UserId).FirstOrDefault();
+                        var temppatient = db.Patients.Where(x => x.PatientId == editeduser.PatientID).FirstOrDefault();
+                        editeduser.PatientName = temppatient.PatientName + " " + temppatient.PatientSurname;
                         db.Users.Remove(previoususer);
                         db.Users.Add(editeduser);
                         db.SaveChanges();

@@ -131,9 +131,10 @@
                 @* @Html.DisplayNameFor(model => model.Date)*@
                 @Html.ActionLink("Hasło", "UserManagement", new { sortOrder = ViewBag.PasswordSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
             </th>
+           
             <th>
-                @* @Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Liczba przypisanych pensjonariuszy", "UserManagement", new { sortOrder = ViewBag.PatientIdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })
+                 Przypisany pensjonariusz
+                @*@Html.ActionLink("Przypisany pensjonariusz", "UserManagement", new { sortOrder = ViewBag.PatientIdSortParm }, new { @class = "my-class", title = "Naciśnięcie spowoduje posortwanie danych według tabeli" })*@
             </th>
             <th></th>
         </tr>
@@ -161,13 +162,13 @@
                     @user.Password
                 </td>
                 <td style="position:center">
-                    @if (user.PatientID == 0)
+                    @if (user.RoleId == 1)
                     {
                         <h5> Brak (Konto Pracownika)</h5>
                     }
                     else
                     {
-                        <h5>1</h5>
+                        <h5>@user.PatientName</h5>
 
                     }
                 </td>
