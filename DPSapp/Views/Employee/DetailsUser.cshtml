@@ -52,7 +52,7 @@
                     <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
                         <label>Przypisany pensjonariusz: </label>
                         <br />
-                        @ViewBag.PatientN @ViewBag.PatientS 
+                        @ViewBag.PatientN @ViewBag.PatientS
                         @*<table class="table" id="tabela">
 
                             @foreach (var item in Model.PatientID)
@@ -71,35 +71,33 @@
             </div>
         </div>
         @*<dl class="dl-horizontal">
-                    <dt>
-                        Pensjonariusz:
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => Model.PatientName) @Html.DisplayFor(model => Model.PatientSurname)
-                    </dd>
-                    <dt>
-                        Przypisane znaczniki:
-                    </dt>
-                    <dd>
-                        <table class="table" id="tabela">
+                <dt>
+                    Pensjonariusz:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => Model.PatientName) @Html.DisplayFor(model => Model.PatientSurname)
+                </dd>
+                <dt>
+                    Przypisane znaczniki:
+                </dt>
+                <dd>
+                    <table class="table" id="tabela">
 
-                            @foreach (var item in Model.Tags)
-                            {
-                                <tr>
+                        @foreach (var item in Model.Tags)
+                        {
+                            <tr>
 
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TagName)
-                                        </td>
-            </tr>
-                            }
-                        </table>
-                    </dd>
-                </dl>*@
-        <div>
-            <p style="text-align:left;">
-                @*@Html.ActionLink("Edytuj", "Edit", new { id = Model.PatientId }) |*@
-                @Html.ActionLink("Powrót do listy użytkowników", "UserManagement", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy użytkowników" })
-            </p>
-        </div>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TagName)
+                                    </td>
+        </tr>
+                        }
+                    </table>
+                </dd>
+            </dl>*@
+        <span class="btn btn-default" style="background-color:white; color:black; border:double; text-align:left" value="Powrót do listy pensjonariuszy">
+
+            @Html.ActionLink("Powrót do listy użytkowników", "UserManagement", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy użytkowników" })
+        </span>
 
