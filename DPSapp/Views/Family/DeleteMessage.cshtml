@@ -1,0 +1,68 @@
+﻿<style>
+    #usun {
+        color: firebrick;
+    }
+
+    .my-class {
+        color: black;
+        font-family: Marker Felt;
+    }
+
+        .my-class:active {
+            color: black;
+        }
+
+        .my-class:link {
+            color: black;
+        }
+
+        .my-class:visited {
+            color: black;
+        }
+
+        .my-class:hover {
+            color: cadetblue;
+        }
+</style>
+@model DPSapp.Models.Message
+
+@{
+    ViewBag.Title = "DeleteMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3 id="usun">Czy na pewno chcesz usunąć ogłoszenie?</h3>
+<div>
+    <h4>Ogłoszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Multimedia:
+        </dt>
+
+        <dd>
+            <img style="vertical-align: bottom; width:50px; height:50px" src="@Url.Content(Model.Image)" alt="tbd" />
+        </dd>
+
+        <dt>
+            Komunikat
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageText)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy ogłoszeń", "SendedMessages", "Employee", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy użytkowników" })
+        </div>
+    }
+</div>

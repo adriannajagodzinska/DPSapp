@@ -41,7 +41,8 @@ namespace DPSapp.Controllers
             {
                 if (Session["role"].ToString() == "2")
                 {
-                    return View();
+                    var model = new FamilySender();
+                    return View(model);
                 }
                 else
                 {
@@ -59,8 +60,7 @@ namespace DPSapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                
                    if (fSender.file.ContentLength > 0)
                     {
                         //Patient p = db.Patients.Where(a=>a.PatientId==2).Select(a => a).FirstOrDefault();
@@ -78,7 +78,7 @@ namespace DPSapp.Controllers
                         var tID = Tagi.Select(a => a).FirstOrDefault();
                         
                         string komunikat = fSender.Komunikat;
-                        string adres = filepath;
+                        string adres = "~/FilesUpload\\" + filename; 
                         Message m = new Message { Image = adres, MessageText = komunikat};
                         m.Tags = new List<Tag>();
                         m.Tags.Add(tID);
@@ -88,13 +88,8 @@ namespace DPSapp.Controllers
                         //db.
                     }
                     ViewBag.Message = "Plik poprawnie załadowany!";
-                    return View();
-                }
-                catch (Exception)
-                {
-                    ViewBag.Message = "Plik nie załadował się!";
-                    return View();
-                }
+                    return RedirectToAction("Index", "Family");
+                
                 
             }
             return View(fSender);
@@ -152,6 +147,190 @@ namespace DPSapp.Controllers
             return View(assistant);
         }
 
+
+        public ActionResult SendedMessages()
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+                    //    var messages = (from s in db.Messages
+                    //               select s).ToList();
+                    string userName = Session["UserName"].ToString();
+                    int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
+                    var pacjent = db.Patients.Include("Tags").Where(a => a.PatientId == pID).Select(a => a).FirstOrDefault();
+                    var Tagi = pacjent.Tags;
+                    var tID = Tagi.Select(a => a).FirstOrDefault();
+                    List<Message> messages = new List<Message>();
+                    List<Message> allmessages = db.Messages.Include("Tags").ToList();
+                    foreach (var tagpacjenta in Tagi)
+                    {
+                        foreach (var message in allmessages)
+                        {
+                            foreach (var tagwiadomosci in message.Tags)
+                            {
+                                if (tagpacjenta.TagId == tagwiadomosci.TagId)
+                                {
+                                    messages.Add(message);
+                                    break;
+                                }
+                            }
+
+                            
+                        }
+                    }
+                    return View(messages);
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+        public ActionResult DeleteMessage(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+                    Message message = db.Messages.Where(x => x.MessageId == id).FirstOrDefault();
+
+
+                    return View(message);
+
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteMessage(int id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+
+                    Message messagetemp = db.Messages.Where(x => x.MessageId == id).FirstOrDefault();
+
+
+
+                    db.Messages.Remove(messagetemp);
+                    db.SaveChanges();
+
+
+
+                    return RedirectToAction("SendedMessages", "Family");
+
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+        }
+
+
+        public ActionResult EditMessage(int? id)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+                    var mess = db.Messages.Include("Tags").Where(x => x.MessageId == id).FirstOrDefault();
+
+                    MessageEditor mEditor = new MessageEditor
+                    {
+                        message = mess
+                    };
+                    return View(mEditor);
+                }
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMessage([Bind(Include = "message,file")] MessageEditor mEditor)
+        {
+            if (Session["role"] != null)
+            {
+                if (Session["role"].ToString() == "2")
+                {
+                    if (ModelState.IsValid)
+                    {
+
+
+
+
+                        string filename = Path.GetFileName(mEditor.file.FileName);
+                        string filepath = Path.Combine(Server.MapPath("~/FilesUpload"), filename);
+                        mEditor.file.SaveAs(filepath);
+                        string userName = Session["UserName"].ToString();
+
+                        string komunikat = mEditor.message.MessageText;
+                        string adres = "~/FilesUpload\\" + filename;
+                        Message tempmess = db.Messages.Include("Tags").Where(x => x.MessageId == mEditor.message.MessageId).FirstOrDefault();
+
+                        List<Tag> tagi = tempmess.Tags.ToList();
+                        Message m = new Message { Image = adres, MessageText = komunikat, IsAnnouncement = true, Tags = tagi };
+
+                        var previousmessage = db.Messages.Where(x => x.MessageId == mEditor.message.MessageId).FirstOrDefault();
+                        db.Messages.Remove(previousmessage);
+                        db.Messages.Add(m);
+                        db.SaveChanges();
+
+
+                        return RedirectToAction("SendedMessages", "Family");
+                    }
+
+                    return View(mEditor.message.MessageId);
+                }
+
+                else
+                {
+                    return RedirectToAction("Error401", "Home");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Error401", "Home");
+            }
+
+
+        }
 
     }
 }

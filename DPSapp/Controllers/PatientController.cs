@@ -130,6 +130,10 @@ namespace DPSapp.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        Tag tag = new Tag();
+                        tag.TagName = "pacjent" + patient.PatientName+patient.PatientSurname;
+                        db.Tags.Add(tag);
+                        
                         //string name = patient.PatientName;
                         //string last = patient.PatientSurname;
                         //string pass = System.Web.Security.Membership.GeneratePassword(12, 2);
@@ -144,12 +148,15 @@ namespace DPSapp.Controllers
                         //db.Tags.Add(new_tag);
                         //db.SaveChanges();
                         db.Patients.Add(patient);
+                       
                         //db.SaveChanges();
 
                         //Patient patient1 = db.Patients.FirstOrDefault(x => x.PatientId == patient.PatientId);
                         //new_tag.Patients.Add(patient);
                         db.SaveChanges();
-
+                        var temp = db.Tags.Include("Patients").Where(s => s.TagId ==tag.TagId).FirstOrDefault();
+                        temp.Patients.Add(patient);
+                        db.SaveChanges();
                         return RedirectToAction("Index");
                     }
                     return View(patient);

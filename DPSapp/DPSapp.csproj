@@ -281,6 +281,9 @@
     <Content Include="Views\Tag\AddTagToMessage.cshtml" />
     <Content Include="Views\Tag\RemoveTagToMessage.cshtml" />
     <Content Include="Views\Tag\RemoveTagToPatient.cshtml" />
+    <Content Include="Views\Family\SendedMessages.cshtml" />
+    <Content Include="Views\Family\DeleteMessage.cshtml" />
+    <Content Include="Views\Family\EditMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
