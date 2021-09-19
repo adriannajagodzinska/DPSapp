@@ -95,15 +95,17 @@
                         </table>
                     </dd>
                 </dl>*@
-        <div>
-            <p style="text-align:left;">
-                @*@Html.ActionLink("Edytuj", "Edit", new { id = Model.PatientId }) |*@
-                @Html.ActionLink("Powrót do listy pensjonariuszy", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
-            </p>
-            <p>
-                @Html.ActionLink("Dodaj znacznik","AddTagToPatient", "Tag", new { id = Model.PatientId }, new { @class = "my-class", title = "Przypisz znacznik pensjonariuszowi" })
-            </p>
-        </div>
+    <div>
+        
+
+        <span class="btn btn-default" style="background-color:white; color:black; border:double; text-align:left" value="Powrót do listy pensjonariuszy" >
+            @*@Html.ActionLink("Edytuj", "Edit", new { id = Model.PatientId }) |*@
+            @Html.ActionLink("Powrót do listy pensjonariuszy", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
+        </span>
+        <span class="btn btn-default" style="background-color:white; color:black; border:double; text-align:left" value ="Dodaj znacznik do pacjenta">
+            @Html.ActionLink("Dodaj znacznik do pacjenta", "AddTagToPatient", "Tag", new { id = Model.PatientId }, new { @class = "my-class", title = "Przypisz znacznik pensjonariuszowi" })
+        </span>
+    </div>
         
 
 
