@@ -240,8 +240,16 @@ namespace DPSapp.Controllers
                 {
                     var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
                     var patients = db.Patients.ToList();
-                    ViewBag.Patients =
-                    ViewBag.PatientID = ToSelectList(patients.ToList<Patient>());
+                    ViewBag.Patients = ToSelectList(patients.ToList<Patient>());
+                    //ViewBag.PatientID = ToSelectList(patients.ToList<Patient>());
+
+
+                    var dictionary = new Dictionary<int, string>();
+                    dictionary.Add(1, "Pracownik");
+                    dictionary.Add(2, "Rodzina");
+                    
+                    SelectList list2 = new SelectList(dictionary, "Key", "Value");
+                    ViewBag.Role = list2;
 
                     return View(user);
                 }

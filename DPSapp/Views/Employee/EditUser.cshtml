@@ -65,15 +65,16 @@
     <div class="form-group">
         @Html.LabelFor(model => model.RoleId, "Przypisana rola", htmlAttributes: new { @class = "control-label col-md-2", title = "1 oznacza rolę pracownika administracji, 2 rolę członka rodziny pensjonariusza" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.RoleId, new { htmlAttributes = new { @min = 1, @max = 2, @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+          
+            @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.Role, "Value", "Text"))
+            @*@Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })*@
         </div>
     </div>
     <div class="form-group">
        
         
     </div>
-
+    
     <div class="form-group">
         @Html.LabelFor(model => model.PatientID, "Przypisany pensjonariusz", htmlAttributes: new { @class = "control-label col-md-2" })
         @*<div class="col-md-10">

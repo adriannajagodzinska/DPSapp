@@ -50,23 +50,21 @@
                         @Html.DisplayFor(model => Model.Login)
                     </div>
                     <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
-                        <label>Przypisany pensjonariusz: </label>
-                        <br />
-                        @ViewBag.PatientN @ViewBag.PatientS
-                        @*<table class="table" id="tabela">
-
-                            @foreach (var item in Model.PatientID)
-                            {
-                                <tr>
-
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TagName)
-                                    </td>
-                                </tr>
-                            }
-                        </table>*@
+                        <label>Hasło: </label>
+                        @Html.DisplayFor(model => Model.Password)
                     </div>
+
+
+                    @if (Model.RoleId == 2)
+                    {
+                        <div class="form-group text-left" style="font-family: Marker Felt; font-size:large">
+                            <label>Przypisany pensjonariusz: </label>
+                            <br />
+                            @ViewBag.PatientN @ViewBag.PatientS
+
+                        </div>
+                    }
+
                 </form>
             </div>
         </div>
