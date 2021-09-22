@@ -118,7 +118,7 @@
             //<td>@adres</td>
     <div class="mySlides fade">
         <div class="numbertext">1</div>
-        <img src="@Url.Content(Model.ListOfAdresses[i])" style="width:100%">
+        <img src="@Url.Content(Model.ListOfAdresses[i])" onload="resizeToMax(this.id)">
         <div class="text" style="font-size:30px; color:black">@Model.Komunikaty[i]</div>
     </div>
            
@@ -273,6 +273,17 @@
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
         setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
+
+    function resizeToMax(id) {
+        myImage = new Image()
+        var img = document.getElementById(id);
+        myImage.src = img.src;
+        if (myImage.width / document.body.clientWidth > myImage.height / document.body.clientHeight) {
+            img.style.width = "100%";
+        } else {
+            img.style.height = "100%";
+        }
     }
 </script>
 

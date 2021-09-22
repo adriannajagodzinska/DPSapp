@@ -74,8 +74,10 @@ namespace DPSapp.Controllers
                         string userName = Session["UserName"].ToString();
                         int pID = db.Users.Where(a => a.Login == userName).Select(a => a.PatientID).FirstOrDefault();
                         var pacjent = db.Patients.Include("Tags").Where(a => a.PatientId == pID).Select(a => a).FirstOrDefault();
+                        
                         var Tagi = pacjent.Tags;
-                        var tID = Tagi.Select(a => a).FirstOrDefault();
+                    //var tID = Tagi.Select(a => a).FirstOrDefault();
+                    var tID = Tagi.Where(x => x.TagName == "pacjent" + pacjent.PatientName + pacjent.PatientSurname).First();
                         
                         string komunikat = fSender.Komunikat;
                         string adres = "~/FilesUpload\\" + filename; 
