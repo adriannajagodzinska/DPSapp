@@ -215,11 +215,21 @@ namespace DPSapp.Controllers
 
 
                     string tagimie = "pacjent" + patienttemp.PatientName + patienttemp.PatientSurname;
+                    
                     var tag = db.Tags.Include("Patients").Include("Rooms").Include("Messages").Where(x => x.TagName == tagimie).FirstOrDefault();
-                    var usertemp = db.Users.Where(x => x.PatientID == id).First();
-                    usertemp.PatientID =0;
-                    usertemp.PatientName = null;
-                    db.Tags.Remove(tag);
+                    var usertemp = db.Users.Where(x => x.PatientID == id).FirstOrDefault();
+
+                    if (usertemp!=null)
+                    {
+                        usertemp.PatientID = 0;
+                        usertemp.PatientName = null;
+                    }
+                   if(tag!=null)
+                    {
+                        db.Tags.Remove(tag);
+                    }
+                   
+                    
                     db.Patients.Remove(patienttemp);
                     db.SaveChanges();
 

@@ -116,11 +116,14 @@
         if (isImage(Model.ListOfAdresses[i]))
         {
             //<td>@adres</td>
-    <div class="mySlides fade">
-        <div class="numbertext">1</div>
-        <img src="@Url.Content(Model.ListOfAdresses[i])" onload="resizeToMax(this.id)">
-        <div class="text" style="font-size:30px; color:black">@Model.Komunikaty[i]</div>
-    </div>
+            <div align="center">
+                <div class="mySlides fade">
+                    <div class="numbertext"></div>
+                    <img id="image " src="@Url.Content(Model.ListOfAdresses[i])" onload="resizeToMax(this.id)">
+                    <div class="text" style="font-size:30px; color:black">@Model.Komunikaty[i]</div>
+                </div>
+            </div>
+    
            
         }
         else if (isVideo(Model.ListOfAdresses[i]))
@@ -279,10 +282,15 @@
         myImage = new Image()
         var img = document.getElementById(id);
         myImage.src = img.src;
-        if (myImage.width / document.body.clientWidth > myImage.height / document.body.clientHeight) {
-            img.style.width = "100%";
+        //if (myImage.width / document.body.clientWidth > myImage.height / document.body.clientHeight) {
+        //    img.style.width = "0px";
+        //} else {
+        //    img.style.height = "50%";
+        //}
+        if (myImage.width  > myImage.height) {
+            img.style.width = "100%" ;
         } else {
-            img.style.height = "100%";
+            img.style.width = "100%";
         }
     }
 </script>
