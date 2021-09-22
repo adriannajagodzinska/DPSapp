@@ -346,7 +346,7 @@ namespace DPSapp.Controllers
                         return HttpNotFound();
                     }
                     var patient = patients.Where(x => x.PatientId == user.PatientID).FirstOrDefault();
-                    if (user.PatientID != 0)
+                    if (user.PatientID != 0&&patient!=null)
                     {
                         ViewBag.PatientN = patient.PatientName.ToString();
                         ViewBag.PatientS = patient.PatientSurname.ToString();

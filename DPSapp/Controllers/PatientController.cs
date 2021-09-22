@@ -303,7 +303,13 @@ namespace DPSapp.Controllers
                                 editpatient.Tags.Add(item);
                             }
                         }
-
+                        
+                        var user = db.Users.Where(x =>x.PatientID == editpatient.PatientId).FirstOrDefault();
+                        if(user!=null)
+                        {
+                            user.PatientName = editpatient.PatientName + " " + editpatient.PatientSurname;
+                        }    
+                        
 
                         db.Patients.Remove(previouspatient);
                         db.Patients.Add(editpatient);
