@@ -212,10 +212,14 @@ namespace DPSapp.Controllers
                 if (Session["role"].ToString() == "1")
                 {
                     Patient patienttemp = db.Patients.Where(x => x.PatientId == id).FirstOrDefault();
-                    
 
 
-
+                    string tagimie = "pacjent" + patienttemp.PatientName + patienttemp.PatientSurname;
+                    var tag = db.Tags.Include("Patients").Include("Rooms").Include("Messages").Where(x => x.TagName == tagimie).FirstOrDefault();
+                    var usertemp = db.Users.Where(x => x.PatientID == id).First();
+                    usertemp.PatientID =0;
+                    usertemp.PatientName = null;
+                    db.Tags.Remove(tag);
                     db.Patients.Remove(patienttemp);
                     db.SaveChanges();
 
@@ -270,7 +274,27 @@ namespace DPSapp.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var previouspatient = db.Patients.Where(x => x.PatientId == editpatient.PatientId).FirstOrDefault();
+                        var previouspatient = db.Patients.Include("Tags").Where(x => x.PatientId == editpatient.PatientId).FirstOrDefault();
+                        
+                        string tagimie = "pacjent" + previouspatient.PatientName + previouspatient.PatientSurname;
+                        var tag = db.Tags.Include("Patients").Include("Rooms").Include("Messages").Where(x =>x.TagName==tagimie ).FirstOrDefault();
+                       
+                        tag.TagName = "pacjent" + editpatient.PatientName + editpatient.PatientSurname;
+                       
+                        editpatient.Tags = new List<Tag>();
+                        if(previouspatient.Tags.Count==0)
+                        {
+                            editpatient.Tags.Add(tag);
+                        }
+                        else
+                        {
+                            foreach (var item in previouspatient.Tags)
+                            {
+                                editpatient.Tags.Add(item);
+                            }
+                        }
+
+
                         db.Patients.Remove(previouspatient);
                         db.Patients.Add(editpatient);
                         db.SaveChanges();

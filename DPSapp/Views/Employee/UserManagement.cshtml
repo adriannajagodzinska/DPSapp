@@ -165,10 +165,13 @@
                     @if (user.RoleId == 1)
                     {
                         <h5> Brak (Konto Pracownika)</h5>
+                    }else if(user.RoleId == 0)
+                    {
+                    <h5> Brak</h5>
                     }
                     else
                     {
-                        <h5>@user.PatientName</h5>
+                    <h5>@user.PatientName</h5>
 
                     }
                 </td>
