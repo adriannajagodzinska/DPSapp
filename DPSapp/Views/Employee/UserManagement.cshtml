@@ -90,10 +90,10 @@
 </div>
 
 <div>
-    <p id="dodaj" class="button">
-        @Html.ActionLink("Dodaj nowego użytkownika", "CreateUser", null, new { title = "Naciśnięcie spowoduje przeniesienie do modułu dodawania użytkownika" })
-
+    <p id="dodaj" class="button" onclick="@("window.location.href='" + @Url.Action("CreateUser", "Employee") + "'");" title="Naciśnięcie spowoduje przeniesienie do modułu dodawania użytkownika">
+        Dodaj nowego pensjonariusza
     </p>
+
 </div>
 
 

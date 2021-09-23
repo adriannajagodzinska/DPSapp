@@ -51,14 +51,17 @@
         <dd>
             @Html.DisplayFor(model => model.RoleId)
         </dd>
+        @if (Model.RoleId == 2)
+        {
+            <dt>
+                Przypisany pensjonariusz:
+            </dt>
 
-        <dt>
-            Przypisany pensjonariusz:
-        </dt>
+            <dd>
+                @ViewBag.PatientN @ViewBag.PatientS
+            </dd>
+        }
 
-        <dd>
-            @ViewBag.PatientN @ViewBag.PatientS
-        </dd>
 
     </dl>
 
@@ -67,7 +70,8 @@
         @Html.AntiForgeryToken()
 
 <div class="form-actions no-color">
-    <input type="submit" value="Usuń" class="btn btn-default" /> |
+    <input type="submit" style="background-color:white; color:black; border:double;" value="Usuń" class="btn btn-default" /> |
+
     @Html.ActionLink("Powrót do listy użytkowników", "UserManagement", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy użytkowników" })
 </div>
     }
