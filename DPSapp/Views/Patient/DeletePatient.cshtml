@@ -52,7 +52,7 @@
 
 </div>*@
 <p class="error">@ViewBag.ErrorMessage</p>
-<h3 id="usun">Czy na pewno chcesz usunąć pensjonariusza?</h3>
+<h3 id="usun">Czy na pewno chcesz usunąć tego pensjonariusza?</h3>
 @*<h3>Jesteś pewny, że chcesz usunąć tego pacjenta??</h3>*@
 <div>
     <hr />
@@ -79,9 +79,10 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót do listy pensjonariuszy", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" style="background-color:white; color:black; border:double;" value="Usuń" class="btn btn-default" /> |
+
+    @Html.ActionLink("Powrót do listy pensjonariuszy", "Index", null, new { @class = "my-class", title = "Naciśnięcie spowoduje powrót do listy pensjonariuszy" })
+</div>
     }
 </div>

@@ -95,9 +95,8 @@
 </div>
 
 <div>
-    <p id="dodaj" class="button">
-        @Html.ActionLink("Dodaj nowego pacjenta", "Create",null, new {title = "Naciśnięcie spowoduje przeniesienie do modułu dodawania pensjonariusza" })
-
+    <p id="dodaj" class="button" onclick="@("window.location.href='" + @Url.Action("Create", "Patient") + "'");" title="Naciśnięcie spowoduje przeniesienie do modułu dodawania nowego pensjonariusza">
+        Dodaj nowego pensjonariusza
     </p>
 </div>
 

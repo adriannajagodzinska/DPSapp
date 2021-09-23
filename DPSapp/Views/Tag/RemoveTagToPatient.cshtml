@@ -30,7 +30,7 @@
     Layout = "~/Views/Shared/_LayoutEmp.cshtml";
 }
 
-<h2>Usuń znacznik od pacjenta</h2>
+<h2>Usuń przypisany znacznik</h2>
 @using (Html.BeginForm("RemoveTagToPatient", "Tag", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
@@ -44,10 +44,17 @@
         <div class="form-group">
             @*@Html.LabelFor(model => model.Tag, "Nazwa znacznika", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-
+                @if (Model.ListOfTags.Count()==0)
+                {
+                <p>Brak przypisanych znacznikow</p>
+                    
+                }
                 @*@Html.DropDownList("TagName", null, htmlAttributes: new { @class = "form-control" })*@
                 @*@Html.DropDownListFor(m => m.TagIdToAdd, Model.ListOfTags, new { @class = "form-control" })*@
+                else
+                {
                 @Html.DropDownListFor(m => m.TagIdToAdd, new SelectList(Model.ListOfTags, "TagId", "TagName"))
+                }
                 @*@ViewBag.TagID as SelectList*@
 
                 @*@Html.ValidationMessageFor(model => model.TagId, "", new { @class = "text-danger" })*@
