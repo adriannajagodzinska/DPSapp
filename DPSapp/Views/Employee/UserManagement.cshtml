@@ -177,9 +177,20 @@
                 </td>
                 <td>
                     @*<a href=@Url.Action(String.Format("EditUser/{0}",@user.UserId),"Employee") class="button">Edytuj użytkownika</a>*@
-                    @Html.ActionLink("Szczegóły", "DetailsUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląf szczegółów użytkownika" })
+                    @*@Html.ActionLink("Szczegóły", "DetailsUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia podgląd szczegółów użytkownika" })
                     @Html.ActionLink("Edytuj", "EditUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia edycję wybranego użytkownika" })
-                    @Html.ActionLink("Usuń", "DeleteUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia usunięcie wybranego użytkownika" })
+                    @Html.ActionLink("Usuń", "DeleteUser", new { id = user.UserId }, new { @class = "my-class", title = "Naciśnięcie umożliwia usunięcie wybranego użytkownika" })*@
+                    
+                        <input type="button" value="Szczegóły" style="background-color:white; color:black; border:double;" title="Naciśnięcie umożliwia podgląd szczegółów użytkownika"
+                               onclick="@("window.location.href='" + @Url.Action("DetailsUser","Employee", new { id = user.UserId }) + "'");" />
+
+                    
+                        <input type="button" value="Edytuj" style="background-color:white; color:black; border:double;" title="Naciśnięcie umożliwia edycję wybranego użytkownika"
+                               onclick="@("window.location.href='" + @Url.Action("EditUser","Employee", new { id = user.UserId }) + "'");" />
+
+                    
+                        <input type="button" value="Usuń" style="background-color:white; color:black; border:double;" title="Naciśnięcie umożliwia usunięcie wybranego użytkownika"
+                               onclick="@("window.location.href='" + @Url.Action("DeleteUser","Employee", new { id = user.UserId }) + "'");" />
                 </td>
             </tr>
         }

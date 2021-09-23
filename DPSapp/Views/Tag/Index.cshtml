@@ -93,9 +93,8 @@
 
     </div>
 </div>
-
-<p id="dodaj" class="button">
-    @Html.ActionLink("Utwórz nowy znacznik", "Create", null, new { title = "Naciśnięcie spowoduje przeniesienie do modułu tworzenia znacznika" })
+<p id="dodaj" class="button" onclick="@("window.location.href='" + @Url.Action("Create", "Tag") + "'");" title="Naciśnięcie spowoduje przeniesienie do modułu tworzenia znacznika">
+    Utwórz nowy znacznik
 </p>
 <br />
 <div class="card text-white bg-info text-center" style="background-color:whitesmoke">
@@ -143,27 +142,27 @@
             </td>
             @*<td>
 
-                @Html.DisplayFor(modelItem => item.IsAnnouncement)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.IsAnnouncement)
+                </td>*@
 
 
-        <td>
-            
-                
+            <td>
+
+
                 <div>
-                    
-                            <input type="button" value="Edytuj znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
-                                   onclick="@("window.location.href='" + @Url.Action("Edit","Tag", new { id = item.TagId }) + "'");" />
-                        
-                            <input type="button" value="Usuń znacznik" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
-                                   onclick="@("window.location.href='" + @Url.Action("DeleteTag","Tag", new { id = item.TagId }) + "'");" />
-                    
+
+                    <input type="button" value="Edytuj" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                           onclick="@("window.location.href='" + @Url.Action("Edit","Tag", new { id = item.TagId }) + "'");" />
+
+                    <input type="button" value="Usuń" style="background-color:white; color:black; border:double;" title="Przypisz znacznik pensjonariuszowi"
+                           onclick="@("window.location.href='" + @Url.Action("DeleteTag","Tag", new { id = item.TagId }) + "'");" />
+
                 </div>
 
 
                 @*@Html.ActionLink("Edytuj", "Edit", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu edycji znacznika" })
-        @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania znacznika" })*@
-</td>
+                    @Html.ActionLink("Usuń", "DeleteTag", new { id = item.TagId }, new { @class = "my-class", title = "Naciśnięcie spowoduje przeniesienie do modułu usuwania znacznika" })*@
+            </td>
 
         </tr>
     }
